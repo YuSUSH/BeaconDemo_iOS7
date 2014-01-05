@@ -48,9 +48,8 @@
      (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     
     //Your app can find out which types of push notifications are enabled through:
-    UIRemoteNotificationType enabledTypes = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-    
-    NSLog(@"enabledTypes is: %d", enabledTypes);
+    //UIRemoteNotificationType enabledTypes = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+    //NSLog(@"enabledTypes is: %d", enabledTypes);
     
     return YES;
 }
@@ -59,6 +58,19 @@
 {
 	NSLog(@"My token is: %@", deviceToken);
 }
+
+
+- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
+{
+	NSLog(@"Received notification: %@", userInfo);
+    
+    UIAlertView *helloWorldAlert = [[UIAlertView alloc]
+                                    initWithTitle:@"Notification from Server" message:[userInfo valueForKey:@"alert"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    // Display the Hello WorldMessage
+    [helloWorldAlert show];
+}
+
+
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
