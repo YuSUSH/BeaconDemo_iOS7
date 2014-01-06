@@ -8,8 +8,6 @@
 
 #import "BeaconDemoAppDelegate.h"
 
-#define IPAD3_DEVICE_UUID @"20CACA32-DD99-240B-402F-C9D09B9BB134"
-
 
 @implementation BeaconDemoAppDelegate
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -65,7 +63,7 @@
 	NSLog(@"Received notification: %@", userInfo);
     
     UIAlertView *helloWorldAlert = [[UIAlertView alloc]
-                                    initWithTitle:@"Notification from Server" message:[userInfo valueForKey:@"alert"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                    initWithTitle:@"Notification from Server" message:[[userInfo valueForKey:@"aps"] valueForKey:@"alert"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     // Display the Hello WorldMessage
     [helloWorldAlert show];
 }
@@ -122,7 +120,7 @@
     
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////
-static NSString * const TagUUID = @"A8CE57BF-00E1-B9A1-F5F0-E5412202529C";
+//static NSString * const TagUUID = @"A8CE57BF-00E1-B9A1-F5F0-E5412202529C";
 
 -(void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
@@ -136,7 +134,7 @@ static NSString * const TagUUID = @"A8CE57BF-00E1-B9A1-F5F0-E5412202529C";
     {
         NSDictionary *options = @{CBCentralManagerScanOptionAllowDuplicatesKey: @NO};
         NSLog(@"//////////////Start to scan.");
-         [central scanForPeripheralsWithServices:@[ [CBUUID UUIDWithString:IPAD_ID] ] options:options];
+         [central scanForPeripheralsWithServices:@[ [CBUUID UUIDWithString:IPAD3_SERVICE_ID] ] options:options];
     }
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,8 +153,7 @@ static NSString * const TagUUID = @"A8CE57BF-00E1-B9A1-F5F0-E5412202529C";
     
     NSLog(@"device UUID=: %@, RSSI=%f", peripheral.identifier, fRSSI);
     
-    if([peripheral.identifier isEqual:IPAD3_DEVICE_UUID])
-    {
+    
     //notify iOS that we've detected a device
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
     localNotification.alertBody = @"I found you";
@@ -164,7 +161,10 @@ static NSString * const TagUUID = @"A8CE57BF-00E1-B9A1-F5F0-E5412202529C";
     localNotification.fireDate = [NSDate date];
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-    }
+        
+    if(self.tv!=nil)
+        [self.tv NotifyServer]; //notify the server side
+    
     
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////

@@ -197,7 +197,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     //NSDictionary *beaconPeripheralData = [region peripheralDataWithMeasuredPower:nil];
     //[self.peripheralManager startAdvertising:beaconPeripheralData];
     //to advertise the service UUID
-    [self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:IPAD_ID]] }];
+    [self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:IPAD3_SERVICE_ID]] }];
 }
 
 

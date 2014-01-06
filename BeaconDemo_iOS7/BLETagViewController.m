@@ -7,6 +7,8 @@
 //
 
 #import "BLETagViewController.h"
+#import <UIKit/UIDevice.h>
+#import "BeaconDemoAppDelegate.h"
 
 @interface BLETagViewController ()
 
@@ -35,7 +37,60 @@
     
     peripherals=[[NSMutableArray alloc] init];
     [peripherals removeAllObjects];
+    
+    
+    BeaconDemoAppDelegate *appDelegate	=	(BeaconDemoAppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate.tv=self; //pass this pointer to the AppDelegate
 
+}
+
+-(NSString*) getCurrentDeviceID
+{
+    return [[UIDevice currentDevice] identifierForVendor].UUIDString;
+}
+
+NSMutableData *receivedData;
+-(void) NotifyServer
+{
+    NSString* deviceID= [self getCurrentDeviceID];
+    NSLog(@"////////This device ID=%@", deviceID);
+    
+    receivedData=[[NSMutableData alloc] init];
+    NSString *requestURL=[NSString stringWithFormat:@"http://experiment.sandbox.net.nz/beacon/simplepush.php?deviceid=%@", deviceID];
+    NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]];
+    
+    NSURLConnection *theConnection = [[NSURLConnection alloc] initWithRequest:theRequest  delegate:self];
+    
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [receivedData appendData:data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    
+    if (receivedData) {
+        
+        NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:receivedData options:NSJSONReadingMutableContainers error:nil];
+        
+        int i;
+        for (i=0; i<[jsonObjects count];i++)
+        {
+            NSMutableDictionary *dataDict=[jsonObjects objectAtIndex:i];
+            NSString *ID = [dataDict objectForKey:@"ID"];
+            NSString *Name = [dataDict objectForKey:@"Name"];
+            NSString *Type = [dataDict objectForKey:@"Type"];
+            NSLog(@"//////////////// ID=%@", ID);
+            NSLog(@"//////////////// Name=%@", Name);
+            NSLog(@"//////////////// Type=%@", Type);
+            
+        }
+        
+    }
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,7 +152,7 @@
     
     //Yu Liu Added
     //convert into string
-    NSString *UUIDstr = [[NSString alloc] initWithFormat:@"%@",  CFUUIDCreateString(nil, peripheral.UUID) ];
+    NSString *UUIDstr = peripheral.identifier.UUIDString;
     float fRSSI=[RSSI floatValue];
     float overall_RSSI=-9000.0f;
     static float last_RSSI=-9000.0f;
@@ -105,16 +160,11 @@
     
     NSLog(@"device UUID=: %@, advertisementData=%@ RSSI=%f", UUIDstr, advertisementData, fRSSI);
     
-    
-    
-    
-    //NSArray *ServiceIDs=[NSArray array];
-    
-    //[peripheral discoverServices:ServiceIDs];
+    NSArray *services=[advertisementData objectForKey:@"kCBAdvDataServiceUUIDs"];
     
 
-    
-    if( [UUIDstr isEqualToString:TagUUID])
+    //If containing our sevice ID
+    if( [services containsObject:[CBUUID UUIDWithString:IPAD3_SERVICE_ID]])
     {
        
         
@@ -128,9 +178,11 @@
         RSSI_array[got_index]=fRSSI; //the RSSI value we got this time
         got_index++;
         
+        /*
         peripheral.delegate = self;
         [central connectPeripheral:peripheral options:nil]; //connect to the periph
         [peripherals addObject:peripheral];
+         */
         
         if(got_index>=MEASURE_SIZE) //process this surge of data
         {
@@ -159,6 +211,7 @@
             
             if((!bInsideRange) ) //if we were outside before
             {
+                [self NotifyServer]; //notify the server side that we found the iPad
                 [self ShowAlertDialog:@"Welcome to the TI SensorTag!"];
                 bInsideRange=YES;
             }
