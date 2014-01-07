@@ -70,7 +70,7 @@
 
 -(void) QueryPersonalInfoAndShow:(NSString*)personID
 {
-    NSURL *requestURL=[NSURL URLWithString:@"http://experiment.sandbox.net.nz/beacon/db_handler.php"];
+    NSURL *requestURL=[NSURL URLWithString:QUERY_DB_SERVIER_URL];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
     
@@ -87,6 +87,7 @@
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     
+    //Request with the personal ID and wait for response from DB server
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
          NSLog(@"responseData: %@", data);
@@ -94,7 +95,7 @@
          //decode the response data
          NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
          
-         NSString *outputstr=@"";
+         NSMutableDictionary *personalInfo=[[NSMutableDictionary alloc] init];
          int i;
          for (i=0; i<[jsonObjects count];i++)
          {
@@ -102,15 +103,16 @@
              NSString *ID = [dataDict objectForKey:@"ID"];
              NSString *Name = [dataDict objectForKey:@"Name"];
              NSString *Type = [dataDict objectForKey:@"Type"];
-             outputstr=[outputstr stringByAppendingString:[NSString stringWithFormat:@"ID=%@\n", ID]];
-             outputstr=[outputstr stringByAppendingString:[NSString stringWithFormat:@"Name=%@\n", Name]];
-             outputstr=[outputstr stringByAppendingString:[NSString stringWithFormat:@"Type=%@\n", Type]];
+             
+             [personalInfo setValue:ID forKey:@"ID"];
+             [personalInfo setValue:Name forKey:@"Name"];
+             [personalInfo setValue:Type forKey:@"Type"];
          }
          
          if(self.bv!=nil)
          {
              dispatch_async(dispatch_get_main_queue(), ^{
-                 [self.bv ShowPopupView:outputstr];
+                 [self.bv ShowPopupView:personalInfo];
              });
          }
          //[self ShowPersonInfoWindow:outputstr];

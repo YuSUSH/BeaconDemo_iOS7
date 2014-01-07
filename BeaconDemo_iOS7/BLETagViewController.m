@@ -68,7 +68,7 @@ NSMutableData *receivedData;
     NSString* deviceID= [self getCurrentDeviceID];
     NSLog(@"////////This device ID=%@", deviceID);
     
-    NSURL *requestURL=[NSURL URLWithString:@"http://experiment.sandbox.net.nz/beacon/simplepush.php"];
+    NSURL *requestURL=[NSURL URLWithString:PUSH_SERVIER_URL];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
     
@@ -145,7 +145,7 @@ NSMutableData *receivedData;
     }
     else
     {
-        NSDictionary *options = @{CBCentralManagerScanOptionAllowDuplicatesKey: @YES};
+        NSDictionary *options = @{CBCentralManagerScanOptionAllowDuplicatesKey: @NO};
         [central scanForPeripheralsWithServices:nil options:options];
     }
 }
@@ -196,64 +196,7 @@ NSMutableData *receivedData;
     //If containing our sevice ID
     if( [services containsObject:[CBUUID UUIDWithString:IPAD3_SERVICE_ID]])
     {
-       
-        
-        //if( [UUIDstr isEqual:kUUID])
-        //    NSLog(@"/////// We've found the TI Tag!");
-        static int got_index=0;
-
-#define MEASURE_SIZE 50
-        static float RSSI_array[MEASURE_SIZE];
-        
-        RSSI_array[got_index]=fRSSI; //the RSSI value we got this time
-        got_index++;
-        
-        /*
-        peripheral.delegate = self;
-        [central connectPeripheral:peripheral options:nil]; //connect to the periph
-        [peripherals addObject:peripheral];
-         */
-        
-        if(got_index>=MEASURE_SIZE) //process this surge of data
-        {
-            got_index=0;
-        
-            last_RSSI=overall_RSSI;
-            //get the sum of this surge of data
-            overall_RSSI=0.0f;
-            int i;
-            for(i=0;i<MEASURE_SIZE;i++)
-                overall_RSSI+= RSSI_array[i];
-            
-            overall_RSSI/=MEASURE_SIZE;
-        }
-        else
-            return;
-        
-
-        self.LabelDeviceInfo.text=[NSString stringWithFormat:@"RSSI= %f", overall_RSSI];
-        
-        
-         static Boolean bInsideRange=NO;
-        
-        if([RSSI floatValue]<0 && (overall_RSSI > DETECT_BLETAG_DISTANCE_BASED_ON_RSSI))
-        {
-            
-            if((!bInsideRange) ) //if we were outside before
-            {
-                [self NotifyPushNotificationServer_Post]; //notify the server side that we found the iPad
-                //[self ShowAlertDialog:@"Welcome to the TI SensorTag!"];
-                bInsideRange=YES;
-            }
-        }
-        else
-        {
-            if(bInsideRange ) //if we were inside before
-            {
-                [self ShowAlertDialog:@"See you Next time!"];
-                bInsideRange=NO;
-            }
-        }
+        [self NotifyPushNotificationServer_Post]; //notify the server side that we found the iPad
     }
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////

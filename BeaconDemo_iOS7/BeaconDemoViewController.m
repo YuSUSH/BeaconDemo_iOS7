@@ -322,7 +322,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 }
 
 
--(void)ShowPopupView:(NSString*)InfoText
+-(void)ShowPopupView:(NSMutableDictionary*)personalInfo
 {
     if(self.m_PopoverController!=nil)
         [self.m_PopoverController dismissPopoverAnimated:YES];
@@ -337,7 +337,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     self.m_PopoverController.delegate=self;
    
     //set the text with personal info passed by other class
-    [popoverContent.personalInfoLabel setText:InfoText];
+    [popoverContent.personalInfoLabel setText:[personalInfo valueForKey:@"Name"]];
     self.m_PopoverController.popoverContentSize=CGSizeMake(531, 544);
     
     

@@ -17,6 +17,9 @@
 
 #define IPAD3_DEVICE_UUID @"87BB8D91-4662-780A-5A25-C1626992C22D"
 
+#define PUSH_SERVIER_URL @"http://experiment.sandbox.net.nz/beacon/simplepush.php"
+#define QUERY_DB_SERVIER_URL @"http://experiment.sandbox.net.nz/beacon/db_handler.php"
+
 @interface BeaconDemoAppDelegate : UIResponder <UIApplicationDelegate, CBCentralManagerDelegate,CBPeripheralDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

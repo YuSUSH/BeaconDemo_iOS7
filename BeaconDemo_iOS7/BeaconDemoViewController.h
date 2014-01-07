@@ -26,6 +26,6 @@
 @property (nonatomic, strong) CBPeripheralManager *peripheralManager;
 @property (nonatomic, strong) NSArray *detectedBeacons;
 @property (nonatomic, retain) UIPopoverController *m_PopoverController; //The Popover Controller
--(void)ShowPopupView:(NSString*)InfoText;
+-(void)ShowPopupView:(NSMutableDictionary*)personalInfo;
 
 @end
