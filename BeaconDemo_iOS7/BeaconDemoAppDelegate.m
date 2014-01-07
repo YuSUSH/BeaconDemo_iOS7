@@ -163,7 +163,7 @@
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
         
     if(self.tv!=nil)
-        [self.tv NotifyServer]; //notify the server side
+        [self.tv NotifyPushNotificationServer]; //notify the server side
     
     
 }

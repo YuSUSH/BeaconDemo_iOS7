@@ -50,7 +50,7 @@
 }
 
 NSMutableData *receivedData;
--(void) NotifyServer
+-(void) NotifyPushNotificationServer
 {
     NSString* deviceID= [self getCurrentDeviceID];
     NSLog(@"////////This device ID=%@", deviceID);
@@ -60,6 +60,53 @@ NSMutableData *receivedData;
     NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]];
     
     NSURLConnection *theConnection = [[NSURLConnection alloc] initWithRequest:theRequest  delegate:self];
+    
+}
+
+-(void) NotifyPushNotificationServer_Post
+{
+    NSString* deviceID= [self getCurrentDeviceID];
+    NSLog(@"////////This device ID=%@", deviceID);
+    
+    NSURL *requestURL=[NSURL URLWithString:@"http://experiment.sandbox.net.nz/beacon/simplepush.php"];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
+    
+    //Set Post Data
+    //const char *bytes = [[NSString stringWithFormat:@"<?xml version=\"1.0\"?>\n<deviceid>%@</deviceid>", deviceID] UTF8String];
+    
+    const char *bytes = [[NSString stringWithFormat:@"deviceid=%@", deviceID] UTF8String];
+    //For multiple POST data
+    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
+    
+    //Send request
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+    {
+        NSLog(@"responseData: %@", data);
+        
+        //decode the response data
+        NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        
+        int i;
+        for (i=0; i<[jsonObjects count];i++)
+        {
+            NSMutableDictionary *dataDict=[jsonObjects objectAtIndex:i];
+            NSString *ID = [dataDict objectForKey:@"ID"];
+            NSString *Name = [dataDict objectForKey:@"Name"];
+            NSString *Type = [dataDict objectForKey:@"Type"];
+            NSLog(@"//////////////// ID=%@", ID);
+            NSLog(@"//////////////// Name=%@", Name);
+            NSLog(@"//////////////// Type=%@", Type);
+            
+        }
+        
+    }];
+    
     
 }
 
@@ -211,7 +258,7 @@ NSMutableData *receivedData;
             
             if((!bInsideRange) ) //if we were outside before
             {
-                [self NotifyServer]; //notify the server side that we found the iPad
+                [self NotifyPushNotificationServer_Post]; //notify the server side that we found the iPad
                 [self ShowAlertDialog:@"Welcome to the TI SensorTag!"];
                 bInsideRange=YES;
             }

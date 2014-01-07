@@ -33,7 +33,7 @@ static NSString * const iOSUUID = @"00000000-0000-0000-0000-000000000000";
 @property (weak, nonatomic) IBOutlet UILabel *LabelDeviceInfo;
 @property (strong,nonatomic) NSMutableArray *peripherals;
 
--(void) NotifyServer;
+-(void) NotifyPushNotificationServer;
 
 
 @end
