@@ -13,17 +13,19 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "AudioViewController.h"
 
-@interface BeaconDemoViewController : AudioViewController <CLLocationManagerDelegate, CBPeripheralManagerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface BeaconDemoViewController : AudioViewController <CLLocationManagerDelegate, CBPeripheralManagerDelegate, UITableViewDataSource, UITableViewDelegate, UIPopoverControllerDelegate>
 @property (weak, nonatomic) IBOutlet UISwitch *TRSwitch;
 - (IBAction)FunctionSwitch:(UISwitch *)sender;
 
 @property (nonatomic, weak) IBOutlet UITableView *beaconTableView;
+@property (strong, nonatomic) IBOutlet UILabel *infoLabel;
 
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLBeaconRegion *beaconRegion;
 @property (nonatomic, strong) CBPeripheralManager *peripheralManager;
 @property (nonatomic, strong) NSArray *detectedBeacons;
-
+@property (nonatomic, retain) UIPopoverController *m_PopoverController; //The Popover Controller
+-(void)ShowPopupView:(NSString*)InfoText;
 
 @end

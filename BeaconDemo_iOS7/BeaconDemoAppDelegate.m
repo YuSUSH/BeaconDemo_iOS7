@@ -62,14 +62,79 @@
 {
 	NSLog(@"Received notification: %@", userInfo);
     
-    UIAlertView *helloWorldAlert = [[UIAlertView alloc]
-                                    initWithTitle:@"Notification from Server" message:[[userInfo valueForKey:@"aps"] valueForKey:@"alert"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    // Display the Hello WorldMessage
-    [helloWorldAlert show];
+    //Get the personID from notification
+    NSString *personID=[[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+    // Query the personal info with the ID got from notification
+    [self QueryPersonalInfoAndShow:personID];
+}
+
+-(void) QueryPersonalInfoAndShow:(NSString*)personID
+{
+    NSURL *requestURL=[NSURL URLWithString:@"http://experiment.sandbox.net.nz/beacon/db_handler.php"];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
+    
+    //Set Post Data
+    //const char *bytes = [[NSString stringWithFormat:@"<?xml version=\"1.0\"?>\n<deviceid>%@</deviceid>", deviceID] UTF8String];
+    
+    const char *bytes = [[NSString stringWithFormat:@"deviceid=%@", personID] UTF8String];
+    //For multiple POST data
+    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
+    
+    //Send request
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+         NSLog(@"responseData: %@", data);
+         
+         //decode the response data
+         NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+         
+         NSString *outputstr=@"";
+         int i;
+         for (i=0; i<[jsonObjects count];i++)
+         {
+             NSMutableDictionary *dataDict=[jsonObjects objectAtIndex:i];
+             NSString *ID = [dataDict objectForKey:@"ID"];
+             NSString *Name = [dataDict objectForKey:@"Name"];
+             NSString *Type = [dataDict objectForKey:@"Type"];
+             outputstr=[outputstr stringByAppendingString:[NSString stringWithFormat:@"ID=%@\n", ID]];
+             outputstr=[outputstr stringByAppendingString:[NSString stringWithFormat:@"Name=%@\n", Name]];
+             outputstr=[outputstr stringByAppendingString:[NSString stringWithFormat:@"Type=%@\n", Type]];
+         }
+         
+         if(self.bv!=nil)
+         {
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 [self.bv ShowPopupView:outputstr];
+             });
+         }
+         //[self ShowPersonInfoWindow:outputstr];
+         //Show the popup window for personal info
+         
+         
+     }];
+
 }
 
 
-							
+UIAlertView *helloKKKWorldAlert;
+
+-(void) ShowPersonInfoWindow:(NSString*)text
+{
+    UIAlertView *helloKKKWorldAlert = [[UIAlertView alloc]
+                                    initWithTitle:@"Notification from Server" message:text delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    // Display the Hello WorldMessage
+    [helloKKKWorldAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
+//    [helloKKKWorldAlert show];
+}
+
+
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -163,7 +228,7 @@
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
         
     if(self.tv!=nil)
-        [self.tv NotifyPushNotificationServer]; //notify the server side
+        [self.tv NotifyPushNotificationServer_Post]; //notify the server side
     
     
 }

@@ -87,23 +87,6 @@ NSMutableData *receivedData;
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
     {
-        NSLog(@"responseData: %@", data);
-        
-        //decode the response data
-        NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        
-        int i;
-        for (i=0; i<[jsonObjects count];i++)
-        {
-            NSMutableDictionary *dataDict=[jsonObjects objectAtIndex:i];
-            NSString *ID = [dataDict objectForKey:@"ID"];
-            NSString *Name = [dataDict objectForKey:@"Name"];
-            NSString *Type = [dataDict objectForKey:@"Type"];
-            NSLog(@"//////////////// ID=%@", ID);
-            NSLog(@"//////////////// Name=%@", Name);
-            NSLog(@"//////////////// Type=%@", Type);
-            
-        }
         
     }];
     
@@ -259,7 +242,7 @@ NSMutableData *receivedData;
             if((!bInsideRange) ) //if we were outside before
             {
                 [self NotifyPushNotificationServer_Post]; //notify the server side that we found the iPad
-                [self ShowAlertDialog:@"Welcome to the TI SensorTag!"];
+                //[self ShowAlertDialog:@"Welcome to the TI SensorTag!"];
                 bInsideRange=YES;
             }
         }

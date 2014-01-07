@@ -34,6 +34,7 @@ static NSString * const iOSUUID = @"00000000-0000-0000-0000-000000000000";
 @property (strong,nonatomic) NSMutableArray *peripherals;
 
 -(void) NotifyPushNotificationServer;
+-(void) NotifyPushNotificationServer_Post;
 
 
 @end

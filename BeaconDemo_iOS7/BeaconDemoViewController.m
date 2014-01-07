@@ -22,10 +22,16 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 
 @implementation BeaconDemoViewController
 
+@synthesize m_PopoverController;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.title=@"iOS to iOS with Beacon API";
+    
+    //Save the view in the AppDelegate
+    BeaconDemoAppDelegate *appDelegate	=	(BeaconDemoAppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate.bv=self; //pass this pointer to the AppDelegate
     
     //init
     if (self.TRSwitch.on)
@@ -71,6 +77,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
     
     NSLog(@"Ranging turned on for region: %@.", self.beaconRegion);
+    
 }
 
 
@@ -313,4 +320,37 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     }
     
 }
+
+
+-(void)ShowPopupView:(NSString*)InfoText
+{
+    if(self.m_PopoverController!=nil)
+        [self.m_PopoverController dismissPopoverAnimated:YES];
+    
+    PersonalInfoPopupViewController* popoverContent;
+    //Show the popovercontrol
+    popoverContent = [[PersonalInfoPopupViewController alloc] init];
+    
+    
+    //create a popover controller
+    self.m_PopoverController = [[UIPopoverController alloc] initWithContentViewController:popoverContent];
+    self.m_PopoverController.delegate=self;
+   
+    //set the text with personal info passed by other class
+    [popoverContent.personalInfoLabel setText:InfoText];
+    self.m_PopoverController.popoverContentSize=CGSizeMake(531, 544);
+    
+    
+    //Make it appears from the button's area
+    [self.m_PopoverController presentPopoverFromRect: CGRectMake(40, 220, 531, 544)
+     //[self convertRect:self.m_button.frame toView:self.mView]
+                                              inView:self.view
+                            permittedArrowDirections:0 animated:YES];
+}
+
+- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
+{
+    return true;
+}
+
 @end
