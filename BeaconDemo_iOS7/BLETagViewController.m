@@ -65,8 +65,6 @@ NSMutableData *receivedData;
 
 -(void) NotifyPushNotificationServer_Post
 {
-    NSString* deviceID= [self getCurrentDeviceID];
-    NSLog(@"////////This device ID=%@", deviceID);
     
     NSURL *requestURL=[NSURL URLWithString:PUSH_SERVIER_URL];
     
@@ -75,7 +73,7 @@ NSMutableData *receivedData;
     //Set Post Data
     //const char *bytes = [[NSString stringWithFormat:@"<?xml version=\"1.0\"?>\n<deviceid>%@</deviceid>", deviceID] UTF8String];
     
-    const char *bytes = [[NSString stringWithFormat:@"deviceid=%@", deviceID] UTF8String];
+    const char *bytes = [[NSString stringWithFormat:@"userid=%@", @"kkk"] UTF8String];
     //For multiple POST data
     //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
     

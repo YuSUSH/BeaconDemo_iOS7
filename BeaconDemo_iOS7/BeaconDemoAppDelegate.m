@@ -63,9 +63,9 @@
 	NSLog(@"Received notification: %@", userInfo);
     
     //Get the personID from notification
-    NSString *personID=[[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+    NSString *userid=[[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
     // Query the personal info with the ID got from notification
-    [self QueryPersonalInfoAndShow:personID];
+    [self QueryPersonalInfoAndShow:userid];
 }
 
 -(void) QueryPersonalInfoAndShow:(NSString*)personID
@@ -77,7 +77,7 @@
     //Set Post Data
     //const char *bytes = [[NSString stringWithFormat:@"<?xml version=\"1.0\"?>\n<deviceid>%@</deviceid>", deviceID] UTF8String];
     
-    const char *bytes = [[NSString stringWithFormat:@"deviceid=%@", personID] UTF8String];
+    const char *bytes = [[NSString stringWithFormat:@"userid=%@", personID] UTF8String];
     //For multiple POST data
     //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
     
@@ -100,13 +100,13 @@
          for (i=0; i<[jsonObjects count];i++)
          {
              NSMutableDictionary *dataDict=[jsonObjects objectAtIndex:i];
-             NSString *ID = [dataDict objectForKey:@"ID"];
-             NSString *Name = [dataDict objectForKey:@"Name"];
-             NSString *Type = [dataDict objectForKey:@"Type"];
+             NSString *userid = [dataDict objectForKey:@"userid"];
+             NSString *surname = [dataDict objectForKey:@"surname"];
+             NSString *givename = [dataDict objectForKey:@"givename"];
              
-             [personalInfo setValue:ID forKey:@"ID"];
-             [personalInfo setValue:Name forKey:@"Name"];
-             [personalInfo setValue:Type forKey:@"Type"];
+             [personalInfo setValue:userid forKey:@"userid"];
+             [personalInfo setValue:surname forKey:@"surname"];
+             [personalInfo setValue:givename forKey:@"givename"];
          }
          
          if(self.bv!=nil)
@@ -220,7 +220,7 @@ UIAlertView *helloKKKWorldAlert;
     
     NSLog(@"device UUID=: %@, RSSI=%f", peripheral.identifier, fRSSI);
     
-    
+    /*
     //notify iOS that we've detected a device
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
     localNotification.alertBody = @"I found you";
@@ -228,6 +228,7 @@ UIAlertView *helloKKKWorldAlert;
     localNotification.fireDate = [NSDate date];
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+     */
         
     if(self.tv!=nil)
         [self.tv NotifyPushNotificationServer_Post]; //notify the server side
