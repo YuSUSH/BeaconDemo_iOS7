@@ -84,7 +84,8 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row==0)
-        [self performSegueWithIdentifier:@"SegueToBLETagView" sender:self]; //transfer to Tag View
+        //[self performSegueWithIdentifier:@"SegueToBLETagView" sender:self]; //transfer to Tag View
+        [self performSegueWithIdentifier:@"SegueToLogin" sender:self]; //transfer to Login View
     
     if(indexPath.row==1)
         [self performSegueWithIdentifier:@"SegueToBeaconView" sender:self]; //transfer to Beacon View

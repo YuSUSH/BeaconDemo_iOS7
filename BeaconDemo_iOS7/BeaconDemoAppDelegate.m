@@ -10,6 +10,7 @@
 
 
 @implementation BeaconDemoAppDelegate
+@synthesize  CurrentUserID, CurrentPersonalInfo;
 /////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL) isMultitaskingSupported
 {
@@ -68,7 +69,7 @@
     [self QueryPersonalInfoAndShow:userid];
 }
 
--(void) QueryPersonalInfoAndShow:(NSString*)personID
+-(void) QueryPersonalInfoAndShow:(NSString*)userID
 {
     NSURL *requestURL=[NSURL URLWithString:QUERY_DB_SERVIER_URL];
     
@@ -77,7 +78,7 @@
     //Set Post Data
     //const char *bytes = [[NSString stringWithFormat:@"<?xml version=\"1.0\"?>\n<deviceid>%@</deviceid>", deviceID] UTF8String];
     
-    const char *bytes = [[NSString stringWithFormat:@"userid=%@", personID] UTF8String];
+    const char *bytes = [[NSString stringWithFormat:@"userid=%@", userID] UTF8String];
     //For multiple POST data
     //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
     

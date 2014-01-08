@@ -39,8 +39,14 @@
     [peripherals removeAllObjects];
     
     
-    BeaconDemoAppDelegate *appDelegate	=	(BeaconDemoAppDelegate*)[[UIApplication sharedApplication] delegate];
+    GET_APPDELEGATE
     appDelegate.tv=self; //pass this pointer to the AppDelegate
+    
+    //Show Welcome message with the user's fullname
+    NSString *fullname=[NSString stringWithFormat:@"Welcome, %@ %@!",
+                        [appDelegate.CurrentPersonalInfo valueForKey:@"givename"],
+                        [appDelegate.CurrentPersonalInfo valueForKey:@"surname"]];
+    self.LabelDeviceInfo.text=fullname;
 
 }
 
@@ -71,9 +77,8 @@ NSMutableData *receivedData;
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
     
     //Set Post Data
-    //const char *bytes = [[NSString stringWithFormat:@"<?xml version=\"1.0\"?>\n<deviceid>%@</deviceid>", deviceID] UTF8String];
-    
-    const char *bytes = [[NSString stringWithFormat:@"userid=%@", @"kkk"] UTF8String];
+    BeaconDemoAppDelegate *appDelegate	=	(BeaconDemoAppDelegate*)[[UIApplication sharedApplication] delegate];
+    const char *bytes = [[NSString stringWithFormat:@"userid=%@", appDelegate.CurrentUserID] UTF8String];
     //For multiple POST data
     //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
     

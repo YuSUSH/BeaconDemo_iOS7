@@ -19,6 +19,9 @@
 
 #define PUSH_SERVIER_URL @"http://experiment.sandbox.net.nz/beacon/simplepush.php"
 #define QUERY_DB_SERVIER_URL @"http://ble.sandbox.net.nz/myforum/query_personalinfo.php"
+#define QUERY_LOGIN_URL @"http://ble.sandbox.net.nz/myforum/query_login.php"
+
+#define GET_APPDELEGATE BeaconDemoAppDelegate *appDelegate	=	(BeaconDemoAppDelegate*)[[UIApplication sharedApplication] delegate];
 
 @interface BeaconDemoAppDelegate : UIResponder <UIApplicationDelegate, CBCentralManagerDelegate,CBPeripheralDelegate>
 
@@ -32,5 +35,8 @@
 
 @property (strong, nonatomic) BLETagViewController *tv;
 @property (strong, nonatomic) BeaconDemoViewController *bv;
+
+@property (strong, nonatomic) NSString *CurrentUserID;
+@property (strong, nonatomic) NSMutableDictionary *CurrentPersonalInfo;
 
 @end
