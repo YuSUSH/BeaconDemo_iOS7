@@ -39,6 +39,7 @@
 					if($rows>0)
 					{
 						$arrCol["userid"]=mysql_result($result,0,'userid');
+						$arrCol["password"]=mysql_result($result,0,'password');
 						$arrCol["surname"]=mysql_result($result,0,'surname');
 						$arrCol["givename"]=mysql_result($result,0,'givename');
 						$arrCol["gender"]= mysql_result($result,0,'gender');

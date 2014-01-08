@@ -24,12 +24,84 @@
     return self;
 }
 
+#define SAVE_FILE_NAME @"kkk.txt"
+
+bool Auto_login;
+
 - (void)viewDidLoad
 {
+    Auto_login=false;
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.useridText.delegate=self;
     self.passwordText.delegate=self;
+    
+    //Try to read out the user info stored in the file
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:SAVE_FILE_NAME];
+    
+    NSMutableDictionary *account;
+    account=[NSMutableDictionary dictionaryWithContentsOfFile:filePath];
+    if(account!=nil)
+    {
+        NSString *userid=[account valueForKey:@"userid"];
+        NSString *password=[account valueForKey:@"password"];
+        if(userid!=nil)
+        {
+            if(userid.length>0)
+            {
+                //Validate the account
+                Auto_login=true;
+                [self SetBusyState];
+                [self ValidateLoginAccount:userid AndPassword:password];
+            }
+        }
+    }
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    if(!Auto_login)
+    {
+        [self SetNormalState];
+        [self SaveAccountInfo:nil]; //don't save any account info
+    }
+}
+
+-(void) SetNormalState
+{
+    [self.titileLabel setText:@"Login Window"];
+    self.useridText.enabled=true;
+    self.passwordText.enabled=true;
+}
+
+-(void) SetBusyState
+{
+    [self.titileLabel setText:@"Loggin in ..."];
+    self.useridText.enabled=false;
+    self.passwordText.enabled=false;
+}
+
+
+-(void) SaveAccountInfo:(NSDictionary*)personalInfo
+{
+    NSMutableDictionary *account;
+    account=[[NSMutableDictionary alloc] init];
+    //create the account object based on PersonalInfo
+    NSString *userid, *password;
+    userid=[personalInfo valueForKey:@"userid"];
+    password=[personalInfo valueForKey:@"password"];
+    [account setValue:userid forKey:@"userid"];
+    [account setValue:password forKey:@"password"];
+    
+    //Save into file
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:SAVE_FILE_NAME];
+    
+    [account writeToFile:filePath atomically:YES];
 }
 
 
@@ -60,10 +132,10 @@
 
 - (IBAction)OnClickedLoginButton:(UIButton *)sender
 {
-    [self ValidateLoginAccount];
+    [self ValidateLoginAccount: self.useridText.text AndPassword:self.passwordText.text];
 }
 
--(void) ValidateLoginAccount
+-(void) ValidateLoginAccount:(NSString*)userid AndPassword:(NSString *)password
 {
     
     NSURL *requestURL=[NSURL URLWithString:QUERY_LOGIN_URL];
@@ -71,7 +143,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
     
     //Set Post Data
-    const char *bytes = [[NSString stringWithFormat:@"userid=%@&password=%@", self.useridText.text, self.passwordText.text] UTF8String];
+    const char *bytes = [[NSString stringWithFormat:@"userid=%@&password=%@", userid, password] UTF8String];
     //For multiple POST data
     //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
     
@@ -83,6 +155,8 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
+         Auto_login=false; //Auto Login state ends here
+         
          NSLog(@"responseData: %@", data);
          
          //decode the response data
@@ -100,6 +174,11 @@
                     GET_APPDELEGATE
                     appDelegate.CurrentUserID = self.useridText.text;
                     appDelegate.CurrentPersonalInfo=dataDict;
+                    
+                    //Save this account info into local file
+                    [self SaveAccountInfo:appDelegate.CurrentPersonalInfo];
+                    
+                    //Switch to next ViewController
                     [self performSegueWithIdentifier:@"SegueToBLEClient" sender:self]; //transfer to Client View
                 });
                 return;
