@@ -4,39 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
-        <scene sceneID="36E-Z2-gyX">
-            <objects>
-                <tableViewController id="8RE-Mq-tSx" customClass="MainViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="uFl-JH-cbj">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="krt-vV-Vpd">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="krt-vV-Vpd" id="EyO-4A-wTY">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="8RE-Mq-tSx" id="29K-e5-Qsy"/>
-                            <outlet property="delegate" destination="8RE-Mq-tSx" id="xtp-jN-G4U"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="qUr-Fr-0kN"/>
-                    <connections>
-                        <segue destination="GFV-OE-UJp" kind="push" identifier="SegueToBLETagView" id="orQ-is-DN2"/>
-                        <segue destination="4N8-UO-Rls" kind="push" identifier="SegueToLogin" id="n7R-e7-r6G"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sRJ-en-big" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-521" y="-611"/>
-        </scene>
         <!--Navigation Controller - BLE Title-->
         <scene sceneID="KYi-at-lZH">
             <objects>
@@ -48,12 +15,12 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="8RE-Mq-tSx" kind="relationship" relationship="rootViewController" id="ARz-Da-Uh8"/>
+                        <segue destination="4N8-UO-Rls" kind="relationship" relationship="rootViewController" id="qsk-g8-e0f"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AhH-1Y-ysB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-702" y="360"/>
+            <point key="canvasLocation" x="-966" y="78"/>
         </scene>
         <!--User Login View Controller-->
         <scene sceneID="guM-xd-kDj">
@@ -120,7 +87,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9da-Hr-cCU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-101" y="-993"/>
+            <point key="canvasLocation" x="-367" y="-477"/>
         </scene>
         <!--Tag View Controller-->
         <scene sceneID="3gD-ne-xkb">
@@ -159,7 +126,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="orQ-is-DN2"/>
-    </inferredMetricsTieBreakers>
 </document>
