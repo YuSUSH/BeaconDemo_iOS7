@@ -30,9 +30,10 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     self.title=@"iOS to iOS with Beacon API";
     
     //Save the view in the AppDelegate
-    BeaconDemoAppDelegate *appDelegate	=	(BeaconDemoAppDelegate*)[[UIApplication sharedApplication] delegate];
+    GET_APPDELEGATE
     appDelegate.bv=self; //pass this pointer to the AppDelegate
     
+    [self.TRSwitch setOn:FALSE]; //initial with advertising mode
     //init
     if (self.TRSwitch.on)
     {

@@ -77,7 +77,7 @@ NSMutableData *receivedData;
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
     
     //Set Post Data
-    BeaconDemoAppDelegate *appDelegate	=	(BeaconDemoAppDelegate*)[[UIApplication sharedApplication] delegate];
+    GET_APPDELEGATE
     const char *bytes = [[NSString stringWithFormat:@"userid=%@", appDelegate.CurrentUserID] UTF8String];
     //For multiple POST data
     //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
