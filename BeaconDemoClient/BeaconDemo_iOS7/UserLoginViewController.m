@@ -37,6 +37,13 @@ bool Auto_login;
     self.useridText.delegate=self;
     self.passwordText.delegate=self;
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+    
+    
     //Try to read out the user info stored in the file
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -104,6 +111,10 @@ bool Auto_login;
     [account writeToFile:filePath atomically:YES];
 }
 
+-(void)dismissKeyboard {
+    [self.useridText resignFirstResponder];
+    [self.passwordText resignFirstResponder];
+}
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -115,13 +126,6 @@ bool Auto_login;
 {
     self.view.frame  =CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+90,
                                  self.view.frame.size.width, self.view.frame.size.height);
-     [textField resignFirstResponder];
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
 }
 
 - (void)didReceiveMemoryWarning
