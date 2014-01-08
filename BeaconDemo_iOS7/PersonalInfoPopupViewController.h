@@ -11,5 +11,8 @@
 @interface PersonalInfoPopupViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UILabel *labelName;
 @property (strong, nonatomic) IBOutlet UILabel *personalInfoLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *imageViewPhoto;
+
+@property (strong, nonatomic) NSMutableDictionary *personalInfo;
 
 @end

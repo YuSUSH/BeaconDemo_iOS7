@@ -19,6 +19,7 @@
 					$arrCol["givename"]=mysql_result($result,$j,'givename');
 					$arrCol["gender"]= mysql_result($result,$j,'gender');
 					$arrCol["age"]= mysql_result($result,$j,'age');
+					$arrCol["iconfilename"]= mysql_result($result,$j,'iconfilename');
 					
 					array_push($resultArray,$arrCol);
 				}

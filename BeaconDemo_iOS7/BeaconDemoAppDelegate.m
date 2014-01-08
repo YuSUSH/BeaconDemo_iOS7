@@ -101,13 +101,7 @@
          for (i=0; i<[jsonObjects count];i++)
          {
              NSMutableDictionary *dataDict=[jsonObjects objectAtIndex:i];
-             NSString *userid = [dataDict objectForKey:@"userid"];
-             NSString *surname = [dataDict objectForKey:@"surname"];
-             NSString *givename = [dataDict objectForKey:@"givename"];
-             
-             [personalInfo setValue:userid forKey:@"userid"];
-             [personalInfo setValue:surname forKey:@"surname"];
-             [personalInfo setValue:givename forKey:@"givename"];
+             personalInfo=dataDict;
          }
          
          if(self.bv!=nil)

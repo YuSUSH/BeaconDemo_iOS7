@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PersonalInfoPopupViewController">
             <connections>
+                <outlet property="imageViewPhoto" destination="3Y1-zx-pnG" id="ozo-Zt-dib"/>
                 <outlet property="labelName" destination="Y50-us-lQU" id="fIv-YS-SB1"/>
                 <outlet property="personalInfoLabel" destination="Y50-us-lQU" id="oqy-wT-VnH"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -42,6 +43,10 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Y1-zx-pnG">
+                    <rect key="frame" x="81" y="243" width="301" height="266"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

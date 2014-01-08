@@ -15,7 +15,6 @@
 
 #define IPAD3_SERVICE_ID @"87BB8D91-4662-780A-5A25-C1626992C22D"
 
-#define IPAD3_DEVICE_UUID @"87BB8D91-4662-780A-5A25-C1626992C22D"
 
 #define PUSH_SERVIER_URL @"http://experiment.sandbox.net.nz/beacon/simplepush.php"
 #define QUERY_DB_SERVIER_URL @"http://ble.sandbox.net.nz/myforum/query_personalinfo.php"

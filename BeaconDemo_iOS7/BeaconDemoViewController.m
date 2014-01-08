@@ -337,15 +337,13 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     self.m_PopoverController = [[UIPopoverController alloc] initWithContentViewController:popoverContent];
     self.m_PopoverController.delegate=self;
    
-    //set the text with personal info passed by other class
-    NSString *fullname= [NSString stringWithFormat:@"%@ %@", [personalInfo valueForKey:@"givename"],
-                         [personalInfo valueForKey:@"surname"]];
-    [popoverContent.personalInfoLabel setText:fullname];
+    popoverContent.personalInfo=personalInfo; //pass the personal info to popupview
+    
     self.m_PopoverController.popoverContentSize=CGSizeMake(531, 544);
     
     
     //Make it appears from the button's area
-    [self.m_PopoverController presentPopoverFromRect: CGRectMake(40, 220, 531, 544)
+    [self.m_PopoverController presentPopoverFromRect: CGRectMake(80, 220, 531, 544)
      //[self convertRect:self.m_button.frame toView:self.mView]
                                               inView:self.view
                             permittedArrowDirections:0 animated:YES];
