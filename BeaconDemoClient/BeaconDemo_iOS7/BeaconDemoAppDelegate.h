@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MainViewController.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "BLETagViewController.h"
-#import "PersonalInfoPopupViewController.h"
 
 #define IPAD3_SERVICE_ID @"87BB8D91-4662-780A-5A25-C1626992C22D"
 

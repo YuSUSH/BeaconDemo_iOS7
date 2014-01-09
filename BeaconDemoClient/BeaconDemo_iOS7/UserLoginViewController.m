@@ -195,6 +195,8 @@ bool Auto_login;
              // Display the Hello WorldMessage
              [helloWorldAlert show];
          });
+         
+         [self SetNormalState]; //recover to normal appearance, if needed.
 
 
      }];
