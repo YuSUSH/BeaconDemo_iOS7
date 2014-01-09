@@ -46,18 +46,6 @@
 }
 
 
-UIAlertView *helloKKKWorldAlert;
-
--(void) ShowPersonInfoWindow:(NSString*)text
-{
-    UIAlertView *helloKKKWorldAlert = [[UIAlertView alloc]
-                                    initWithTitle:@"Notification from Server" message:text delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    // Display the Hello WorldMessage
-    [helloKKKWorldAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-//    [helloKKKWorldAlert show];
-}
-
-
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
