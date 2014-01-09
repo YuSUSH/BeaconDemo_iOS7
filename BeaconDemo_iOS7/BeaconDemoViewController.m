@@ -354,4 +354,54 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     return true;
 }
 
+
+-(void) QueryPersonalInfoAndShow:(NSString*)userID
+{
+    NSURL *requestURL=[NSURL URLWithString:QUERY_DB_SERVIER_URL];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
+    
+    //Set Post Data
+    //const char *bytes = [[NSString stringWithFormat:@"<?xml version=\"1.0\"?>\n<deviceid>%@</deviceid>", deviceID] UTF8String];
+    
+    const char *bytes = [[NSString stringWithFormat:@"userid=%@", userID] UTF8String];
+    //For multiple POST data
+    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
+    
+    //Send request
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    //Request with the personal ID and wait for response from DB server
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+         NSLog(@"responseData: %@", data);
+         
+         //decode the response data
+         NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+         
+         NSMutableDictionary *personalInfo=[[NSMutableDictionary alloc] init];
+         int i;
+         for (i=0; i<[jsonObjects count];i++)
+         {
+             NSMutableDictionary *dataDict=[jsonObjects objectAtIndex:i];
+             personalInfo=dataDict;
+         }
+         
+       
+         dispatch_async(dispatch_get_main_queue(), ^{
+                 [self ShowPopupView:personalInfo];
+         });
+         //[self ShowPersonInfoWindow:outputstr];
+         //Show the popup window for personal info
+         
+         
+     }];
+    
+}
+
+
+
 @end

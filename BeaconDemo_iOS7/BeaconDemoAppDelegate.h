@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MainViewController.h"
 #import <CoreBluetooth/CoreBluetooth.h>
-#import "BLETagViewController.h"
 #import "BeaconDemoViewController.h"
 #import "PersonalInfoPopupViewController.h"
 
@@ -30,9 +28,7 @@
 @property (nonatomic, unsafe_unretained) UIBackgroundTaskIdentifier backgroundTaskIdentifier;
 @property (nonatomic, strong) NSTimer *myTimer;
 
-@property (strong,nonatomic) CBCentralManager *cm;
 
-@property (strong, nonatomic) BLETagViewController *tv;
 @property (strong, nonatomic) BeaconDemoViewController *bv;
 
 @property (strong, nonatomic) NSString *CurrentUserID;

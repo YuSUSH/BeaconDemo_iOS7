@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		F310A304181099C100581230 /* ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F310A303181099C100581230 /* ringtone.mp3 */; };
 		F310A3071810CC8F00581230 /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F310A3061810CC8F00581230 /* AudioViewController.m */; };
-		F36A6991181085A4004DF5B6 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F36A6990181085A4004DF5B6 /* MainViewController.m */; };
 		F390C2F01806644E00A8BA39 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F390C2EF1806644E00A8BA39 /* Foundation.framework */; };
 		F390C2F21806644E00A8BA39 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F390C2F11806644E00A8BA39 /* CoreGraphics.framework */; };
 		F390C2F41806644E00A8BA39 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F390C2F31806644E00A8BA39 /* UIKit.framework */; };
@@ -24,7 +23,6 @@
 		F390C3111806644E00A8BA39 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F390C2F31806644E00A8BA39 /* UIKit.framework */; };
 		F390C3191806644E00A8BA39 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F390C3171806644E00A8BA39 /* InfoPlist.strings */; };
 		F390C31B1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = F390C31A1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m */; };
-		F3A7195E180BA71C001999C0 /* BLETagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A7195D180BA71C001999C0 /* BLETagViewController.m */; };
 		F3CDCC14187BB01D00C86E61 /* PersonalInfoPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CDCC12187BB01D00C86E61 /* PersonalInfoPopupViewController.m */; };
 		F3CDCC15187BB01D00C86E61 /* PersonalInfoPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3CDCC13187BB01D00C86E61 /* PersonalInfoPopupViewController.xib */; };
 		F3DD5719187CBE0800EEA6C6 /* UserLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DD5718187CBE0800EEA6C6 /* UserLoginViewController.m */; };
@@ -44,8 +42,6 @@
 		F310A303181099C100581230 /* ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ringtone.mp3; sourceTree = SOURCE_ROOT; };
 		F310A3051810CC8F00581230 /* AudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioViewController.h; sourceTree = "<group>"; };
 		F310A3061810CC8F00581230 /* AudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioViewController.m; sourceTree = "<group>"; };
-		F36A698F181085A4004DF5B6 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		F36A6990181085A4004DF5B6 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		F390C2EC1806644E00A8BA39 /* BeaconDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaconDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F390C2EF1806644E00A8BA39 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F390C2F11806644E00A8BA39 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -65,8 +61,6 @@
 		F390C3161806644E00A8BA39 /* BeaconDemo_iOS7Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BeaconDemo_iOS7Tests-Info.plist"; sourceTree = "<group>"; };
 		F390C3181806644E00A8BA39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F390C31A1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeaconDemo_iOS7Tests.m; sourceTree = "<group>"; };
-		F3A7195C180BA71C001999C0 /* BLETagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLETagViewController.h; sourceTree = "<group>"; };
-		F3A7195D180BA71C001999C0 /* BLETagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLETagViewController.m; sourceTree = "<group>"; };
 		F3CDCC11187BB01D00C86E61 /* PersonalInfoPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoPopupViewController.h; sourceTree = "<group>"; };
 		F3CDCC12187BB01D00C86E61 /* PersonalInfoPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoPopupViewController.m; sourceTree = "<group>"; };
 		F3CDCC13187BB01D00C86E61 /* PersonalInfoPopupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalInfoPopupViewController.xib; sourceTree = "<group>"; };
@@ -139,10 +133,6 @@
 				F390C3051806644E00A8BA39 /* BeaconDemoViewController.m */,
 				F390C3071806644E00A8BA39 /* Images.xcassets */,
 				F390C2F61806644E00A8BA39 /* Supporting Files */,
-				F3A7195C180BA71C001999C0 /* BLETagViewController.h */,
-				F3A7195D180BA71C001999C0 /* BLETagViewController.m */,
-				F36A698F181085A4004DF5B6 /* MainViewController.h */,
-				F36A6990181085A4004DF5B6 /* MainViewController.m */,
 				F310A3051810CC8F00581230 /* AudioViewController.h */,
 				F310A3061810CC8F00581230 /* AudioViewController.m */,
 				F3CDCC11187BB01D00C86E61 /* PersonalInfoPopupViewController.h */,
@@ -295,8 +285,6 @@
 				F390C2FC1806644E00A8BA39 /* main.m in Sources */,
 				F3DD5719187CBE0800EEA6C6 /* UserLoginViewController.m in Sources */,
 				F390C3001806644E00A8BA39 /* BeaconDemoAppDelegate.m in Sources */,
-				F36A6991181085A4004DF5B6 /* MainViewController.m in Sources */,
-				F3A7195E180BA71C001999C0 /* BLETagViewController.m in Sources */,
 				F310A3071810CC8F00581230 /* AudioViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

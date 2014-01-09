@@ -27,5 +27,6 @@
 @property (nonatomic, strong) NSArray *detectedBeacons;
 @property (nonatomic, retain) UIPopoverController *m_PopoverController; //The Popover Controller
 -(void)ShowPopupView:(NSMutableDictionary*)personalInfo;
+-(void) QueryPersonalInfoAndShow:(NSString*)userID;
 
 @end

@@ -66,69 +66,13 @@
     //Get the personID from notification
     NSString *userid=[[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
     // Query the personal info with the ID got from notification
-    [self QueryPersonalInfoAndShow:userid];
-}
-
--(void) QueryPersonalInfoAndShow:(NSString*)userID
-{
-    NSURL *requestURL=[NSURL URLWithString:QUERY_DB_SERVIER_URL];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
-    
-    //Set Post Data
-    //const char *bytes = [[NSString stringWithFormat:@"<?xml version=\"1.0\"?>\n<deviceid>%@</deviceid>", deviceID] UTF8String];
-    
-    const char *bytes = [[NSString stringWithFormat:@"userid=%@", userID] UTF8String];
-    //For multiple POST data
-    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
-    
-    //Send request
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
-    
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    
-    //Request with the personal ID and wait for response from DB server
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-     {
-         NSLog(@"responseData: %@", data);
-         
-         //decode the response data
-         NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-         
-         NSMutableDictionary *personalInfo=[[NSMutableDictionary alloc] init];
-         int i;
-         for (i=0; i<[jsonObjects count];i++)
-         {
-             NSMutableDictionary *dataDict=[jsonObjects objectAtIndex:i];
-             personalInfo=dataDict;
-         }
-         
-         if(self.bv!=nil)
-         {
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 [self.bv ShowPopupView:personalInfo];
-             });
-         }
-         //[self ShowPersonInfoWindow:outputstr];
-         //Show the popup window for personal info
-         
-         
-     }];
-
+    if(self.bv!=nil)
+        [self.bv QueryPersonalInfoAndShow:userid];
 }
 
 
-UIAlertView *helloKKKWorldAlert;
 
--(void) ShowPersonInfoWindow:(NSString*)text
-{
-    UIAlertView *helloKKKWorldAlert = [[UIAlertView alloc]
-                                    initWithTitle:@"Notification from Server" message:text delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    // Display the Hello WorldMessage
-    [helloKKKWorldAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-//    [helloKKKWorldAlert show];
-}
+
 
 
 
@@ -165,8 +109,6 @@ UIAlertView *helloKKKWorldAlert;
     if (![self isMultitaskingSupported])
         return;
     
-    self.cm = [[CBCentralManager alloc]initWithDelegate:self queue:nil];
-    
     self.myTimer =
     [NSTimer scheduledTimerWithTimeInterval:1.0f
                                      target:self
@@ -181,55 +123,7 @@ UIAlertView *helloKKKWorldAlert;
 
     
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////
-//static NSString * const TagUUID = @"A8CE57BF-00E1-B9A1-F5F0-E5412202529C";
-
--(void)centralManagerDidUpdateState:(CBCentralManager *)central
-{
-    NSLog(@"//////////////centralManagerDidUpdateState.");
-    if (central.state != CBCentralManagerStatePoweredOn)
-    {
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"BLE not supported !" message:[NSString stringWithFormat:@"CoreBluetooth return state: %d",central.state] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alertView show];
-    }
-    else
-    {
-        NSDictionary *options = @{CBCentralManagerScanOptionAllowDuplicatesKey: @NO};
-        NSLog(@"//////////////Start to scan.");
-         [central scanForPeripheralsWithServices:@[ [CBUUID UUIDWithString:IPAD3_SERVICE_ID] ] options:options];
-    }
-}
 //////////////////////////////////////////////////////////////////////////////////////////////////
--(void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
-    
-    NSLog(@"Found a BLE Device : %@",peripheral);
-    
-    /* iOS 6.0 bug workaround : connect to device before displaying UUID !
-     The reason for this is that the CFUUID .UUID property of CBPeripheral
-     here is null the first time an unkown (never connected before in any app)
-     peripheral is connected. So therefore we connect to all peripherals we find.
-     */
-    
-    float fRSSI=[RSSI floatValue];
-    
-    
-    NSLog(@"device UUID=: %@, RSSI=%f", peripheral.identifier, fRSSI);
-    
-    /*
-    //notify iOS that we've detected a device
-    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-    localNotification.alertBody = @"I found you";
-    localNotification.soundName = @"ringtone.mp3";
-    localNotification.fireDate = [NSDate date];
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-     */
-        
-    if(self.tv!=nil)
-        [self.tv NotifyPushNotificationServer_Post]; //notify the server side
-    
-    
-}
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
