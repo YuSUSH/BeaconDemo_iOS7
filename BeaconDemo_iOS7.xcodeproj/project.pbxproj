@@ -25,7 +25,6 @@
 		F390C31B1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = F390C31A1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m */; };
 		F3CDCC14187BB01D00C86E61 /* PersonalInfoPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CDCC12187BB01D00C86E61 /* PersonalInfoPopupViewController.m */; };
 		F3CDCC15187BB01D00C86E61 /* PersonalInfoPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3CDCC13187BB01D00C86E61 /* PersonalInfoPopupViewController.xib */; };
-		F3DD5719187CBE0800EEA6C6 /* UserLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DD5718187CBE0800EEA6C6 /* UserLoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,8 +63,6 @@
 		F3CDCC11187BB01D00C86E61 /* PersonalInfoPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoPopupViewController.h; sourceTree = "<group>"; };
 		F3CDCC12187BB01D00C86E61 /* PersonalInfoPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoPopupViewController.m; sourceTree = "<group>"; };
 		F3CDCC13187BB01D00C86E61 /* PersonalInfoPopupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalInfoPopupViewController.xib; sourceTree = "<group>"; };
-		F3DD5717187CBE0800EEA6C6 /* UserLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLoginViewController.h; sourceTree = "<group>"; };
-		F3DD5718187CBE0800EEA6C6 /* UserLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,8 +135,6 @@
 				F3CDCC11187BB01D00C86E61 /* PersonalInfoPopupViewController.h */,
 				F3CDCC12187BB01D00C86E61 /* PersonalInfoPopupViewController.m */,
 				F3CDCC13187BB01D00C86E61 /* PersonalInfoPopupViewController.xib */,
-				F3DD5717187CBE0800EEA6C6 /* UserLoginViewController.h */,
-				F3DD5718187CBE0800EEA6C6 /* UserLoginViewController.m */,
 			);
 			path = BeaconDemo_iOS7;
 			sourceTree = "<group>";
@@ -283,7 +278,6 @@
 				F3CDCC14187BB01D00C86E61 /* PersonalInfoPopupViewController.m in Sources */,
 				F390C3061806644E00A8BA39 /* BeaconDemoViewController.m in Sources */,
 				F390C2FC1806644E00A8BA39 /* main.m in Sources */,
-				F3DD5719187CBE0800EEA6C6 /* UserLoginViewController.m in Sources */,
 				F390C3001806644E00A8BA39 /* BeaconDemoAppDelegate.m in Sources */,
 				F310A3071810CC8F00581230 /* AudioViewController.m in Sources */,
 			);
