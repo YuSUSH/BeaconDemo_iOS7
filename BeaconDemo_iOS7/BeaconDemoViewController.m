@@ -33,20 +33,9 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     GET_APPDELEGATE
     appDelegate.bv=self; //pass this pointer to the AppDelegate
     
-    [self.TRSwitch setOn:FALSE]; //initial with advertising mode
-    //init
-    if (self.TRSwitch.on)
-    {
-        //ranging
-        [self stopAdvertisingBeacon];
-        [self startRangingForBeacons];
-    }
-    else
-    {
-        //advertising
-        [self stopRangingForBeacons];
-        [self startAdvertisingBeacon];
-    }
+    //advertising
+    [self stopRangingForBeacons];
+    [self startAdvertisingBeacon];
 }
 
 #pragma mark - Beacon ranging
@@ -65,7 +54,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     
     if (![CLLocationManager isRangingAvailable]) {
         NSLog(@"Couldn't turn on ranging: Ranging is not available.");
-        self.TRSwitch.on = NO;
+        //self.TRSwitch.on = NO;
         return;
     }
     
@@ -113,17 +102,17 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 {
     if (![CLLocationManager locationServicesEnabled]) {
         NSLog(@"Couldn't turn on ranging: Location services are not enabled.");
-        self.TRSwitch.on = NO;
+        //self.TRSwitch.on = NO;
         return;
     }
     
     if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
         NSLog(@"Couldn't turn on ranging: Location services not authorised.");
-        self.TRSwitch.on = NO;
+        //self.TRSwitch.on = NO;
         return;
     }
     
-    self.TRSwitch.on = YES;
+    //self.TRSwitch.on = YES;
 }
 
 -(void)ShowAlertDialog:(NSString *)msg
@@ -192,7 +181,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 {
     if (self.peripheralManager.state != 5) {
         NSLog(@"Peripheral manager is off.");
-        self.TRSwitch.on = NO;
+        //self.TRSwitch.on = NO;
         return;
     }
     
@@ -233,13 +222,13 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 {
     if (error) {
         NSLog(@"Couldn't turn on advertising: %@", error);
-        self.TRSwitch.on = NO;
+        //self.TRSwitch.on = NO;
         return;
     }
     
     if (peripheralManager.isAdvertising) {
         NSLog(@"Turned on advertising.");
-        self.TRSwitch.on = NO;
+        //self.TRSwitch.on = NO;
     }
 }
 
@@ -247,7 +236,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 {
     if (peripheralManager.state != 5) {
         NSLog(@"Peripheral manager is off.");
-        self.TRSwitch.on = NO;
+        //self.TRSwitch.on = NO;
         return;
     }
     
