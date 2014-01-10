@@ -50,6 +50,12 @@
 
 }
 
+
+-(void) viewDidAppear:(BOOL)animated
+{
+    [self PlayRingtone];
+}
+
 -(NSString*) getCurrentDeviceID
 {
     return [[UIDevice currentDevice] identifierForVendor].UUIDString;

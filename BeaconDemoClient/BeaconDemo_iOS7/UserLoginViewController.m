@@ -176,7 +176,7 @@ bool Auto_login;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     //Save the current userid and personal info
                     GET_APPDELEGATE
-                    appDelegate.CurrentUserID = self.useridText.text;
+                    appDelegate.CurrentUserID = [dataDict valueForKey:@"userid"];
                     appDelegate.CurrentPersonalInfo=dataDict;
                     
                     //Save this account info into local file

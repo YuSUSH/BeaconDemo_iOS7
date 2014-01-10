@@ -39,6 +39,8 @@
                          [personalInfo valueForKey:@"surname"]];
     [self.personalInfoLabel setText:fullname];
     
+    [self PlayRingtone];
+    
 }
 
 -(void) viewDidAppear:(BOOL)animated

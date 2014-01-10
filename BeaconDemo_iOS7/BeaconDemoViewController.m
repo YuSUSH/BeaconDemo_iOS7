@@ -392,5 +392,4 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 }
 
 
-
 @end

@@ -56,8 +56,43 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
 	NSLog(@"My token is: %@", deviceToken);
+    
+    //Conver the token into string
+    const unsigned *tokenBytes = [deviceToken bytes];
+    NSString *hexToken = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                          ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                          ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                          ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+    
+    [self UpdateNotifyPushNotificationToken:hexToken];
+    
 }
 
+-(void) UpdateNotifyPushNotificationToken:(NSString *)tokenstr
+{
+    
+    NSURL *requestURL=[NSURL URLWithString:PUSH_TOKEN_UPDATE_URL];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
+    
+    //Set Post Data
+    const char *bytes = [[NSString stringWithFormat:@"token=%@", tokenstr] UTF8String];
+    //For multiple POST data
+    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
+    
+    //Send request
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+         
+     }];
+    
+    
+}
 
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
 {

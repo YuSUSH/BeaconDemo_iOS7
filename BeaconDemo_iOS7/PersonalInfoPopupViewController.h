@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AudioViewController.h"
 
-@interface PersonalInfoPopupViewController : UIViewController
+@interface PersonalInfoPopupViewController : AudioViewController
 @property (strong, nonatomic) IBOutlet UILabel *labelName;
 @property (strong, nonatomic) IBOutlet UILabel *personalInfoLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *imageViewPhoto;
