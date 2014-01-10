@@ -26,6 +26,8 @@
 @property (nonatomic, strong) CBPeripheralManager *peripheralManager;
 @property (nonatomic, strong) NSArray *detectedBeacons;
 @property (nonatomic, retain) UIPopoverController *m_PopoverController; //The Popover Controller
+@property (nonatomic, retain) NSMutableArray *popupQueue; //the queue storing all the people to be shown
+
 -(void)ShowPopupView:(NSMutableDictionary*)personalInfo;
 -(void) QueryPersonalInfoAndShow:(NSString*)userID;
 

@@ -22,11 +22,15 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 
 @implementation BeaconDemoViewController
 
-@synthesize m_PopoverController;
+@synthesize m_PopoverController, popupQueue;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //init the queue for showing people
+    popupQueue=[[NSMutableArray alloc] init];
+    [popupQueue removeAllObjects];
+    
     self.title=@"iOS to iOS with Beacon API";
     
     //Save the view in the AppDelegate
@@ -36,6 +40,28 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     //advertising
     [self stopRangingForBeacons];
     [self startAdvertisingBeacon];
+    
+    
+    //The loop for showing popup window
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // Add code here to do background processing
+        //
+        //
+        while(1)
+        {
+            while(popupQueue.count>0)
+            {
+                [popupQueue objectAtIndex:0]
+                [popupQueue removeObjectAtIndex:0];
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    // Add code here to update the UI/send notifications based on the
+                    // results of the background processing
+                });
+                
+            }
+        }
+        
+    });
 }
 
 #pragma mark - Beacon ranging
