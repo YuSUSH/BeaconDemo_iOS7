@@ -10,7 +10,7 @@
 
 
 @implementation BeaconDemoAppDelegate
-@synthesize  CurrentUserID, CurrentPersonalInfo;
+@synthesize  CurrentUserID, CurrentPersonalInfo, bEnableBLE;
 /////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL) isMultitaskingSupported
 {
@@ -40,6 +40,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    bEnableBLE=true; //enable BLE as default;
     
     
     return YES;
@@ -80,19 +82,22 @@
     if (![self isMultitaskingSupported])
         return;
     
-    self.cm = [[CBCentralManager alloc]initWithDelegate:self queue:nil];
-    
-    self.myTimer =
-    [NSTimer scheduledTimerWithTimeInterval:1.0f
-                                     target:self
-                                   selector:@selector(timerMethod:)
-                                   userInfo:nil
-                                    repeats:YES];
-    self.backgroundTaskIdentifier =
-    [application beginBackgroundTaskWithExpirationHandler:^(void)
+    if(bEnableBLE) //if BLE function is enabled
     {
-        [self endBackgroundTask];
-    }];
+        self.cm = [[CBCentralManager alloc]initWithDelegate:self queue:nil];
+        
+        self.myTimer =
+        [NSTimer scheduledTimerWithTimeInterval:1.0f
+                                         target:self
+                                       selector:@selector(timerMethod:)
+                                       userInfo:nil
+                                        repeats:YES];
+        self.backgroundTaskIdentifier =
+        [application beginBackgroundTaskWithExpirationHandler:^(void)
+        {
+            [self endBackgroundTask];
+        }];
+    }
 
     
 }

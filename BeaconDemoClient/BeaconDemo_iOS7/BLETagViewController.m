@@ -109,11 +109,15 @@ NSMutableData *receivedData;
         NSLog(@"//////////Start to Scan");
         NSDictionary *options = @{CBCentralManagerScanOptionAllowDuplicatesKey: @NO};
         [self.cm scanForPeripheralsWithServices:nil options:options];
+        GET_APPDELEGATE
+        appDelegate.bEnableBLE=true;
     }
     else
     {
-        [self.cm stopScan];
         NSLog(@"////////Stop scanning");
+        [self.cm stopScan];
+        GET_APPDELEGATE
+        appDelegate.bEnableBLE=false;
     }
 }
 

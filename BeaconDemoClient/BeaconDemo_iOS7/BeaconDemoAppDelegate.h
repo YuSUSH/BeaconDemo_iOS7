@@ -33,5 +33,6 @@
 
 @property (strong, nonatomic) NSString *CurrentUserID;
 @property (strong, nonatomic) NSMutableDictionary *CurrentPersonalInfo;
+@property (nonatomic) bool bEnableBLE; //if the BLE function is
 
 @end
