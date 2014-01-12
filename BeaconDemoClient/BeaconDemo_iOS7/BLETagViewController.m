@@ -102,6 +102,21 @@ NSMutableData *receivedData;
     
 }
 
+- (IBAction)OnBLESwitchChange:(UISwitch *)sender
+{
+    if([sender isOn])
+    {
+        NSLog(@"//////////Start to Scan");
+        NSDictionary *options = @{CBCentralManagerScanOptionAllowDuplicatesKey: @NO};
+        [self.cm scanForPeripheralsWithServices:nil options:options];
+    }
+    else
+    {
+        [self.cm stopScan];
+        NSLog(@"////////Stop scanning");
+    }
+}
+
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     [receivedData appendData:data];
@@ -225,6 +240,5 @@ NSMutableData *receivedData;
         }
     }
 }
-////////////////////////////////////////////////////////////////////////////////////////////
 
 @end

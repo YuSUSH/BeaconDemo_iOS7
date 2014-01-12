@@ -32,9 +32,11 @@ static NSString * const iOSUUID = @"00000000-0000-0000-0000-000000000000";
 @property (strong,nonatomic) CBCentralManager *cm;
 @property (weak, nonatomic) IBOutlet UILabel *LabelDeviceInfo;
 @property (strong,nonatomic) NSMutableArray *peripherals;
+@property (strong, nonatomic) IBOutlet UISwitch *BLEOnOffSwitch;
 
 -(void) NotifyPushNotificationServer;
 -(void) NotifyPushNotificationServer_Post;
+- (IBAction)OnBLESwitchChange:(UISwitch *)sender;
 
 
 @end

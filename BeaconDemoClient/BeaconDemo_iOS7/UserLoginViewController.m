@@ -159,6 +159,9 @@ bool Auto_login;
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
+         if(error!=nil)
+             return; //error
+         
          Auto_login=false; //Auto Login state ends here
          
          NSLog(@"responseData: %@", data);
