@@ -13,7 +13,7 @@
 @end
 
 @implementation PersonalInfoPopupViewController
-@synthesize personalInfo;
+@synthesize personalInfo, m_PopoverController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -63,4 +63,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)OnClickCloseButton:(UIButton *)sender
+{
+    if(self.mainView!=nil)
+    {
+        [self.mainView popoverControllerDidDismissPopover:nil];
+    }
+    
+}
 @end

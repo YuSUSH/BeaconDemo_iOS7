@@ -13,6 +13,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "AudioViewController.h"
 
+
 @interface BeaconDemoViewController : AudioViewController <CLLocationManagerDelegate, CBPeripheralManagerDelegate, UITableViewDataSource, UITableViewDelegate, UIPopoverControllerDelegate>
 @property (weak, nonatomic) IBOutlet UISwitch *TRSwitch;
 - (IBAction)FunctionSwitch:(UISwitch *)sender;
@@ -26,7 +27,8 @@
 @property (nonatomic, strong) CBPeripheralManager *peripheralManager;
 @property (nonatomic, strong) NSArray *detectedBeacons;
 @property (nonatomic, retain) UIPopoverController *m_PopoverController; //The Popover Controller
-@property (nonatomic, retain) NSMutableArray *popupQueue; //the queue storing all the people to be shown
+@property (nonatomic, strong) NSMutableArray *popupQueue; //the queue storing all the people to be shown
+@property (nonatomic, strong) NSLock *queueLock; //Lock object used for the queue
 
 -(void)ShowPopupView:(NSMutableDictionary*)personalInfo;
 -(void) QueryPersonalInfoAndShow:(NSString*)userID;

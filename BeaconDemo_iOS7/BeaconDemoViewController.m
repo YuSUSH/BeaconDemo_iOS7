@@ -22,11 +22,17 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 
 @implementation BeaconDemoViewController
 
-@synthesize m_PopoverController, popupQueue;
+@synthesize m_PopoverController, popupQueue, queueLock;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    m_PopoverController=nil;
+    
+    //Init the lock object for queue
+    queueLock=[[NSLock alloc] init];
+    
     //init the queue for showing people
     popupQueue=[[NSMutableArray alloc] init];
     [popupQueue removeAllObjects];
@@ -49,19 +55,39 @@ static NSString * const kCellIdentifier = @"BeaconCell";
         //
         while(1)
         {
-            while(popupQueue.count>0)
+            /*
+            while(popupQueue.count>0 && self.m_PopoverController==nil)
             {
-                [popupQueue objectAtIndex:0]
-                [popupQueue removeObjectAtIndex:0];
+        
+                NSMutableDictionary *person=[popupQueue objectAtIndex:0];
+                
                 dispatch_async( dispatch_get_main_queue(), ^{
-                    // Add code here to update the UI/send notifications based on the
-                    // results of the background processing
+                        [self ShowPopupView:person];
+            
+                    
                 });
                 
-            }
+                [popupQueue removeObjectAtIndex:0];
+                
+            }*/
         }
         
     });
+}
+
+
+-(void) removeFromQueueAndShowPopupView
+{
+    [queueLock lock];
+    
+    if(self.popupQueue.count<1)
+        return; //do nothing
+    
+    NSMutableDictionary *person=[popupQueue objectAtIndex:0];
+    [self ShowPopupView:person];
+    [popupQueue removeObjectAtIndex:0];
+    
+    [queueLock unlock];
 }
 
 #pragma mark - Beacon ranging
@@ -353,6 +379,8 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     self.m_PopoverController.delegate=self;
    
     popoverContent.personalInfo=personalInfo; //pass the personal info to popupview
+    popoverContent.m_PopoverController=self.m_PopoverController; //pass the pointer of m_PopoverController
+    popoverContent.mainView=self; //pass the pointer of this view
     
     self.m_PopoverController.popoverContentSize=CGSizeMake(531, 544);
     
@@ -366,7 +394,19 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 
 - (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController
 {
-    return true;
+    return false;
+}
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController;
+{
+    [m_PopoverController dismissPopoverAnimated:false];
+    m_PopoverController=nil;
+    
+    //if need to show the next popup
+    if(self.popupQueue.count>0)
+    {
+        [self removeFromQueueAndShowPopupView];
+    }
 }
 
 
@@ -407,7 +447,16 @@ static NSString * const kCellIdentifier = @"BeaconCell";
          
        
          dispatch_async(dispatch_get_main_queue(), ^{
-                 [self ShowPopupView:personalInfo];
+                 //[self ShowPopupView:personalInfo];
+                [queueLock lock];
+                [self.popupQueue addObject:personalInfo]; //Add it to the queue
+                [queueLock unlock];
+             
+                if(self.popupQueue.count==1 && self.m_PopoverController==nil) //this is the only element in queue
+                {
+                    //show it and remove that element from queue
+                    [self removeFromQueueAndShowPopupView];
+                }
          });
          //[self ShowPersonInfoWindow:outputstr];
          //Show the popup window for personal info

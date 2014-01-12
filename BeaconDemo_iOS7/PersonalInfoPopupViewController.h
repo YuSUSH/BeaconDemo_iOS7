@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "AudioViewController.h"
+#import "BeaconDemoViewController.h"
 
 @interface PersonalInfoPopupViewController : AudioViewController
 @property (strong, nonatomic) IBOutlet UILabel *labelName;
 @property (strong, nonatomic) IBOutlet UILabel *personalInfoLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *imageViewPhoto;
 
+@property (nonatomic, retain) UIPopoverController *m_PopoverController; //The Popover Controller
+@property (nonatomic, retain) BeaconDemoViewController *mainView; //pointer to the main view
 @property (strong, nonatomic) NSMutableDictionary *personalInfo;
+- (IBAction)OnClickCloseButton:(UIButton *)sender;
 
 @end
