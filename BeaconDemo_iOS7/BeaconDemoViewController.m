@@ -243,10 +243,11 @@ static NSString * const kCellIdentifier = @"BeaconCell";
                                                                      major:rand()
                                                                      minor:rand()
                                                                 identifier:self.beaconRegion.identifier];
-    //NSDictionary *beaconPeripheralData = [region peripheralDataWithMeasuredPower:nil];
-    //[self.peripheralManager startAdvertising:beaconPeripheralData];
+    NSDictionary *beaconPeripheralData = [region peripheralDataWithMeasuredPower:nil];
+    [self.peripheralManager startAdvertising:beaconPeripheralData];
+    
     //to advertise the service UUID
-    [self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:IPAD3_SERVICE_ID]] }];
+    //[self.peripheralManager startAdvertising:@{ CBAdvertisementDataServiceUUIDsKey : @[[CBUUID UUIDWithString:IPAD3_SERVICE_ID]] }];
 }
 
 

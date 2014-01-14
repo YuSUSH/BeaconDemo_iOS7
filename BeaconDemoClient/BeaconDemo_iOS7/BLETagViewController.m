@@ -31,7 +31,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.cm = [[CBCentralManager alloc]initWithDelegate:self queue:nil];
+    //self.cm = [[CBCentralManager alloc]initWithDelegate:self queue:nil];
+    //Use iBeacon API instead of BLE API
+    [self startRangingForBeacons];
     
     self.title=@"BLE device to iOS with Bluetooth Core API";
     
@@ -242,6 +244,119 @@ NSMutableData *receivedData;
             NSLog(@"This is a SensorTag !");
             found = YES;
         }
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)startRangingForBeacons
+{
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.activityType = CLActivityTypeFitness;
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    [self turnOnRanging];
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)turnOnRanging
+{
+    NSLog(@"Turning on ranging...");
+    
+    if (![CLLocationManager isRangingAvailable]) {
+        NSLog(@"Couldn't turn on ranging: Ranging is not available.");
+        //self.TRSwitch.on = NO;
+        return;
+    }
+    
+    if (self.locationManager.rangedRegions.count > 0) {
+        NSLog(@"Didn't turn on ranging: Ranging already on.");
+        return;
+    }
+    
+    [self createBeaconRegion];
+    [self.locationManager startMonitoringForRegion:self.beaconRegion];
+    [self.locationManager startRangingBeaconsInRegion:self.beaconRegion];
+    
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    self.locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
+    self.locationManager.delegate = self;
+    [self.locationManager startMonitoringSignificantLocationChanges];
+    
+    NSLog(@"Ranging turned on for region: %@.", self.beaconRegion);
+    
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)createBeaconRegion
+{
+    if (self.beaconRegion)
+        return;
+    
+    NSUUID *proximityUUID = [[NSUUID alloc] initWithUUIDString:kUUID];
+    self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID identifier:kIdentifier];
+    self.beaconRegion.notifyEntryStateOnDisplay=YES;
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)locationManager:(CLLocationManager *)manager
+        didRangeBeacons:(NSArray *)beacons
+               inRegion:(CLBeaconRegion *)region
+{
+    for(CLBeacon *beacon in beacons)
+    {
+        if([beacon.proximityUUID.UUIDString isEqual: kUUID]) //if it's our beacon device
+        {
+            //NSLog(@"///////////////Found it!");
+        }
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+         didEnterRegion:(CLRegion *)region
+{
+    if([region.identifier isEqualToString:kIdentifier])
+    {
+        /*
+        NSLog(@"$$$$$$$$$$ I came in!");
+        
+        UIAlertView *helloWorldAlert = [[UIAlertView alloc]
+                                        initWithTitle:@"My First App" message:@"I came in!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        // Display the Hello WorldMessage
+        [helloWorldAlert show];
+         */
+        [self NotifyPushNotificationServer_Post]; //notify the server side that we found the iPad
+    }
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+          didExitRegion:(CLRegion *)region
+{
+    if([region.identifier isEqualToString:kIdentifier])
+    {
+        /*
+        NSLog(@"$$$$$$$$$$ I went out!");
+        
+        UIAlertView *helloWorldAlert = [[UIAlertView alloc]
+                                        initWithTitle:@"My First App" message:@"I went out!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        // Display the Hello WorldMessage
+        [helloWorldAlert show];
+         */
+    }
+
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
+{
+    if(state == CLRegionStateInside) {
+        NSLog(@"locationManager didDetermineState INSIDE for %@", region.identifier);
+    }
+    else if(state == CLRegionStateOutside) {
+        NSLog(@"locationManager didDetermineState OUTSIDE for %@", region.identifier);
+    }
+    else {
+        NSLog(@"locationManager didDetermineState OTHER for %@", region.identifier);
     }
 }
 

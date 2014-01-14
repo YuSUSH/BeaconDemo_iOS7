@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreBluetooth/CoreBluetooth.h>
+#import <CoreLocation/CoreLocation.h>
 #import "AudioViewController.h"
+
+static NSString * const kUUID = @"00000000-0000-0000-0000-000000000000";
+static NSString * const kIdentifier = @"SomeIdentifier";
 
 #define IPHONE5
 //#define IPAD3
@@ -27,7 +31,7 @@ static NSString * const iOSUUID = @"00000000-0000-0000-0000-000000000000";
 #define DETECT_IOS_DISTANCE_BASED_ON_RSSI -80
 #define DETECT_BLETAG_DISTANCE_BASED_ON_RSSI -80
 
-@interface BLETagViewController : AudioViewController <CBCentralManagerDelegate,CBPeripheralDelegate, NSURLConnectionDelegate>
+@interface BLETagViewController : AudioViewController <CBCentralManagerDelegate,CBPeripheralDelegate, NSURLConnectionDelegate, CLLocationManagerDelegate>
 
 @property (strong,nonatomic) CBCentralManager *cm;
 @property (weak, nonatomic) IBOutlet UILabel *LabelDeviceInfo;
@@ -38,5 +42,10 @@ static NSString * const iOSUUID = @"00000000-0000-0000-0000-000000000000";
 -(void) NotifyPushNotificationServer_Post;
 - (IBAction)OnBLESwitchChange:(UISwitch *)sender;
 
+//iBeacon objects
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) CLBeaconRegion *beaconRegion;
+
+- (void)startRangingForBeacons;
 
 @end

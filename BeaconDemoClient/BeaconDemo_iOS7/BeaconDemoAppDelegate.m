@@ -84,6 +84,7 @@
     
     if(bEnableBLE) //if BLE function is enabled
     {
+        /*
         self.cm = [[CBCentralManager alloc]initWithDelegate:self queue:nil];
         
         self.myTimer =
@@ -97,6 +98,10 @@
         {
             [self endBackgroundTask];
         }];
+         */
+        
+        //Using iBeacon API
+        [self.tv startRangingForBeacons];
     }
 
     
