@@ -16,6 +16,8 @@
 #define PUSH_SERVIER_URL @"http://experiment.sandbox.net.nz/beacon/simplepush.php"
 #define QUERY_DB_SERVIER_URL @"http://ble.sandbox.net.nz/myforum/query_personalinfo.php"
 #define QUERY_LOGIN_URL @"http://ble.sandbox.net.nz/myforum/query_login.php"
+#define CLIENT_ARRIVE_URL @"http://ble.sandbox.net.nz/myforum/client_arrive.php"
+#define GET_ALL_STAFF_INFO_URL @"http://ble.sandbox.net.nz/myforum/get_all_staff_info.php"
 
 #define GET_APPDELEGATE BeaconDemoAppDelegate *appDelegate	=	(BeaconDemoAppDelegate*)[[UIApplication sharedApplication] delegate];
 

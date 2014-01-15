@@ -151,7 +151,7 @@
      */
         
     if(self.tv!=nil)
-        [self.tv NotifyPushNotificationServer_Post]; //notify the server side
+        [self.tv NewClientArrive]; //notify the server side
     
     
 }

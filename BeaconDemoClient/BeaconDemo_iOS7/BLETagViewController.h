@@ -39,7 +39,7 @@ static NSString * const iOSUUID = @"00000000-0000-0000-0000-000000000000";
 @property (strong, nonatomic) IBOutlet UISwitch *BLEOnOffSwitch;
 
 -(void) NotifyPushNotificationServer;
--(void) NotifyPushNotificationServer_Post;
+-(void) NewClientArrive;
 - (IBAction)OnBLESwitchChange:(UISwitch *)sender;
 
 //iBeacon objects

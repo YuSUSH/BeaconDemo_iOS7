@@ -77,10 +77,10 @@ NSMutableData *receivedData;
     
 }
 
--(void) NotifyPushNotificationServer_Post
+-(void) NewClientArrive
 {
     
-    NSURL *requestURL=[NSURL URLWithString:PUSH_SERVIER_URL];
+    NSURL *requestURL=[NSURL URLWithString:CLIENT_ARRIVE_URL];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
     
@@ -98,7 +98,27 @@ NSMutableData *receivedData;
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
     {
+        if(error!=nil)
+            return; //error
         
+        NSLog(@"responseData: %@", data);
+        
+        //decode the response data
+        NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        
+        NSMutableDictionary *dataDict=[jsonObjects objectAtIndex:0];
+        NSString *result = [dataDict objectForKey:@"result"];
+        
+        if([result isEqualToString:@"add_new"]) //if being asked to create new appointment
+        {
+            //try to add new appointment
+            dispatch_queue_t mainQueue = dispatch_get_main_queue();
+            dispatch_async(mainQueue, ^(void)
+            {
+                [self performSegueWithIdentifier:@"SegueNewAppointment" sender:self];
+            });
+        }
+
     }];
     
     
@@ -226,7 +246,7 @@ NSMutableData *receivedData;
     //If containing our sevice ID
     if( [services containsObject:[CBUUID UUIDWithString:IPAD3_SERVICE_ID]])
     {
-        [self NotifyPushNotificationServer_Post]; //notify the server side that we found the iPad
+        [self NewClientArrive]; //notify the server side that we found the iPad
     }
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -324,7 +344,7 @@ NSMutableData *receivedData;
         // Display the Hello WorldMessage
         [helloWorldAlert show];
          */
-        [self NotifyPushNotificationServer_Post]; //notify the server side that we found the iPad
+        [self NewClientArrive]; //notify the server side that we found the iPad
     }
     
 }
