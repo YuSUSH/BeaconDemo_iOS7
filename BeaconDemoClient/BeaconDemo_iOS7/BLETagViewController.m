@@ -118,10 +118,7 @@ NSMutableData *receivedData;
                 [self performSegueWithIdentifier:@"SegueNewAppointment" sender:self];
             });
         }
-
     }];
-    
-    
 }
 
 - (IBAction)OnBLESwitchChange:(UISwitch *)sender

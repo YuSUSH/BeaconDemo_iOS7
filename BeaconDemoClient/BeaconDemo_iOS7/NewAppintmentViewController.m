@@ -14,7 +14,7 @@
 @end
 
 @implementation NewAppintmentViewController
-@synthesize allStaffs, staffPicker;
+@synthesize allStaffs, staffPicker, selectedStaff;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,6 +30,18 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     allStaffs=[[NSMutableArray alloc]init];
+    
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+}
+
+-(void)dismissKeyboard
+{
+    [self.textDescription resignFirstResponder];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -88,6 +100,17 @@
 {
     [staffPicker Close]; //close the popover window
     
+    int selected=[staffPicker.m_Picker selectedRowInComponent:0];
+    
+    selectedStaff=[allStaffs objectAtIndex:selected]; //save the selected staff info
+    
+    NSString *fullname;
+    fullname=[NSString stringWithFormat:@"%@ %@",
+    [selectedStaff valueForKey:@"givename"],
+    [selectedStaff valueForKey:@"surname"] ];
+    
+    [self.btnStaffChoice setTitle:fullname forState:UIControlStateNormal];
+    
 }
 
 
@@ -122,6 +145,64 @@
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
+}
+
+
+- (IBAction)OnClickCancel:(UIButton *)sender
+{
+    //simple cancel this new appointment and back
+    [self performSegueWithIdentifier:@"SegueCloseNewAppointment" sender:self];
+}
+
+- (IBAction)OnClickSubmit:(UIButton *)sender
+{
+    //Add a new record in appointment table in the DB
+    [self addNewAppointment];
+}
+
+
+-(void) addNewAppointment
+{
+    
+    NSURL *requestURL=[NSURL URLWithString:ADD_APPOINTMENT];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
+    
+    //Set Post Data
+    GET_APPDELEGATE
+    
+    const char *bytes = [[NSString stringWithFormat:@"client=%@&staff=%@&time=%@&description=%@",
+                          appDelegate.CurrentUserID,
+                          [selectedStaff valueForKey:@"userid"],
+                          [NSDate date],
+                          self.textDescription.text
+                          ] UTF8String];
+    
+    
+    //const char *bytes="time=010&staff=ryoko&description=gfhfhf+hgfhgfhghf+gfhfghfgfh&client=kkk";
+    //For multiple POST data
+    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
+    
+    //Send request
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+         if(error!=nil)
+             return; //error
+         
+         
+        //try to add new appointment
+        dispatch_queue_t mainQueue = dispatch_get_main_queue();
+        dispatch_async(mainQueue, ^(void)
+        {
+            //Now come back to the main view
+            [self performSegueWithIdentifier:@"SegueCloseNewAppointment" sender:self];
+        });
+     }];
 }
 
 

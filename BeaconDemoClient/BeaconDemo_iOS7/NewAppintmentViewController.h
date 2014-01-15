@@ -16,5 +16,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnStaffChoice;
 - (IBAction)OnClickStaffChoice:(UIButton *)sender;
 -(IBAction) DoneStaffPicker:(id)sender;
+@property (strong, nonatomic) IBOutlet UITextView *textDescription;
+@property (strong, nonatomic) NSMutableDictionary *selectedStaff;
+- (IBAction)OnClickCancel:(UIButton *)sender;
+- (IBAction)OnClickSubmit:(UIButton *)sender;
 
 @end

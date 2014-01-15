@@ -47,6 +47,9 @@
                                 <state key="normal" title="Submit">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="OnClickSubmit:" destination="l1e-c8-wxZ" eventType="touchUpInside" id="N0O-mQ-BU9"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pO-qe-xUp">
                                 <rect key="frame" x="189" y="407" width="61" height="30"/>
@@ -54,6 +57,9 @@
                                 <state key="normal" title="Cancel">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="OnClickCancel:" destination="l1e-c8-wxZ" eventType="touchUpInside" id="cEI-gI-2jN"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZw-ZC-iTw">
                                 <rect key="frame" x="30" y="205" width="96" height="29"/>
@@ -70,7 +76,7 @@
                             <textView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="blc-Th-egt">
                                 <rect key="frame" x="50" y="237" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.62352943419999995" green="0.80000007149999997" blue="0.9215686917" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.79891304350000003" green="0.79891304350000003" blue="0.79891304350000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -89,11 +95,13 @@
                     </view>
                     <connections>
                         <outlet property="btnStaffChoice" destination="ZNJ-X5-Ycv" id="f1w-JF-dvz"/>
+                        <outlet property="textDescription" destination="blc-Th-egt" id="p3e-vS-SIW"/>
+                        <segue destination="GFV-OE-UJp" kind="modal" identifier="SegueCloseNewAppointment" id="Rul-Nl-pt6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tCO-xM-627" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="783" y="-136"/>
+            <point key="canvasLocation" x="1073" y="-22"/>
         </scene>
         <!--User Login View Controller-->
         <scene sceneID="guM-xd-kDj">
@@ -209,4 +217,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="Rul-Nl-pt6"/>
+    </inferredMetricsTieBreakers>
 </document>
