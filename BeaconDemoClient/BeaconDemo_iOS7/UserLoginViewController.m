@@ -24,7 +24,7 @@
     return self;
 }
 
-#define SAVE_FILE_NAME @"kkk.txt"
+#define SAVE_FILE_NAME @"clientaccount.txt"
 
 bool Auto_login;
 

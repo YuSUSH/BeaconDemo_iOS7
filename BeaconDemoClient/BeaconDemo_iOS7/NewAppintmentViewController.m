@@ -14,7 +14,7 @@
 @end
 
 @implementation NewAppintmentViewController
-@synthesize allStaffs, staffPicker, selectedStaff;
+@synthesize allStaffs, staffPicker, selectedStaff, timePicker, selectedDateStr;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -160,6 +160,31 @@
     [self addNewAppointment];
 }
 
+- (IBAction)OnClickSelectTime:(UIButton *)sender
+{
+    //show the popup for staff name display
+    timePicker=[[PopoverDatePicker alloc] init];
+    
+    CGRect poprect=[self.view convertRect:self.btnSelectTime.frame toView:self.view];
+    //poprect.origin.y+=30;
+    
+    [timePicker Popup:self From:poprect InView:self.view
+      DoneButtonTarget:self DoneButtonAction:(@selector(DoneTimePicker:))];
+    
+}
+
+-(IBAction) DoneTimePicker:(id)sender
+{
+    NSDate *selectedDate= timePicker.m_Picker.date;
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    //convert the selected Date into string
+    selectedDateStr=[formatter stringFromDate:selectedDate];
+    [self.btnSelectTime setTitle:selectedDateStr forState:UIControlStateNormal];
+    [timePicker Close]; //close the popover window
+}
+
 
 -(void) addNewAppointment
 {
@@ -174,7 +199,7 @@
     const char *bytes = [[NSString stringWithFormat:@"client=%@&staff=%@&time=%@&description=%@",
                           appDelegate.CurrentUserID,
                           [selectedStaff valueForKey:@"userid"],
-                          [NSDate date],
+                          selectedDateStr,
                           self.textDescription.text
                           ] UTF8String];
     

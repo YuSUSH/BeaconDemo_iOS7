@@ -22,6 +22,7 @@
 		F390C3111806644E00A8BA39 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F390C2F31806644E00A8BA39 /* UIKit.framework */; };
 		F390C3191806644E00A8BA39 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F390C3171806644E00A8BA39 /* InfoPlist.strings */; };
 		F390C31B1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = F390C31A1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m */; };
+		F3A2C2EE188739AB000D321F /* PopoverDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A2C2ED188739AB000D321F /* PopoverDatePicker.m */; };
 		F3A7195E180BA71C001999C0 /* BLETagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A7195D180BA71C001999C0 /* BLETagViewController.m */; };
 		F3AB2F6518861884004FF03B /* NewAppintmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB2F6418861884004FF03B /* NewAppintmentViewController.m */; };
 		F3AB2F681886331F004FF03B /* PopoverPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB2F671886331F004FF03B /* PopoverPicker.m */; };
@@ -60,6 +61,8 @@
 		F390C3161806644E00A8BA39 /* BeaconDemo_iOS7Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BeaconDemo_iOS7Tests-Info.plist"; sourceTree = "<group>"; };
 		F390C3181806644E00A8BA39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F390C31A1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeaconDemo_iOS7Tests.m; sourceTree = "<group>"; };
+		F3A2C2EC188739AB000D321F /* PopoverDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverDatePicker.h; sourceTree = "<group>"; };
+		F3A2C2ED188739AB000D321F /* PopoverDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverDatePicker.m; sourceTree = "<group>"; };
 		F3A7195C180BA71C001999C0 /* BLETagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLETagViewController.h; sourceTree = "<group>"; };
 		F3A7195D180BA71C001999C0 /* BLETagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLETagViewController.m; sourceTree = "<group>"; };
 		F3AB2F6318861884004FF03B /* NewAppintmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAppintmentViewController.h; sourceTree = "<group>"; };
@@ -147,6 +150,8 @@
 				F3AB2F671886331F004FF03B /* PopoverPicker.m */,
 				F3AB2F69188634F4004FF03B /* NSObject+UIPopoverController_iPhone.h */,
 				F3AB2F6A188634F4004FF03B /* NSObject+UIPopoverController_iPhone.m */,
+				F3A2C2EC188739AB000D321F /* PopoverDatePicker.h */,
+				F3A2C2ED188739AB000D321F /* PopoverDatePicker.m */,
 			);
 			path = BeaconDemo_iOS7;
 			sourceTree = "<group>";
@@ -286,6 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3A2C2EE188739AB000D321F /* PopoverDatePicker.m in Sources */,
 				F390C2FC1806644E00A8BA39 /* main.m in Sources */,
 				F3DD5719187CBE0800EEA6C6 /* UserLoginViewController.m in Sources */,
 				F3AB2F6B188634F4004FF03B /* NSObject+UIPopoverController_iPhone.m in Sources */,
