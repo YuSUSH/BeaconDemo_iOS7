@@ -11,9 +11,10 @@
 		if(!connect_to_database()) //connect to SQL database
 			return;
 		
-			
+		$id=time(); //set timestamp as id
 		//start to execute SQL commands
-		$querystr="INSERT INTO appointment VALUES ('" .
+		$querystr="INSERT INTO appointment VALUES ('"
+								. $id . "', '" .
 								$client . "', '" . 
 								$staff . "', '" . 
 		                        $plannedtime . "', '" . 

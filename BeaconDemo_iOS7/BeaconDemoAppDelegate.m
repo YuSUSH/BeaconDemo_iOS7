@@ -71,7 +71,7 @@
 -(void) UpdateNotifyPushNotificationToken:(NSString *)tokenstr
 {
     
-    NSURL *requestURL=[NSURL URLWithString:PUSH_TOKEN_UPDATE_URL];
+    NSURL *requestURL=[NSURL URLWithString:IPAD_TOKEN_UPDATE_URL];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
     

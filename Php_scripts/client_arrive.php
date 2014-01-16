@@ -3,8 +3,10 @@ include "lib_functions.php";
 
 $userid= $_POST['userid'];	
 
+//Send notification to iPad
 $url = 'http://experiment.sandbox.net.nz/beacon/simplepush.php';
 $fields = array(
+			'device_type'=>urlencode("ipad"),
             'userid'=>urlencode($userid),
         );
 

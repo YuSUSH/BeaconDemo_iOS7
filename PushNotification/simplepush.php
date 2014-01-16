@@ -1,6 +1,6 @@
 <?php
 
-function SendPushNotification($token)
+function SendPushNotification($token, $sent_id)
 {
 	// Put your private key's passphrase here:
 	$passphrase = 'sush1234';
@@ -24,11 +24,9 @@ function SendPushNotification($token)
 
 	//echo 'Connected to APNS' . PHP_EOL;
 
-	$UserID= $_POST['userid'];
-
 	// Create the payload body
 	$body['aps'] = array(
-		'alert' => $UserID,
+		'alert' => $sent_id,
 		'sound' => 'default'
 		);
 
@@ -55,10 +53,17 @@ function SendPushNotification($token)
 
 // Put your device token here (without spaces):
 //Read out the Device Token string saved in the file
-$file = 'token.txt';
-$iPadToken = file_get_contents($file);
+$device_type= $_POST['device_type']; //the type of target device the notification is to be sent to
+	
+if(strcmp($device_type, "ipad")==0) //send to the iPad
+{
 
-SendPushNotification($iPadToken);
+	$file = 'ipad_token.txt';
+	$iPadToken = file_get_contents($file);
+	$UserID= $_POST['userid'];
+
+	SendPushNotification($iPadToken, $UserID);
+}
 
 
 ?>

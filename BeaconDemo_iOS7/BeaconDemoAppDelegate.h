@@ -15,7 +15,7 @@
 
 
 #define PUSH_SERVIER_URL @"http://experiment.sandbox.net.nz/beacon/simplepush.php"
-#define PUSH_TOKEN_UPDATE_URL @"http://experiment.sandbox.net.nz/beacon/update_token.php"
+#define IPAD_TOKEN_UPDATE_URL @"http://experiment.sandbox.net.nz/beacon/update_ipad_token.php"
 #define QUERY_DB_SERVIER_URL @"http://ble.sandbox.net.nz/myforum/query_personalinfo.php"
 #define QUERY_LOGIN_URL @"http://ble.sandbox.net.nz/myforum/query_login.php"
 

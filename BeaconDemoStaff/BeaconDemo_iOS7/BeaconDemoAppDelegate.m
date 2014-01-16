@@ -43,11 +43,28 @@
     
     bEnableBLE=true; //enable BLE as default;
     
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    
     
     return YES;
 }
 
 
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+	NSLog(@"My token is: %@", deviceToken);
+    
+    //Conver the token into string
+    const unsigned *tokenBytes = [deviceToken bytes];
+    NSString *hexToken = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
+                          ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
+                          ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
+                          ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+    
+    //[self UpdateNotifyPushNotificationToken:hexToken];
+    
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -100,8 +117,6 @@
         }];
          */
         
-        //Using iBeacon API
-        [self.tv startRangingForBeacons];
     }
 
     
@@ -149,9 +164,7 @@
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
      */
-        
-    if(self.tv!=nil)
-        [self.tv NewClientArrive]; //notify the server side
+    
     
     
 }
