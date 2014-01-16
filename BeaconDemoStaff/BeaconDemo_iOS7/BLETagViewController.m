@@ -46,13 +46,15 @@
     
     //Show Welcome message with the user's fullname
     NSString *fullname=[NSString stringWithFormat:@"Welcome, %@ %@!",
-                        [appDelegate.CurrentPersonalInfo valueForKey:@"givename"],
-                        [appDelegate.CurrentPersonalInfo valueForKey:@"surname"]];
+                        [appDelegate.CurrentStaffInfo valueForKey:@"givename"],
+                        [appDelegate.CurrentStaffInfo valueForKey:@"surname"]];
     self.LabelDeviceInfo.text=fullname;
     
 
     appointmentTableView.delegate=self;
     appointmentTableView.dataSource=self;
+    
+    [self FetchAllofMyAppointments:appDelegate.CurrentStaffID]; //get all the appointments at the moment
 
 }
 
@@ -90,7 +92,7 @@ NSMutableData *receivedData;
     
     //Set Post Data
     GET_APPDELEGATE
-    const char *bytes = [[NSString stringWithFormat:@"userid=%@", appDelegate.CurrentUserID] UTF8String];
+    const char *bytes = [[NSString stringWithFormat:@"userid=%@", appDelegate.CurrentStaffID] UTF8String];
     //For multiple POST data
     //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
     
@@ -362,6 +364,7 @@ NSMutableData *receivedData;
     }
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -380,7 +383,11 @@ NSMutableData *receivedData;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     NSString *titilestr;
-    titilestr=[NSString stringWithFormat:@"Appointment %d", indexPath.row];
+    NSMutableDictionary *appointment=[myAppointments objectAtIndex:indexPath.row];
+    titilestr=[NSString stringWithFormat:@"%@ %@ %@",
+               [appointment valueForKey:@"client"],
+               [appointment valueForKey:@"time"],
+               [appointment valueForKey:@"description"]];
 
     [cell.textLabel setText:titilestr];
 
@@ -391,7 +398,10 @@ NSMutableData *receivedData;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    if(myAppointments!=nil && myAppointments.count>0)
+        return myAppointments.count;
+    else
+        return 0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -399,5 +409,47 @@ NSMutableData *receivedData;
     return 1;
 }
 
+
+
+-(void) FetchAllofMyAppointments:(NSString *)staffid
+{
+        
+    NSURL *requestURL=[NSURL URLWithString:QUERY_STAFFS_APPOINTMENTS_URL];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
+    
+    //Set Post Data
+    const char *bytes = [[NSString stringWithFormat:@"userid=%@", staffid] UTF8String];
+    //For multiple POST data
+    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
+    
+    //Send request
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+         if(error!=nil)
+             return; //error
+         
+         NSLog(@"responseData: %@", data);
+         
+         //decode the response data
+         NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+         
+         //NSMutableDictionary *dataDict=[jsonObjects objectAtIndex:0];
+         //NSString *result = [dataDict objectForKey:@"result"];
+         
+         if(jsonObjects.count>0)
+         {
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 myAppointments=jsonObjects; //pass the appointment info
+                 [appointmentTableView reloadData];
+             });
+         }
+     }];
+}
 
 @end

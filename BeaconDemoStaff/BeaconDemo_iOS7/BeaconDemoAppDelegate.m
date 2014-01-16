@@ -10,7 +10,7 @@
 
 
 @implementation BeaconDemoAppDelegate
-@synthesize  CurrentUserID, CurrentPersonalInfo, bEnableBLE;
+@synthesize  CurrentStaffID, CurrentStaffInfo, bEnableBLE;
 /////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL) isMultitaskingSupported
 {

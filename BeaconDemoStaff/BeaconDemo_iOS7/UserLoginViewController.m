@@ -179,11 +179,11 @@ bool Auto_login;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     //Save the current userid and personal info
                     GET_APPDELEGATE
-                    appDelegate.CurrentUserID = [dataDict valueForKey:@"userid"];
-                    appDelegate.CurrentPersonalInfo=dataDict;
+                    appDelegate.CurrentStaffID = [dataDict valueForKey:@"userid"];
+                    appDelegate.CurrentStaffInfo=dataDict;
                     
                     //Save this account info into local file
-                    [self SaveAccountInfo:appDelegate.CurrentPersonalInfo];
+                    [self SaveAccountInfo:appDelegate.CurrentStaffInfo];
                     
                     //Switch to next ViewController
                     [self performSegueWithIdentifier:@"SegueToBLEClient" sender:self]; //transfer to Client View

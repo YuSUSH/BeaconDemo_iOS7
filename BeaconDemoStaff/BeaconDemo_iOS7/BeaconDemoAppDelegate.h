@@ -21,6 +21,7 @@
 
 
 #define QUERY_STAFF_LOGIN_URL @"http://ble.sandbox.net.nz/myforum/query_staff_login.php"
+#define QUERY_STAFFS_APPOINTMENTS_URL @"http://ble.sandbox.net.nz/myforum/query_staffs_appointments.php"
 
 
 #define GET_APPDELEGATE BeaconDemoAppDelegate *appDelegate	=	(BeaconDemoAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -37,8 +38,8 @@
 
 @property (strong, nonatomic) BLETagViewController *tv;
 
-@property (strong, nonatomic) NSString *CurrentUserID;
-@property (strong, nonatomic) NSMutableDictionary *CurrentPersonalInfo;
+@property (strong, nonatomic) NSString *CurrentStaffID;
+@property (strong, nonatomic) NSMutableDictionary *CurrentStaffInfo;
 @property (nonatomic) bool bEnableBLE; //if the BLE function is
 
 @end
