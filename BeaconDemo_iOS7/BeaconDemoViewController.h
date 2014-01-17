@@ -32,5 +32,6 @@
 
 -(void)ShowPopupView:(NSMutableDictionary*)personalInfo;
 -(void) QueryPersonalInfoAndShow:(NSString*)userID;
+@property (strong, nonatomic) IBOutlet UITableView *enteringClientTableView;
 
 @end

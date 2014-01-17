@@ -47,32 +47,9 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     [self stopRangingForBeacons];
     [self startAdvertisingBeacon];
     
-    
-    //The loop for showing popup window
-    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        // Add code here to do background processing
-        //
-        //
-        while(1)
-        {
-            /*
-            while(popupQueue.count>0 && self.m_PopoverController==nil)
-            {
-        
-                NSMutableDictionary *person=[popupQueue objectAtIndex:0];
-                
-                dispatch_async( dispatch_get_main_queue(), ^{
-                        [self ShowPopupView:person];
-            
-                    
-                });
-                
-                [popupQueue removeObjectAtIndex:0];
-                
-            }*/
-        }
-        
-    });
+    self.enteringClientTableView.delegate=self;
+    self.enteringClientTableView.dataSource=self;
+    [self.enteringClientTableView reloadData];
 }
 
 
@@ -297,53 +274,6 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     [self turnOnAdvertising];
 }
 
-#pragma mark - Table view functionality
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    CLBeacon *beacon = self.detectedBeacons[indexPath.row];
-    
-    UITableViewCell *defaultCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                                          reuseIdentifier:kCellIdentifier];
-    
-    defaultCell.textLabel.text = beacon.proximityUUID.UUIDString;
-    
-    NSString *proximityString;
-    switch (beacon.proximity) {
-        case CLProximityNear:
-            proximityString = @"Near";
-            break;
-        case CLProximityImmediate:
-            proximityString = @"Immediate";
-            break;
-        case CLProximityFar:
-            proximityString = @"Far";
-            break;
-        case CLProximityUnknown:
-        default:
-            proximityString = @"Unknown";
-            break;
-    }
-    defaultCell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@ • %@ • %f • %li",
-                                        beacon.major.stringValue, beacon.minor.stringValue, proximityString, beacon.accuracy, (long)beacon.rssi];
-    defaultCell.detailTextLabel.textColor = [UIColor grayColor];
-    
-    return defaultCell;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.detectedBeacons.count;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return @"Detected beacons";
-}
 /////////////////////////////////////////////////////////////////////////////////////////
 - (IBAction)FunctionSwitch:(UISwitch *)sender
 {
@@ -451,6 +381,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
                  //[self ShowPopupView:personalInfo];
                 [queueLock lock];
                 [self.popupQueue addObject:personalInfo]; //Add it to the queue
+                [self.enteringClientTableView reloadData]; //refresh list display
                 [queueLock unlock];
              
                 if(self.popupQueue.count==1 && self.m_PopoverController==nil) //this is the only element in queue
@@ -465,6 +396,56 @@ static NSString * const kCellIdentifier = @"BeaconCell";
          
      }];
     
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    
+    
+    [cell.textLabel setFont:[UIFont systemFontOfSize:18]];
+    [cell.textLabel setTextColor:[UIColor blackColor]];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+    NSString *titilestr;
+    
+    if(indexPath.row<popupQueue.count)
+    {
+        NSMutableDictionary *person=[popupQueue objectAtIndex:indexPath.row];
+        titilestr=[NSString stringWithFormat:@"%@ %@",
+                   [person valueForKey:@"givename"],
+                   [person valueForKey:@"surname"]];
+    }
+    else
+        titilestr=@"";
+    
+    
+    [cell.textLabel setText:titilestr];
+    
+    
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if(popupQueue!=nil && popupQueue.count>0)
+        return popupQueue.count;
+    else
+        return 0;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
 }
 
 
