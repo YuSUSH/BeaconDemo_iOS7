@@ -49,4 +49,6 @@ static NSString * const iOSUUID = @"00000000-0000-0000-0000-000000000000";
 
 @property (strong, nonatomic) NSMutableArray *myAppointments; //store all the appointments with me
 
+-(void)showNewAppointment:(NSString *)appointment_id;
+
 @end

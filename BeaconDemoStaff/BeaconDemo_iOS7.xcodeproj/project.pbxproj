@@ -43,7 +43,7 @@
 		F310A303181099C100581230 /* ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ringtone.mp3; sourceTree = SOURCE_ROOT; };
 		F310A3051810CC8F00581230 /* AudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioViewController.h; sourceTree = "<group>"; };
 		F310A3061810CC8F00581230 /* AudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioViewController.m; sourceTree = "<group>"; };
-		F390C2EC1806644E00A8BA39 /* BeaconDemoClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = BeaconDemoClient.app; path = BeaconDemoStaff.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F390C2EC1806644E00A8BA39 /* BeaconDemoStaff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaconDemoStaff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F390C2EF1806644E00A8BA39 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F390C2F11806644E00A8BA39 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F390C2F31806644E00A8BA39 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -109,7 +109,7 @@
 		F390C2ED1806644E00A8BA39 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F390C2EC1806644E00A8BA39 /* BeaconDemoClient.app */,
+				F390C2EC1806644E00A8BA39 /* BeaconDemoStaff.app */,
 				F390C30D1806644E00A8BA39 /* BeaconDemo_iOS7Tests.xctest */,
 			);
 			name = Products;
@@ -197,7 +197,7 @@
 			);
 			name = BeaconDemoStaff;
 			productName = BeaconDemo_iOS7;
-			productReference = F390C2EC1806644E00A8BA39 /* BeaconDemoClient.app */;
+			productReference = F390C2EC1806644E00A8BA39 /* BeaconDemoStaff.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F390C30C1806644E00A8BA39 /* BeaconDemo_iOS7Tests */ = {
@@ -427,7 +427,7 @@
 				INFOPLIST_FILE = "BeaconDemo_iOS7/BeaconDemo_iOS7-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "A9CD2302-072D-4247-A530-628E2E63AB62";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -445,7 +445,7 @@
 				INFOPLIST_FILE = "BeaconDemo_iOS7/BeaconDemo_iOS7-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "A9CD2302-072D-4247-A530-628E2E63AB62";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

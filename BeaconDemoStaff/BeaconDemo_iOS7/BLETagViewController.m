@@ -35,13 +35,17 @@
     //Use iBeacon API instead of BLE API
     //[self startRangingForBeacons];
     
+    //First of all update the staff token for this iphone device
+    GET_APPDELEGATE
+    [self UpdateStaffDeviceToken:appDelegate.CurrentTokenStr
+                     WithStaffID:appDelegate.CurrentStaffID];
+    
     self.title=@"BLE device to iOS with Bluetooth Core API";
     
     //peripherals=[[NSMutableArray alloc] init];
     //[peripherals removeAllObjects];
     
     
-    GET_APPDELEGATE
     appDelegate.tv=self; //pass this pointer to the AppDelegate
     
     //Show Welcome message with the user's fullname
@@ -55,7 +59,38 @@
     appointmentTableView.dataSource=self;
     
     [self FetchAllofMyAppointments:appDelegate.CurrentStaffID]; //get all the appointments at the moment
+    
+    
 
+}
+
+
+-(void) UpdateStaffDeviceToken:(NSString *)token WithStaffID:(NSString*)userid
+{
+    
+    NSURL *requestURL=[NSURL URLWithString:UPDATE_STAFF_TOKEN_URL];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
+    
+    //Set Post Data
+    const char *bytes = [[NSString stringWithFormat:@"userid=%@&token=%@", userid, token] UTF8String];
+    //For multiple POST data
+    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
+    
+    //Send request
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+         if(error!=nil)
+             return; //error
+         
+         NSLog(@"responseData: %@", data);
+         
+    }];
 }
 
 
@@ -450,6 +485,58 @@ NSMutableData *receivedData;
              });
          }
      }];
+}
+
+-(void)showNewAppointment:(NSString *)appointment_id
+{
+    NSURL *requestURL=[NSURL URLWithString:QUERY_APPOINTMENTS_INFO_URL];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
+    
+    //Set Post Data
+    const char *bytes = [[NSString stringWithFormat:@"id=%@", appointment_id] UTF8String];
+    //For multiple POST data
+    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
+    
+    //Send request
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+         if(error!=nil)
+             return; //error
+         
+         NSLog(@"responseData: %@", data);
+         
+         //decode the response data
+         NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+         
+         //NSMutableDictionary *dataDict=[jsonObjects objectAtIndex:0];
+         //NSString *result = [dataDict objectForKey:@"result"];
+         
+         if(jsonObjects.count>0)
+         {
+             NSMutableDictionary *meeting= [jsonObjects objectAtIndex:0];
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 NSString *meeting_str;
+                 meeting_str=[NSString stringWithFormat:@"%@ and %@ at %@ about %@.",
+                               [meeting valueForKey:@"client"],
+                               [meeting valueForKey:@"staff"],
+                               [meeting valueForKey:@"time"],
+                               [meeting valueForKey:@"description"]];
+                 
+                 UIAlertView *helloWorldAlert = [[UIAlertView alloc]
+                                                 initWithTitle:@"New Appointment" message:meeting_str delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                 // Display the Hello WorldMessage
+                 [helloWorldAlert show];
+                 [appointmentTableView reloadData];
+             });
+         }
+     }];
+
 }
 
 @end

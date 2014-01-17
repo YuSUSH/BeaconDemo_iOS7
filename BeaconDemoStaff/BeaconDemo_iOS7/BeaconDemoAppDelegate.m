@@ -10,7 +10,7 @@
 
 
 @implementation BeaconDemoAppDelegate
-@synthesize  CurrentStaffID, CurrentStaffInfo, bEnableBLE;
+@synthesize  CurrentStaffID, CurrentStaffInfo, bEnableBLE, CurrentTokenStr;
 /////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL) isMultitaskingSupported
 {
@@ -62,8 +62,19 @@
                           ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
                           ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
     
-    //[self UpdateNotifyPushNotificationToken:hexToken];
+    CurrentTokenStr=hexToken; //save the updated token string
     
+}
+
+- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
+{
+	NSLog(@"Received notification: %@", userInfo);
+    
+    //Get the personID from notification
+    NSString *appointment_id=[[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+    // Query the personal info with the ID got from notification
+    if(self.tv!=nil)
+        [self.tv showNewAppointment:appointment_id];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

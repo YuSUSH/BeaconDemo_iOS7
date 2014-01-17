@@ -1,6 +1,6 @@
 <?php
 
-function SendPushNotification($token, $sent_id)
+function SendPushNotification($token, $pem_file,  $sent_id)
 {
 	// Put your private key's passphrase here:
 	$passphrase = 'sush1234';
@@ -11,7 +11,7 @@ function SendPushNotification($token, $sent_id)
 	////////////////////////////////////////////////////////////////////////////////
 
 	$ctx = stream_context_create();
-	stream_context_set_option($ctx, 'ssl', 'local_cert', 'ck.pem');
+	stream_context_set_option($ctx, 'ssl', 'local_cert', $pem_file);
 	stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
 
 	// Open a connection to the APNS server
@@ -62,7 +62,14 @@ if(strcmp($device_type, "ipad")==0) //send to the iPad
 	$iPadToken = file_get_contents($file);
 	$UserID= $_POST['userid'];
 
-	SendPushNotification($iPadToken, $UserID);
+	SendPushNotification($iPadToken, 'ck.pem', $UserID);
+}
+
+if(strcmp($device_type, "staff")==0)
+{
+	$UserID= $_POST['userid'];
+	$stafftoken=$_POST['token'];
+	SendPushNotification($stafftoken, 'ck_staff.pem', $UserID);
 }
 
 
