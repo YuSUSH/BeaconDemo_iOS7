@@ -38,7 +38,6 @@ static NSString * const iOSUUID = @"00000000-0000-0000-0000-000000000000";
 @property (strong,nonatomic) NSMutableArray *peripherals;
 @property (strong, nonatomic) IBOutlet UISwitch *BLEOnOffSwitch;
 
--(void) NotifyPushNotificationServer;
 -(void) NewClientArrive;
 - (IBAction)OnBLESwitchChange:(UISwitch *)sender;
 
@@ -49,6 +48,8 @@ static NSString * const iOSUUID = @"00000000-0000-0000-0000-000000000000";
 - (void)startRangingForBeacons;
 
 - (IBAction)OnClickLogout:(UIButton *)sender;
+
+@property (nonatomic) bool bInsideRange;
 
 
 @end

@@ -28,6 +28,8 @@
 
 - (void)viewDidLoad
 {
+    self.bInsideRange=false; //initially outside the Beacon range
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
@@ -340,8 +342,12 @@
 - (void)locationManager:(CLLocationManager *)manager
          didEnterRegion:(CLRegion *)region
 {
+    if(self.bInsideRange) //if already inside the range
+        return; //do nothing
+    
     if([region.identifier isEqualToString:kIdentifier])
     {
+        self.bInsideRange=true;
         /*
         NSLog(@"$$$$$$$$$$ I came in!");
         
@@ -358,8 +364,13 @@
 - (void)locationManager:(CLLocationManager *)manager
           didExitRegion:(CLRegion *)region
 {
+    if(!self.bInsideRange) //if already outside the range
+        return; //do nothing
+       
     if([region.identifier isEqualToString:kIdentifier])
     {
+        self.bInsideRange=false;
+        
         [self ClientExit]; //send push notification for exiting the shop
     }
 
