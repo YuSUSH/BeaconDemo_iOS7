@@ -1,6 +1,45 @@
 <?php
 include "lib_functions.php";
 
+
+//Remove the client from the table of 'inshop_users', showing all the existing users in the shop.
+function RemoveClientInShop($userid)
+{
+	if(!connect_to_database()) //connect to SQL database
+			return;
+			
+	//firstly, check all the users in the shop now
+	$bAlreadyExist=0;
+	
+	$result=ExecuteQuery("SELECT * FROM inshop_users");
+	if($result)
+	{
+		$rows = mysql_num_rows($result);
+		if($rows>0)
+		{
+			for ($j = 0 ; $j < $rows ; $j++)
+			{		
+				if( strcmp($userid,  mysql_result($result,$j,'userid') )==0)
+				{
+					$bAlreadyExist=1;
+					break;
+				}
+			}
+		}
+		
+		if($bAlreadyExist==1)
+		{
+			//Add this to the inshop_users table
+			$querystr="DELETE FROM inshop_users WHERE userid='" .  $userid . "'";
+		    //echo $querystr;
+		    ExecuteQuery($querystr);
+		}
+	}
+		
+	close_database();
+}
+
+
 $userid= $_POST['userid'];	
 
 //Send notification to iPad
@@ -26,6 +65,8 @@ curl_setopt($ch,CURLOPT_POSTFIELDS,$fields_string);
 //execute post
 $result = curl_exec($ch);
 //print $result;
+
+RemoveClientInShop($userid); //remove the user from the current inshop user table in the DB
 
 
 

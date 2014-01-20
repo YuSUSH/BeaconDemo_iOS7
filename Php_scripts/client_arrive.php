@@ -1,6 +1,44 @@
 <?php
 include "lib_functions.php";
 
+//Add the client the the table of 'inshop_users', showing all the existing users in the shop.
+function AddClientInShop($userid)
+{
+	if(!connect_to_database()) //connect to SQL database
+			return;
+			
+	//firstly, check all the users in the shop now
+	$bAlreadyExist=0;
+	
+	$result=ExecuteQuery("SELECT * FROM inshop_users");
+	if($result)
+	{
+		$rows = mysql_num_rows($result);
+		if($rows>0)
+		{
+			for ($j = 0 ; $j < $rows ; $j++)
+			{		
+				if( strcmp($userid,  mysql_result($result,$j,'userid') )==0)
+				{
+					$bAlreadyExist=1;
+					break;
+				}
+			}
+		}
+		
+		if($bAlreadyExist!=1)
+		{
+			//Add this to the inshop_users table
+			$querystr="INSERT INTO inshop_users VALUES ('" .
+								$userid . "')";
+		    //echo $querystr;
+		    ExecuteQuery($querystr);
+		}
+	}
+		
+	close_database();
+}
+
 $userid= $_POST['userid'];	
 
 //Send notification to iPad
@@ -28,6 +66,7 @@ $result = curl_exec($ch);
 //print $result;
 
 
+AddClientInShop($userid); //Add this user into the inshop_user table in the DB
 
 
 
