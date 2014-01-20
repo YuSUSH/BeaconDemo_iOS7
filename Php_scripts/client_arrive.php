@@ -76,6 +76,7 @@ $resultArray = array();
 //echo "number of rows=" . $rows . "<br/>";
 $arrCol= array();
 $arrCol["result"]="add_new"; //require client to input info for new appointment
+$arrCol["shop_info"]="Federal Bureau of Investigation";
 array_push($resultArray,$arrCol);
 			
 //Output to HTTP request

@@ -203,7 +203,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o6v-SJ-sqB">
-                                <rect key="frame" x="136" y="150" width="51" height="31"/>
+                                <rect key="frame" x="123" y="127" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="OnBLESwitchChange:" destination="GFV-OE-UJp" eventType="valueChanged" id="9g2-9a-OHf"/>
@@ -219,6 +219,23 @@
                                     <action selector="OnClickLogout:" destination="GFV-OE-UJp" eventType="touchUpInside" id="XEq-aS-Mxl"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vii-bb-ZaW">
+                                <rect key="frame" x="20" y="217" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRk-Da-FuJ">
+                                <rect key="frame" x="60" y="251" width="139" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Make Appointment">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="OnClickMakeAppointment:" destination="GFV-OE-UJp" eventType="touchUpInside" id="V0P-JN-uNO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -226,6 +243,8 @@
                     <connections>
                         <outlet property="BLEOnOffSwitch" destination="o6v-SJ-sqB" id="gGZ-nd-cPi"/>
                         <outlet property="LabelDeviceInfo" destination="HxT-AA-aUO" id="dDX-Kt-NsR"/>
+                        <outlet property="btnMakeAppointment" destination="fRk-Da-FuJ" id="slK-jJ-RNJ"/>
+                        <outlet property="labelShopInfo" destination="vii-bb-ZaW" id="Cb3-RP-efN"/>
                         <segue destination="l1e-c8-wxZ" kind="push" identifier="SegueNewAppointment" id="zJJ-b1-Wfb"/>
                     </connections>
                 </viewController>

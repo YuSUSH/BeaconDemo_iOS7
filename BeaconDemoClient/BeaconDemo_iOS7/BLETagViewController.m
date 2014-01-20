@@ -31,6 +31,10 @@
     self.bInsideRange=false; //initially outside the Beacon range
     self.navigationItem.hidesBackButton=true; //disable the "back" button
     
+    //by default hide the make appointment button and shop label
+    self.btnMakeAppointment.hidden=true;
+    self.labelShopInfo.hidden=true;
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
@@ -98,25 +102,57 @@
         
         NSMutableDictionary *dataDict=[jsonObjects objectAtIndex:0];
         NSString *result = [dataDict objectForKey:@"result"];
+        NSString *shop_info=[dataDict objectForKey:@"shop_info"];
+        
         
         if([result isEqualToString:@"add_new"]) //if being asked to create new appointment
         {
-            //try to add new appointment
+            //Show shop info and make appointment button
             dispatch_queue_t mainQueue = dispatch_get_main_queue();
             dispatch_async(mainQueue, ^(void)
             {
-                [self performSegueWithIdentifier:@"SegueNewAppointment" sender:self];
+                self.labelShopInfo.hidden=false;
+                self.labelShopInfo.text=shop_info;
+                self.btnMakeAppointment.hidden=false;
+                
+                UIAlertView *helloWorldAlert = [[UIAlertView alloc]
+                                                initWithTitle:@"Welcome" message:[@"Welcome to " stringByAppendingString:shop_info] delegate:self cancelButtonTitle:@"Make Appointment" otherButtonTitles:@"close", nil];
+                // Display the Hello WorldMessage
+                [helloWorldAlert show];
+
+                //[self performSegueWithIdentifier:@"SegueNewAppointment" sender:self];
             });
         }
     }];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex==0)
+    {
+        //Make new appointment
+        [self performSegueWithIdentifier:@"SegueNewAppointment" sender:self];
+    }
+}
 -(void) ClientExit //The client exit this shop
 {
     
     NSURL *requestURL=[NSURL URLWithString:CLIENT_LEFT_URL];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
+    
+    
+    //Hide the shop info and appointment making button
+    self.labelShopInfo.hidden=true;
+    self.btnMakeAppointment.hidden=true;
+    
+    //Show good bye message
+    UIAlertView *helloWorldAlert = [[UIAlertView alloc]
+                                    initWithTitle:@"Good Bye!" message:@"See you next time." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    // Display the Hello WorldMessage
+    [helloWorldAlert show];
+
+
     
     //Set Post Data
     GET_APPDELEGATE
@@ -391,4 +427,9 @@
     }
 }
 
+- (IBAction)OnClickMakeAppointment:(UIButton *)sender
+{
+    //Make new appointment
+    [self performSegueWithIdentifier:@"SegueNewAppointment" sender:self];
+}
 @end
