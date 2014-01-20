@@ -160,7 +160,11 @@ bool Auto_login;
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
          if(error!=nil)
+         {
+             [self SetNormalState];
+             [self SaveAccountInfo:nil]; //don't save any account info
              return; //error
+         }
          
          Auto_login=false; //Auto Login state ends here
          

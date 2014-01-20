@@ -345,8 +345,47 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 }
 
 
+//The client has left the shop, so we should remove him from the entering list
+-(void) ClientHasLeft:(NSString*)userID
+{
+    int m;
+    if(enteringClients!=nil && enteringClients.count>0)
+    {
+        for(m=0;m<enteringClients.count;m++)
+        {
+            NSMutableDictionary *client=[enteringClients objectAtIndex:m];
+            if([[client valueForKey:@"userid"] isEqualToString:userID])
+                [enteringClients removeObjectAtIndex:m]; //remove this client
+        }
+    }
+    
+    [self.enteringClientTableView reloadData]; //refresh the table view
+    
+}
+
+
 -(void) QueryPersonalInfoAndShow:(NSString*)userID
 {
+    //firstly, check if this user is already in current client list
+    int m;
+    if(enteringClients!=nil && enteringClients.count>0)
+    {
+        bool found=false;
+        for(m=0;m<enteringClients.count;m++)
+        {
+            NSMutableDictionary *client=[enteringClients objectAtIndex:m];
+            if([[client valueForKey:@"userid"] isEqualToString:userID])
+            {
+                found=true;
+                break;
+            }
+        }
+        
+        if(found==true) //already exists
+            return; //do nothing
+    }
+    
+    
     NSURL *requestURL=[NSURL URLWithString:QUERY_DB_SERVIER_URL];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];

@@ -8,7 +8,7 @@ $url = 'http://experiment.sandbox.net.nz/beacon/simplepush.php';
 $fields = array(
 			'device_type'=>urlencode("ipad"),
             'userid'=>urlencode($userid),
-    		'event'=>urlencode("in"),
+    		'event'=>urlencode("out"),
         );
 
 //url-ify the data for the POST
@@ -30,7 +30,7 @@ $result = curl_exec($ch);
 
 
 
-
+/*
 //Send back a result to ask client to input new appoint info 
 $resultArray = array();
 			
@@ -41,6 +41,7 @@ array_push($resultArray,$arrCol);
 			
 //Output to HTTP request
 echo json_encode($resultArray);
+*/
 
 ?>
 

@@ -100,9 +100,22 @@
     
     //Get the personID from notification
     NSString *userid=[[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+    NSString *event=[[userInfo valueForKey:@"aps"] valueForKey:@"event"];
+    
     // Query the personal info with the ID got from notification
-    if(self.bv!=nil)
-        [self.bv QueryPersonalInfoAndShow:userid];
+    if([event isEqualToString:@"in"]) //client came in event
+    {
+        if(self.bv!=nil)
+            [self.bv QueryPersonalInfoAndShow:userid];
+        
+        return;
+    }
+    
+    if([event isEqualToString:@"out"]) //client came in event
+    {
+        if(self.bv!=nil)
+            [self.bv ClientHasLeft:userid];
+    }
 }
 
 

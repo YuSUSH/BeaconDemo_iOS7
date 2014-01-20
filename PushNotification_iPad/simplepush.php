@@ -1,6 +1,6 @@
 <?php
 
-function SendPushNotification($token, $pem_file,  $sent_id)
+function SendPushNotification($token, $pem_file,  $sent_id, $event)
 {
 	// Put your private key's passphrase here:
 	$passphrase = 'sush1234';
@@ -27,7 +27,8 @@ function SendPushNotification($token, $pem_file,  $sent_id)
 	// Create the payload body
 	$body['aps'] = array(
 		'alert' => $sent_id,
-		'sound' => 'default'
+		'sound' => 'default',
+		'event' => $event
 		);
 
 	// Encode the payload as JSON
@@ -54,6 +55,7 @@ function SendPushNotification($token, $pem_file,  $sent_id)
 // Put your device token here (without spaces):
 //Read out the Device Token string saved in the file
 $device_type= $_POST['device_type']; //the type of target device the notification is to be sent to
+$device_event= $_POST['event'];
 	
 if(strcmp($device_type, "ipad")==0) //send to the iPad
 {
@@ -62,14 +64,14 @@ if(strcmp($device_type, "ipad")==0) //send to the iPad
 	$iPadToken = file_get_contents($file);
 	$UserID= $_POST['userid'];
 
-	SendPushNotification($iPadToken, 'ck.pem', $UserID);
+	SendPushNotification($iPadToken, 'ck.pem', $UserID, $device_event);
 }
 
 if(strcmp($device_type, "staff")==0)
 {
 	$UserID= $_POST['userid'];
 	$stafftoken=$_POST['token'];
-	SendPushNotification($stafftoken, 'ck_staff.pem', $UserID);
+	SendPushNotification($stafftoken, 'ck_staff.pem', $UserID, $device_event);
 }
 
 
