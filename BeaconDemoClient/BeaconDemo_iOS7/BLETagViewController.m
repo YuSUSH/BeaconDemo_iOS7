@@ -29,6 +29,7 @@
 - (void)viewDidLoad
 {
     self.bInsideRange=false; //initially outside the Beacon range
+    self.navigationItem.hidesBackButton=true; //disable the "back" button
     
     [super viewDidLoad];
 	// Do any additional setup after loading the view.

@@ -171,6 +171,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="iDL-g1-uFg"/>
                     <connections>
+                        <outlet property="labelPassword" destination="Mx7-eM-kmf" id="hEe-C3-Xmo"/>
+                        <outlet property="labelUserID" destination="ssa-cP-ImJ" id="zYI-Q4-s6s"/>
                         <outlet property="passwordText" destination="Maf-39-TBH" id="3gu-6d-rJX"/>
                         <outlet property="titileLabel" destination="tke-lY-nlD" id="wWv-XZ-gvo"/>
                         <outlet property="useridText" destination="5d9-tK-c1P" id="RlN-d7-gKr"/>

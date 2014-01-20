@@ -80,15 +80,19 @@ bool Auto_login;
 -(void) SetNormalState
 {
     [self.titileLabel setText:@"Login Window"];
-    self.useridText.enabled=true;
-    self.passwordText.enabled=true;
+    self.useridText.hidden=false;
+    self.passwordText.hidden=false;
+    self.labelUserID.hidden=false;
+    self.labelPassword.hidden=false;
 }
 
 -(void) SetBusyState
 {
     [self.titileLabel setText:@"Loggin in ..."];
-    self.useridText.enabled=false;
-    self.passwordText.enabled=false;
+    self.useridText.hidden=true;
+    self.passwordText.hidden=true;
+    self.labelUserID.hidden=true;
+    self.labelPassword.hidden=true;
 }
 
 
