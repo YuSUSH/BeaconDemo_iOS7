@@ -43,10 +43,15 @@
     self.datePicker=[[iphoneDatePicker alloc]init];
     [self.datePicker Init:self.textDateChoice DoneButtonTarget:self DoneButtonAction:(@selector(DoneDateSelection:))];
     
+    //Add the Staff picker
+    self.staffPicker=[[iphonePicker alloc] init];
+    [self.staffPicker Init:self.textStaffChoice Delegate:self DoneButtonTarget:self DoneButtonAction:(@selector(DoneStaffSelection:))];
+    
 }
 
 -(void)DoneDateSelection:(id)sender
 {
+    [self.datePicker updateTextField:nil];
     NSDate *theDate=self.datePicker.selectedDate;
     
     //Get the hour number from the selected Date
@@ -65,6 +70,23 @@
 
     }
     
+}
+
+
+-(void)DoneStaffSelection:(id)sender
+{
+    int selected=[staffPicker.m_Picker selectedRowInComponent:0];
+    
+    selectedStaff=[allStaffs objectAtIndex:selected]; //save the selected staff info
+    
+    NSString *fullname;
+    fullname=[NSString stringWithFormat:@"%@ %@",
+              [selectedStaff valueForKey:@"givename"],
+              [selectedStaff valueForKey:@"surname"] ];
+    
+    [self.textStaffChoice setText:fullname];
+    
+    [self.textStaffChoice resignFirstResponder];
 }
 
 -(void)dismissKeyboard
@@ -108,38 +130,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (IBAction)OnClickStaffChoice:(UIButton *)sender
-{
-    //show the popup for staff name display
-    staffPicker=[[PopoverPicker alloc] init];
-    
-    CGRect poprect=[self.view convertRect:self.btnStaffChoice.frame toView:self.view];
-    poprect.origin.y+=30;
-    
-    [staffPicker Popup:self From:poprect InView:self.view
-       DoneButtonTarget:self DoneButtonAction:(@selector(DoneStaffPicker:))];
-    
-    //display the selected index in the list
-    [staffPicker.m_Picker selectRow:0 inComponent:0 animated:true];
-}
-
--(IBAction) DoneStaffPicker:(id)sender
-{
-    [staffPicker Close]; //close the popover window
-    
-    int selected=[staffPicker.m_Picker selectedRowInComponent:0];
-    
-    selectedStaff=[allStaffs objectAtIndex:selected]; //save the selected staff info
-    
-    NSString *fullname;
-    fullname=[NSString stringWithFormat:@"%@ %@",
-    [selectedStaff valueForKey:@"givename"],
-    [selectedStaff valueForKey:@"surname"] ];
-    
-    [self.btnStaffChoice setTitle:fullname forState:UIControlStateNormal];
-    
 }
 
 

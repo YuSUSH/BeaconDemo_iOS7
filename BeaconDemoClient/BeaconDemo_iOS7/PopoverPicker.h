@@ -18,3 +18,15 @@
 DoneButtonTarget:(id)target DoneButtonAction:(SEL)handler;
 - (IBAction)OnClickCancel:(id)sender;
 @end
+
+
+@interface iphonePicker: NSObject
+//@property (nonatomic, retain) UIPopoverController *m_PopoverController;
+@property (nonatomic, retain) UIPickerView *m_Picker;
+@property (strong, nonatomic) UITextField *textField;
+@property (strong, nonatomic) NSDate *selectedDate;
+
+-(void) Init:(UITextField*)textfield Delegate:(id<UIPickerViewDelegate>)PickerDelegate DoneButtonTarget:(id)target DoneButtonAction:(SEL)handler;
+- (IBAction)OnClickCancel:(id)sender;
+-(void)updateTextField:(id)sender;
+@end

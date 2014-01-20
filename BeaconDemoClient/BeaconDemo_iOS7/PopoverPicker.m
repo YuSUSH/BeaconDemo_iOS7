@@ -80,3 +80,80 @@ DoneButtonTarget:(id)target DoneButtonAction:(SEL)handler
 }
 
 @end
+
+
+
+
+
+
+
+
+
+@implementation iphonePicker
+
+@synthesize m_Picker;
+
+-(void) Init:(UITextField*)textfield Delegate:(id<UIPickerViewDelegate>)PickerDelegate DoneButtonTarget:(id)target DoneButtonAction:(SEL)handler
+{
+    
+    self.textField=textfield;
+    
+    //Add the Date picker for the text field
+    m_Picker=[[UIPickerView alloc] initWithFrame:CGRectMake(0, 45, POPWINDOW_WIDTH, 244)];
+    m_Picker.delegate=PickerDelegate;
+    m_Picker.showsSelectionIndicator=YES;
+    m_Picker.hidden=false;
+
+    
+   // [m_Picker setDate:[NSDate date]];
+   // [m_Picker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
+    
+    
+    
+    
+    //Init the toobar with cancel & done buttons
+    UIToolbar *pickerToolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    pickerToolbar.barStyle = UIBarStyleBlackOpaque;
+    NSMutableArray *barItems = [[NSMutableArray alloc] init];
+    
+    UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel target:self action:@selector(OnClickCancel:)];
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:target action:handler];
+    
+    
+    UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:Nil action:nil];
+    
+    [barItems addObject:cancelButton];
+    [barItems addObject:space];
+    [barItems addObject:doneButton];
+    
+    pickerToolbar.items = barItems;
+    
+    
+    //Init the Security Level Picker
+    [m_Picker setTag:10];
+    //[m_Picker addTarget:self action:@selector(result) forControlEvents:UIControlEventValueChanged];
+    //[m_Picker selectRow:self.m_SelectedCheckFreq-1 inComponent:0 animated:true];
+    
+    //Show the popovercontrol
+    //UIViewController* popoverContent = [[UIViewController alloc] init];
+    //popoverContent.contentSizeForViewInPopover = CGSizeMake(320, 264);
+    UIView* popoverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 264)];
+    popoverView.backgroundColor = [UIColor whiteColor];
+    [popoverView addSubview:pickerToolbar];
+    [popoverView addSubview:m_Picker];
+    
+    
+    [self.textField setInputView:popoverView];
+}
+
+
+-(void)updateTextField:(id)sender
+{
+}
+
+- (IBAction)OnClickCancel:(id)sender
+{
+    [self.textField resignFirstResponder];
+}
+@end

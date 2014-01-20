@@ -104,7 +104,7 @@ DoneButtonTarget:(id)target DoneButtonAction:(SEL)handler
     m_Picker = [[UIDatePicker alloc]init];
     
     [m_Picker setDate:[NSDate date]];
-    [m_Picker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
+    //[m_Picker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
     
     
     
