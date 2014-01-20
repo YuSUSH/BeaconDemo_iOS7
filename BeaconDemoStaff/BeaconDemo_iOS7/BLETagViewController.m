@@ -9,6 +9,7 @@
 #import "BLETagViewController.h"
 #import <UIKit/UIDevice.h>
 #import "BeaconDemoAppDelegate.h"
+#import "AppointmentDetailViewController.h"
 
 @interface BLETagViewController ()
 
@@ -201,6 +202,12 @@ NSMutableData *receivedData;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSLog(@"segue=%@, sender=%@.", segue.identifier, sender);
+    
+    if([segue.identifier isEqualToString:@"SegueToAppointmentDetail"])
+    {
+        AppointmentDetailViewController *myVC = [segue destinationViewController];
+        myVC.appointmentInfo = sender;// set your properties here
+    }
 }
 
 //Bluetooth related implementations
@@ -400,6 +407,16 @@ NSMutableData *receivedData;
 }
 
 
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row < myAppointments.count)
+    {
+        NSMutableDictionary *this_appointment;
+        this_appointment=[myAppointments objectAtIndex:indexPath.row];
+        [self performSegueWithIdentifier:@"SegueToAppointmentDetail" sender:this_appointment];
+    }
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -417,12 +434,25 @@ NSMutableData *receivedData;
     [cell.textLabel setTextColor:[UIColor blackColor]];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
+#define LENGTH_NAME_IN_TABLE 15
     NSString *titilestr;
+    
+    NSString *showFullName;
     NSMutableDictionary *appointment=[myAppointments objectAtIndex:indexPath.row];
-    titilestr=[NSString stringWithFormat:@"%@ %@ %@",
-               [appointment valueForKey:@"client"],
-               [appointment valueForKey:@"time"],
-               [appointment valueForKey:@"description"]];
+    
+    showFullName= [appointment valueForKey:@"client_fullname"];
+    int fullname_len=showFullName.length;
+    showFullName=[showFullName substringToIndex:LENGTH_NAME_IN_TABLE];
+    if(fullname_len>LENGTH_NAME_IN_TABLE)
+        showFullName=[showFullName stringByAppendingString:@"..."];
+    
+    NSString *showTime;
+    showTime=[appointment valueForKey:@"time"];
+    showTime=[showTime substringFromIndex:5];
+    
+    titilestr=[NSString stringWithFormat:@"%18@ %@",
+               showFullName,
+               showTime];
 
     [cell.textLabel setText:titilestr];
 

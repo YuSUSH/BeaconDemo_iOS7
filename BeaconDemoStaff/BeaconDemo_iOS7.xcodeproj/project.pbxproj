@@ -26,6 +26,7 @@
 		F3A7195E180BA71C001999C0 /* BLETagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A7195D180BA71C001999C0 /* BLETagViewController.m */; };
 		F3AB2F681886331F004FF03B /* PopoverPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB2F671886331F004FF03B /* PopoverPicker.m */; };
 		F3AB2F6B188634F4004FF03B /* NSObject+UIPopoverController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB2F6A188634F4004FF03B /* NSObject+UIPopoverController_iPhone.m */; };
+		F3D7B866188DD0AE004D3328 /* AppointmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D7B865188DD0AE004D3328 /* AppointmentDetailViewController.m */; };
 		F3DD5719187CBE0800EEA6C6 /* UserLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DD5718187CBE0800EEA6C6 /* UserLoginViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,8 @@
 		F3AB2F671886331F004FF03B /* PopoverPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverPicker.m; sourceTree = "<group>"; };
 		F3AB2F69188634F4004FF03B /* NSObject+UIPopoverController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+UIPopoverController_iPhone.h"; sourceTree = "<group>"; };
 		F3AB2F6A188634F4004FF03B /* NSObject+UIPopoverController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+UIPopoverController_iPhone.m"; sourceTree = "<group>"; };
+		F3D7B864188DD0AE004D3328 /* AppointmentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppointmentDetailViewController.h; sourceTree = "<group>"; };
+		F3D7B865188DD0AE004D3328 /* AppointmentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointmentDetailViewController.m; sourceTree = "<group>"; };
 		F3DD5717187CBE0800EEA6C6 /* UserLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLoginViewController.h; sourceTree = "<group>"; };
 		F3DD5718187CBE0800EEA6C6 /* UserLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,6 +150,8 @@
 				F3AB2F6A188634F4004FF03B /* NSObject+UIPopoverController_iPhone.m */,
 				F3A2C2EC188739AB000D321F /* PopoverDatePicker.h */,
 				F3A2C2ED188739AB000D321F /* PopoverDatePicker.m */,
+				F3D7B864188DD0AE004D3328 /* AppointmentDetailViewController.h */,
+				F3D7B865188DD0AE004D3328 /* AppointmentDetailViewController.m */,
 			);
 			path = BeaconDemo_iOS7;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 			files = (
 				F3A2C2EE188739AB000D321F /* PopoverDatePicker.m in Sources */,
 				F390C2FC1806644E00A8BA39 /* main.m in Sources */,
+				F3D7B866188DD0AE004D3328 /* AppointmentDetailViewController.m in Sources */,
 				F3DD5719187CBE0800EEA6C6 /* UserLoginViewController.m in Sources */,
 				F3AB2F6B188634F4004FF03B /* NSObject+UIPopoverController_iPhone.m in Sources */,
 				F390C3001806644E00A8BA39 /* BeaconDemoAppDelegate.m in Sources */,

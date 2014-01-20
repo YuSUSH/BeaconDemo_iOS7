@@ -2,7 +2,7 @@
 	<?php
 	    include "lib_functions.php";
 		///////////////////////////////////////////////////////////////
-		function OutputPersonalInfoResults($result)
+		function OutputAppointmentResults($result)
 		{
 			$resultArray = array();
 			
@@ -15,7 +15,17 @@
 				{		
 					$arrCol= array();
 					$arrCol["staff"]=mysql_result($result,$j,'staff');
-					$arrCol["client"]=mysql_result($result,$j,'client');
+					$client_id=mysql_result($result,$j,'client');
+					$arrCol["client"]=$client_id;
+					//query client's fullname based on client ID
+					$client_result=ExecuteQuery("SELECT * FROM personal_info WHERE userid='" . $client_id . "'");
+					if($client_result)
+					{
+						//Output to HTTP request
+						$arrCol["client_fullname"]=mysql_result($client_result, 0,'givename') . ' ' .
+									mysql_result($client_result, 0,'surname');
+					}
+					
 					$arrCol["time"]=mysql_result($result,$j,'time');
 					$arrCol["description"]= mysql_result($result,$j,'description');
 					array_push($resultArray,$arrCol);
@@ -45,7 +55,7 @@
 		else
 		{
 			//Output to HTTP request
-			OutputPersonalInfoResults($result);
+			OutputAppointmentResults($result);
 		}
 		
 		close_database();
