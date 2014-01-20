@@ -193,7 +193,7 @@
     const char *bytes = [[NSString stringWithFormat:@"client=%@&staff=%@&time=%@&description=%@",
                           appDelegate.CurrentUserID,
                           [selectedStaff valueForKey:@"userid"],
-                          selectedDateStr,
+                          self.textDateChoice.text,
                           self.textDescription.text
                           ] UTF8String];
     
@@ -213,15 +213,44 @@
          if(error!=nil)
              return; //error
          
+        //decode the response data
+        NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
          
-        //try to add new appointment
-        dispatch_queue_t mainQueue = dispatch_get_main_queue();
-        dispatch_async(mainQueue, ^(void)
-        {
-            //Now come back to the main view
-            [self.navigationController popViewControllerAnimated:YES];
-        });
-     }];
+         if(jsonObjects!=nil && jsonObjects.count>0)
+         {
+             NSMutableDictionary *result;
+             result=[jsonObjects objectAtIndex:0];
+             
+             if([[result valueForKey:@"result"] isEqualToString:@"OK"])
+             {
+                 //try to add new appointment
+                 dispatch_queue_t mainQueue = dispatch_get_main_queue();
+                 dispatch_async(mainQueue, ^(void)
+                 {
+                        //Now come back to the main view
+                        [self.navigationController popViewControllerAnimated:YES];
+                 });
+
+             }
+             
+             if([[result valueForKey:@"result"] isEqualToString:@"unavailable"])
+             {
+                 //the time is unavailable
+                 dispatch_queue_t mainQueue = dispatch_get_main_queue();
+                 dispatch_async(mainQueue, ^(void)
+                 {
+                     UIAlertView *helloWorldAlert = [[UIAlertView alloc]
+                                                     initWithTitle:@"Error" message:@"The time for the client and the staff is unavailable!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                     // Display the Hello WorldMessage
+                     [helloWorldAlert show];
+
+                 });
+
+             }
+             
+         }
+         
+    }];
 }
 
 @end
