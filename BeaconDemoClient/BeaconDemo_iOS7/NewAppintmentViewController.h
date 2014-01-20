@@ -25,5 +25,6 @@
 
 @property (strong, nonatomic) iphoneDatePicker *datePicker;
 @property (strong, nonatomic) IBOutlet UITextField *textStaffChoice;
+- (IBAction)OnClickCancel:(UIButton *)sender;
 
 @end

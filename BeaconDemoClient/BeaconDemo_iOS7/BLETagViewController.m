@@ -276,6 +276,12 @@ NSMutableData *receivedData;
     
     [self turnOnRanging];
 }
+
+- (IBAction)OnClickLogout:(UIButton *)sender
+{
+    //simply going back
+    [self.navigationController popViewControllerAnimated:YES];
+}
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)turnOnRanging
 {

@@ -48,4 +48,7 @@ static NSString * const iOSUUID = @"00000000-0000-0000-0000-000000000000";
 
 - (void)startRangingForBeacons;
 
+- (IBAction)OnClickLogout:(UIButton *)sender;
+
+
 @end

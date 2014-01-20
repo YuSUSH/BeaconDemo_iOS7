@@ -170,7 +170,7 @@
 - (IBAction)OnClickCancel:(UIButton *)sender
 {
     //simple cancel this new appointment and back
-    [self performSegueWithIdentifier:@"SegueCloseNewAppointment" sender:self];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)OnClickSubmit:(UIButton *)sender
@@ -219,10 +219,9 @@
         dispatch_async(mainQueue, ^(void)
         {
             //Now come back to the main view
-            [self performSegueWithIdentifier:@"SegueCloseNewAppointment" sender:self];
+            [self.navigationController popViewControllerAnimated:YES];
         });
      }];
 }
-
 
 @end
