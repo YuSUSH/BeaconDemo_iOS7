@@ -22,7 +22,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 
 @implementation BeaconDemoViewController
 
-@synthesize m_PopoverController, popupQueue, queueLock;
+@synthesize m_PopoverController, popupQueue, queueLock, enteringClients;
 
 - (void)viewDidLoad
 {
@@ -36,6 +36,10 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     //init the queue for showing people
     popupQueue=[[NSMutableArray alloc] init];
     [popupQueue removeAllObjects];
+    
+    //init the clients array for list show
+    enteringClients=[[NSMutableArray alloc] init];
+    [enteringClients removeAllObjects];
     
     self.title=@"iOS to iOS with Beacon API";
     
@@ -363,6 +367,9 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     //Request with the personal ID and wait for response from DB server
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
+         if(error !=nil)
+             return;
+             
          NSLog(@"responseData: %@", data);
          
          //decode the response data
@@ -380,9 +387,11 @@ static NSString * const kCellIdentifier = @"BeaconCell";
          dispatch_async(dispatch_get_main_queue(), ^{
                  //[self ShowPopupView:personalInfo];
                 [queueLock lock];
-                [self.popupQueue addObject:personalInfo]; //Add it to the queue
-                [self.enteringClientTableView reloadData]; //refresh list display
+                [self.popupQueue addObject:personalInfo]; //Add it to the popup queue
                 [queueLock unlock];
+             
+                [self.enteringClients addObject:personalInfo]; //Add it to the list array
+                [self.enteringClientTableView reloadData]; //refresh list display
              
                 if(self.popupQueue.count==1 && self.m_PopoverController==nil) //this is the only element in queue
                 {
@@ -417,9 +426,9 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     
     NSString *titilestr;
     
-    if(indexPath.row<popupQueue.count)
+    if(indexPath.row<enteringClients.count)
     {
-        NSMutableDictionary *person=[popupQueue objectAtIndex:indexPath.row];
+        NSMutableDictionary *person=[enteringClients objectAtIndex:indexPath.row];
         titilestr=[NSString stringWithFormat:@"%@ %@",
                    [person valueForKey:@"givename"],
                    [person valueForKey:@"surname"]];
@@ -437,8 +446,8 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(popupQueue!=nil && popupQueue.count>0)
-        return popupQueue.count;
+    if(enteringClients!=nil && enteringClients.count>0)
+        return enteringClients.count;
     else
         return 0;
 }

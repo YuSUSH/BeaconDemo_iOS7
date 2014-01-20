@@ -29,6 +29,7 @@
 @property (nonatomic, retain) UIPopoverController *m_PopoverController; //The Popover Controller
 @property (nonatomic, strong) NSMutableArray *popupQueue; //the queue storing all the people to be shown
 @property (nonatomic, strong) NSLock *queueLock; //Lock object used for the queue
+@property (nonatomic, strong) NSMutableArray *enteringClients; //all the clients who have come into the shop
 
 -(void)ShowPopupView:(NSMutableDictionary*)personalInfo;
 -(void) QueryPersonalInfoAndShow:(NSString*)userID;

@@ -14,7 +14,7 @@
 @end
 
 @implementation NewAppintmentViewController
-@synthesize allStaffs, staffPicker, selectedStaff, timePicker, selectedDateStr;
+@synthesize allStaffs, staffPicker, selectedStaff, selectedDateStr;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,10 +37,39 @@
                                    action:@selector(dismissKeyboard)];
     
     [self.view addGestureRecognizer:tap];
+    
+    
+    //Add the Date picker for the text fiel
+    self.datePicker=[[iphoneDatePicker alloc]init];
+    [self.datePicker Init:self.textDateChoice DoneButtonTarget:self DoneButtonAction:(@selector(DoneDateSelection:))];
+    
+}
+
+-(void)DoneDateSelection:(id)sender
+{
+    NSDate *theDate=self.datePicker.selectedDate;
+    
+    //Get the hour number from the selected Date
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:theDate];
+    int hour = [components hour];
+    
+    if(hour >=9 && hour<=17) //between 9:00AM and 5:00PM
+        [self.textDateChoice resignFirstResponder]; //end editing
+    else
+    {
+        UIAlertView *helloWorldAlert = [[UIAlertView alloc]
+                                        initWithTitle:@"Unavailable Time" message:@"Please select time between 9:00AM to 5:30PM" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        // Display the Hello WorldMessage
+        [helloWorldAlert show];
+
+    }
+    
 }
 
 -(void)dismissKeyboard
 {
+    [self.datePicker updateTextField:nil];
     [self.textDescription resignFirstResponder];
 }
 
@@ -158,31 +187,6 @@
 {
     //Add a new record in appointment table in the DB
     [self addNewAppointment];
-}
-
-- (IBAction)OnClickSelectTime:(UIButton *)sender
-{
-    //show the popup for staff name display
-    timePicker=[[PopoverDatePicker alloc] init];
-    
-    CGRect poprect=[self.view convertRect:self.btnSelectTime.frame toView:self.view];
-    //poprect.origin.y+=30;
-    
-    [timePicker Popup:self From:poprect InView:self.view
-      DoneButtonTarget:self DoneButtonAction:(@selector(DoneTimePicker:))];
-    
-}
-
--(IBAction) DoneTimePicker:(id)sender
-{
-    NSDate *selectedDate= timePicker.m_Picker.date;
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-    //convert the selected Date into string
-    selectedDateStr=[formatter stringFromDate:selectedDate];
-    [self.btnSelectTime setTitle:selectedDateStr forState:UIControlStateNormal];
-    [timePicker Close]; //close the popover window
 }
 
 

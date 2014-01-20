@@ -97,24 +97,19 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zlb-Wj-GA7">
-                                <rect key="frame" x="114" y="160" width="167" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9EC-2o-XRd">
+                                <rect key="frame" x="110" y="165" width="180" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Select Time">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="OnClickSelectTime:" destination="l1e-c8-wxZ" eventType="touchUpInside" id="dlp-S6-PZc"/>
-                                </connections>
-                            </button>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="btnSelectTime" destination="zlb-Wj-GA7" id="vUb-kF-hsH"/>
                         <outlet property="btnStaffChoice" destination="ZNJ-X5-Ycv" id="f1w-JF-dvz"/>
+                        <outlet property="textDateChoice" destination="9EC-2o-XRd" id="H28-v6-TFq"/>
                         <outlet property="textDescription" destination="blc-Th-egt" id="p3e-vS-SIW"/>
-                        <segue destination="GFV-OE-UJp" kind="modal" identifier="SegueCloseNewAppointment" id="Rul-Nl-pt6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tCO-xM-627" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -222,7 +217,7 @@
                     <connections>
                         <outlet property="BLEOnOffSwitch" destination="o6v-SJ-sqB" id="gGZ-nd-cPi"/>
                         <outlet property="LabelDeviceInfo" destination="HxT-AA-aUO" id="dDX-Kt-NsR"/>
-                        <segue destination="l1e-c8-wxZ" kind="modal" identifier="SegueNewAppointment" id="zJJ-b1-Wfb"/>
+                        <segue destination="l1e-c8-wxZ" kind="push" identifier="SegueNewAppointment" id="zJJ-b1-Wfb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zEA-H1-6jV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -235,7 +230,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="Rul-Nl-pt6"/>
-    </inferredMetricsTieBreakers>
 </document>

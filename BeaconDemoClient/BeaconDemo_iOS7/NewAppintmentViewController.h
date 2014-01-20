@@ -13,10 +13,10 @@
 @interface NewAppintmentViewController : AudioViewController <UIPickerViewDelegate>
 
 @property (retain, nonatomic) PopoverPicker *staffPicker;
-@property (retain, nonatomic) PopoverDatePicker *timePicker;
 @property (strong, nonatomic) NSString *selectedDateStr;
 
 @property (strong, nonatomic) NSMutableArray *allStaffs;
+@property (strong, nonatomic) IBOutlet UITextField *textDateChoice;
 @property (strong, nonatomic) IBOutlet UIButton *btnStaffChoice;
 @property (strong, nonatomic) IBOutlet UIButton *btnSelectTime;
 - (IBAction)OnClickStaffChoice:(UIButton *)sender;
@@ -26,5 +26,7 @@
 - (IBAction)OnClickCancel:(UIButton *)sender;
 - (IBAction)OnClickSubmit:(UIButton *)sender;
 - (IBAction)OnClickSelectTime:(UIButton *)sender;
+
+@property (strong, nonatomic) iphoneDatePicker *datePicker;
 
 @end
