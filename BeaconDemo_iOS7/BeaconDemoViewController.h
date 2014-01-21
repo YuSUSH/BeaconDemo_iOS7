@@ -35,5 +35,7 @@
 -(void) QueryPersonalInfoAndShow:(NSString*)userID;
 -(void) ClientHasLeft:(NSString*)userID;
 @property (strong, nonatomic) IBOutlet UITableView *enteringClientTableView;
+@property (strong, nonatomic) IBOutlet UILabel *labelFullname;
+@property (strong, nonatomic) IBOutlet UIImageView *imgPhoto;
 
 @end

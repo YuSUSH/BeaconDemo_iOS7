@@ -447,6 +447,28 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row < self.enteringClients.count)
+    {
+        NSMutableDictionary *client= [enteringClients objectAtIndex:indexPath.row];
+        self.labelFullname.text=[NSString stringWithFormat:@"%@ %@",
+        [client valueForKey:@"givename"], [client valueForKey:@"surname"] ];
+        
+        
+        //show picture
+        NSString *picture_url= [NSString stringWithFormat:@"%@%@",
+                                @"http://ble.sandbox.net.nz/myforum/upload_image/",
+                                [client valueForKey:@"iconfilename"] ];
+        
+        NSURL *url = [NSURL URLWithString:picture_url];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        UIImage *img = [[UIImage alloc] initWithData:data];
+        CGSize size = img.size;
+        [self.imgPhoto setImage:img];
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
