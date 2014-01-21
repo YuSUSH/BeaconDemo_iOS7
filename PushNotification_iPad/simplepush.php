@@ -77,8 +77,8 @@ if(strcmp($device_type, "staff")==0)
 if(strcmp($device_type, "client")==0)
 {
 	$UserID= $_POST['userid'];
-	$stafftoken="c1236734afae91d56848e6d46c186c99b8c7ca5ea852ea6f785c745bcefd2015"; //$_POST['token'];
-	SendPushNotification($stafftoken, 'ck_client.pem', $UserID, $device_event);
+	$clienttoken=$_POST['token'];
+	SendPushNotification($clienttoken, 'ck_client.pem', $UserID, $device_event);
 }
 
 

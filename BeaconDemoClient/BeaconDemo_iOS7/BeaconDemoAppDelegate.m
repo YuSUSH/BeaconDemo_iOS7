@@ -10,7 +10,7 @@
 
 
 @implementation BeaconDemoAppDelegate
-@synthesize  CurrentUserID, CurrentPersonalInfo, bEnableBLE;
+@synthesize  CurrentUserID, CurrentPersonalInfo, bEnableBLE, currentToken;
 /////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL) isMultitaskingSupported
 {
@@ -62,6 +62,8 @@
                           ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
     
     NSLog(@"My token is: %@", hexToken);
+    
+    currentToken=hexToken; //save the new token;
 }
 
 

@@ -28,11 +28,17 @@
 
 - (void)viewDidLoad
 {
+    
+    //First of all update the client token for this iphone device
+    GET_APPDELEGATE
+    [self UpdateClientDeviceToken:appDelegate.currentToken
+                     WithClientID:appDelegate.CurrentUserID];
+    
     self.bInsideRange=false; //initially outside the Beacon range
     self.navigationItem.hidesBackButton=true; //disable the "back" button
     
     //by default hide the make appointment button and shop label
-    self.btnMakeAppointment.hidden=true;
+    self.btnRequestHomeLoan.hidden=true;
     self.labelShopInfo.hidden=true;
     
     [super viewDidLoad];
@@ -48,7 +54,6 @@
     [peripherals removeAllObjects];
     
     
-    GET_APPDELEGATE
     appDelegate.tv=self; //pass this pointer to the AppDelegate
     
     //Show Welcome message with the user's fullname
@@ -68,6 +73,35 @@
 -(NSString*) getCurrentDeviceID
 {
     return [[UIDevice currentDevice] identifierForVendor].UUIDString;
+}
+
+
+-(void) UpdateClientDeviceToken:(NSString *)token WithClientID:(NSString*)userid
+{
+    
+    NSURL *requestURL=[NSURL URLWithString:UPDATE_CLIENT_TOKEN_URL];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
+    
+    //Set Post Data
+    const char *bytes = [[NSString stringWithFormat:@"userid=%@&token=%@", userid, token] UTF8String];
+    //For multiple POST data
+    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
+    
+    //Send request
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+         if(error!=nil)
+             return; //error
+         
+         NSLog(@"responseData: %@", data);
+         
+     }];
 }
 
 
@@ -113,7 +147,7 @@
             {
                 self.labelShopInfo.hidden=false;
                 self.labelShopInfo.text=shop_info;
-                self.btnMakeAppointment.hidden=false;
+                self.btnRequestHomeLoan.hidden=false;
                 
                 UIAlertView *helloWorldAlert = [[UIAlertView alloc]
                                                 initWithTitle:@"Welcome" message:[@"Welcome to " stringByAppendingString:shop_info] delegate:self cancelButtonTitle:@"Make Appointment" otherButtonTitles:@"close", nil];
@@ -144,7 +178,7 @@
     
     //Hide the shop info and appointment making button
     self.labelShopInfo.hidden=true;
-    self.btnMakeAppointment.hidden=true;
+    self.btnRequestHomeLoan.hidden=true;
     
     //Show good bye message
     UIAlertView *helloWorldAlert = [[UIAlertView alloc]
