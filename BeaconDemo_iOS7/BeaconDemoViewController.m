@@ -321,7 +321,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     
     
     //Make it appears from the button's area
-    [self.m_PopoverController presentPopoverFromRect: CGRectMake(80, 220, 531, 544)
+    [self.m_PopoverController presentPopoverFromRect: CGRectMake(480, 220, 531, 544)
      //[self convertRect:self.m_button.frame toView:self.mView]
                                               inView:self.view
                             permittedArrowDirections:0 animated:YES];
