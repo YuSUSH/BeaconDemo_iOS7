@@ -80,6 +80,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="iDL-g1-uFg"/>
                     <connections>
+                        <outlet property="labelPassword" destination="Mx7-eM-kmf" id="SjA-BD-Gs0"/>
+                        <outlet property="labelUserID" destination="ssa-cP-ImJ" id="ylA-Hy-5pK"/>
                         <outlet property="passwordText" destination="Maf-39-TBH" id="3gu-6d-rJX"/>
                         <outlet property="titileLabel" destination="tke-lY-nlD" id="wWv-XZ-gvo"/>
                         <outlet property="useridText" destination="5d9-tK-c1P" id="RlN-d7-gKr"/>
@@ -103,17 +105,27 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="None" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HxT-AA-aUO">
-                                <rect key="frame" x="20" y="69" width="265" height="65"/>
+                                <rect key="frame" x="20" y="69" width="265" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="32" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="khk-aY-66O">
-                                <rect key="frame" x="8" y="152" width="301" height="287"/>
+                            <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="khk-aY-66O">
+                                <rect key="frame" x="10" y="149" width="301" height="287"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4u5-5f-iUw">
+                                <rect key="frame" x="229" y="111" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="OnClickLogout:" destination="GFV-OE-UJp" eventType="touchUpInside" id="e67-hM-8KG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>

@@ -62,6 +62,9 @@
     [self FetchAllofMyAppointments:appDelegate.CurrentStaffID]; //get all the appointments at the moment
     
     
+    self.navigationItem.hidesBackButton=true; //disable the back button
+    
+    
 
 }
 
@@ -425,7 +428,7 @@ NSMutableData *receivedData;
     UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     
@@ -441,20 +444,23 @@ NSMutableData *receivedData;
     NSMutableDictionary *appointment=[myAppointments objectAtIndex:indexPath.row];
     
     showFullName= [appointment valueForKey:@"client_fullname"];
+/*
     int fullname_len=showFullName.length;
     showFullName=[showFullName substringToIndex:LENGTH_NAME_IN_TABLE];
     if(fullname_len>LENGTH_NAME_IN_TABLE)
         showFullName=[showFullName stringByAppendingString:@"..."];
+ */
     
     NSString *showTime;
     showTime=[appointment valueForKey:@"time"];
-    showTime=[showTime substringFromIndex:5];
+//    showTime=[showTime substringFromIndex:5];
     
-    titilestr=[NSString stringWithFormat:@"%18@ %@",
-               showFullName,
-               showTime];
+//    titilestr=[NSString stringWithFormat:@"%18@ %@",
+//               showFullName,
+//               showTime];
 
-    [cell.textLabel setText:titilestr];
+    [cell.textLabel setText:showFullName];
+    [cell.detailTextLabel setText:showTime];
 
     
     
@@ -515,6 +521,12 @@ NSMutableData *receivedData;
              });
          }
      }];
+}
+
+- (IBAction)OnClickLogout:(UIButton *)sender
+{
+    //pop to previous layer
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)showNewAppointment:(NSString *)appointment_id
