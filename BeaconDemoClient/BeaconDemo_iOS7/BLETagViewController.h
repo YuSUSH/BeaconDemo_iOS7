@@ -56,4 +56,6 @@ static NSString * const iOSUUID = @"00000000-0000-0000-0000-000000000000";
 
 @property (strong, nonatomic) IBOutlet UIButton *btnRequestHomeLoan;
 
+-(void) ShowMeetingDueInfo:(NSString *)appointment_id;
+
 @end

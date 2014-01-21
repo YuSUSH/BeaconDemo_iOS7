@@ -21,6 +21,7 @@
 #define GET_ALL_STAFF_INFO_URL @"http://ble.sandbox.net.nz/myforum/get_all_staff_info.php"
 #define ADD_APPOINTMENT @"http://ble.sandbox.net.nz/myforum/add_appointment.php"
 #define UPDATE_CLIENT_TOKEN_URL @"http://ble.sandbox.net.nz/myforum/update_clients_token.php"
+#define QUERY_APPOINTMENT_DETAIL_URL @"http://ble.sandbox.net.nz/myforum/query_appointment_detail.php"
 
 
 #define GET_APPDELEGATE BeaconDemoAppDelegate *appDelegate	=	(BeaconDemoAppDelegate*)[[UIApplication sharedApplication] delegate];

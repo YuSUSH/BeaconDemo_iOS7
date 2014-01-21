@@ -79,6 +79,7 @@
 							'device_type'=>urlencode("client"),
 				            'userid'=>urlencode($appointment_id),
 				    		'token'=>urlencode($client_token),
+				    		'event'=>urlencode("meeting_due")
 				        );
 
 				//url-ify the data for the POST

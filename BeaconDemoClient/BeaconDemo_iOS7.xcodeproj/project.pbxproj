@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F310A304181099C100581230 /* ringtone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F310A303181099C100581230 /* ringtone.mp3 */; };
 		F310A3071810CC8F00581230 /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F310A3061810CC8F00581230 /* AudioViewController.m */; };
+		F37FB8ED188F3242006908C8 /* MeetingNotifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F37FB8EC188F3242006908C8 /* MeetingNotifyViewController.m */; };
 		F390C2F01806644E00A8BA39 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F390C2EF1806644E00A8BA39 /* Foundation.framework */; };
 		F390C2F21806644E00A8BA39 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F390C2F11806644E00A8BA39 /* CoreGraphics.framework */; };
 		F390C2F41806644E00A8BA39 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F390C2F31806644E00A8BA39 /* UIKit.framework */; };
@@ -44,6 +45,8 @@
 		F310A303181099C100581230 /* ringtone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ringtone.mp3; sourceTree = SOURCE_ROOT; };
 		F310A3051810CC8F00581230 /* AudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioViewController.h; sourceTree = "<group>"; };
 		F310A3061810CC8F00581230 /* AudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioViewController.m; sourceTree = "<group>"; };
+		F37FB8EB188F3242006908C8 /* MeetingNotifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingNotifyViewController.h; sourceTree = "<group>"; };
+		F37FB8EC188F3242006908C8 /* MeetingNotifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingNotifyViewController.m; sourceTree = "<group>"; };
 		F390C2EC1806644E00A8BA39 /* BeaconDemoClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeaconDemoClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F390C2EF1806644E00A8BA39 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F390C2F11806644E00A8BA39 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -152,6 +155,8 @@
 				F3AB2F6A188634F4004FF03B /* NSObject+UIPopoverController_iPhone.m */,
 				F3A2C2EC188739AB000D321F /* PopoverDatePicker.h */,
 				F3A2C2ED188739AB000D321F /* PopoverDatePicker.m */,
+				F37FB8EB188F3242006908C8 /* MeetingNotifyViewController.h */,
+				F37FB8EC188F3242006908C8 /* MeetingNotifyViewController.m */,
 			);
 			path = BeaconDemo_iOS7;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 				F3A2C2EE188739AB000D321F /* PopoverDatePicker.m in Sources */,
 				F390C2FC1806644E00A8BA39 /* main.m in Sources */,
 				F3DD5719187CBE0800EEA6C6 /* UserLoginViewController.m in Sources */,
+				F37FB8ED188F3242006908C8 /* MeetingNotifyViewController.m in Sources */,
 				F3AB2F6B188634F4004FF03B /* NSObject+UIPopoverController_iPhone.m in Sources */,
 				F390C3001806644E00A8BA39 /* BeaconDemoAppDelegate.m in Sources */,
 				F3A7195E180BA71C001999C0 /* BLETagViewController.m in Sources */,
