@@ -107,8 +107,7 @@
     {
         if(self.bv!=nil)
         {
-            [self.bv QueryPersonalInfoAndShow:userid];
-            [self.bv checkDueAppointment:userid]; //check if there's any due meeting for this client
+            [self.bv QueryPersonalInfoAndShow:userid]; //Show this new client
         }
         
         return;

@@ -200,12 +200,12 @@
                 self.labelShopInfo.text=shop_info;
                 self.btnRequestHomeLoan.hidden=false;
                 
+                /*
                 UIAlertView *helloWorldAlert = [[UIAlertView alloc]
                                                 initWithTitle:@"Welcome" message:[@"Welcome to " stringByAppendingString:shop_info] delegate:self cancelButtonTitle:@"Make Appointment" otherButtonTitles:@"close", nil];
                 // Display the Hello WorldMessage
                 [helloWorldAlert show];
-
-                //[self performSegueWithIdentifier:@"SegueNewAppointment" sender:self];
+                 */
             });
         }
     }];

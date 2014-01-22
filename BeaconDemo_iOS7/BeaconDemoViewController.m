@@ -22,7 +22,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 
 @implementation BeaconDemoViewController
 
-@synthesize m_PopoverController, popupQueue, queueLock, enteringClients, meetingDueTimer;
+@synthesize m_PopoverController, popupQueue, queueLock, enteringClients;
 
 - (void)viewDidLoad
 {
@@ -62,60 +62,6 @@ static NSString * const kCellIdentifier = @"BeaconCell";
                                                       target:self selector:@selector(checkDueAppointment:)
                                                     userInfo:nil repeats:YES];
      */
-}
-
--(void) checkDueAppointment:(NSString *)client_id
-{
-    //get the all existing
-    NSURL *requestURL=[NSURL URLWithString:QUERY_CLIENTS_APPOINTMENT_URL];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
-    
-    const char *bytes = [[NSString stringWithFormat:@"userid=%@", client_id] UTF8String];
-    //For multiple POST data
-    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
-    
-    //Send request
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
-    
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-     {
-         if(error!=nil)
-             return; //error
-         
-         NSLog(@"responseData: %@", data);
-         
-         //decode the response data
-         NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-         
-         if(jsonObjects==nil)
-             return;
-         
-         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-         [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-         
-         int i;
-         for(i=0;i<jsonObjects.count;i++)
-         {
-             NSMutableDictionary *appointment= [jsonObjects objectAtIndex:i];
-             NSString *timestr;
-             timestr=[appointment valueForKey:@"time"];
-             NSDate *duetime=[formatter dateFromString:timestr];
-             double interval= [duetime timeIntervalSinceNow];
-             if(interval>0 && interval <=60 * 30)
-             {
-                 [self MeetingDueNotify:[appointment valueForKey:@"id"]
-                             WithClient:[appointment valueForKey:@"client"]
-                               AndStaff:[appointment valueForKey:@"staff"]];
-             }
-             
-         }
-         
-     }];
-
 }
 
 
@@ -586,60 +532,6 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     return 1;
 }
 
-
--(void) MeetingDueNotify:(NSString *)appointment WithClient:(NSString *)client AndStaff:(NSString*) staff
-{
-    //get the detailed info about the meeting
-    NSURL *requestURL=[NSURL URLWithString:MEETING_DUE_NOTIFY_URL];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
-    
-    
-    //Set Post Data
-    const char *bytes = [[NSString stringWithFormat:@"appointment=%@&client=%@&staff=%@",
-                          appointment, client, staff] UTF8String];
-    //For multiple POST data
-    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
-    
-    //Send request
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
-    
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-     {
-         if(error!=nil)
-             return; //error
-         
-         NSLog(@"responseData: %@", data);
-         
-         //decode the response data
-         NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-         
-         if(jsonObjects==nil)
-             return;
-         /*
-         NSMutableDictionary *appointment=[jsonObjects objectAtIndex:0];
-         
-         //Show Meeting info
-         dispatch_queue_t mainQueue = dispatch_get_main_queue();
-         dispatch_async(mainQueue, ^(void)
-                        {
-                            //Show the appointment detail window
-                            [self performSegueWithIdentifier:@"SegueToMeetingNotify" sender:appointment];
-                        });
-          */
-         
-     }];
-}
-
-
-
-- (IBAction)OnClickCheckDueAppointment:(UIButton *)sender
-{
-    [self checkDueAppointment:nil]; //forcably check the due meetings
-}
 
 -(void)homeloanRequest:(NSString *)userid
 {

@@ -14,5 +14,6 @@
 
 @property (strong, nonatomic) NSMutableDictionary *appointmentDetail;
 @property (strong, nonatomic) IBOutlet UILabel *labelTitle;
+- (IBAction)OnClockClose:(UIButton *)sender;
 
 @end

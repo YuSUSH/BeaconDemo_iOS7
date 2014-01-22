@@ -28,6 +28,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.navigationItem.hidesBackButton=true; //disable the "back" button
+    
     NSString *staffName=[appointmentDetail valueForKey:@"staff_fullname"];
     NSString *time=[appointmentDetail valueForKey:@"time"];
     NSString *description=[appointmentDetail valueForKey:@"description"];
@@ -44,4 +46,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)OnClockClose:(UIButton *)sender
+{
+    [self.navigationController popViewControllerAnimated:true];
+}
 @end

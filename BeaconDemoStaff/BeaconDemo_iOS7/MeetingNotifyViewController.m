@@ -28,11 +28,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.navigationItem.hidesBackButton=true; //disable the "back" button
+    
     NSString *clientName=[appointmentDetail valueForKey:@"client_fullname"];
     NSString *time=[appointmentDetail valueForKey:@"time"];
     NSString *description=[appointmentDetail valueForKey:@"description"];
     
-    self.labelTitle.text=[NSString  stringWithFormat:@"The appointment with %@ will be due at:",
+    self.labelTitle.text=[NSString  stringWithFormat:@"%@ has arrived, with whom an appointment will be due at:",
                           clientName];
     self.labelTime.text=time;
     self.labelDescription.text=description;
@@ -44,4 +46,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)OnClickClose:(UIButton *)sender
+{
+    [self.navigationController popViewControllerAnimated:true];
+}
 @end

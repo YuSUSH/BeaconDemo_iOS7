@@ -7,6 +7,15 @@
 	<label>
 	
 	<?php
+		//echo $to_time= date('Y-m-d H:i');
+		date_default_timezone_set("Pacific/Auckland");
+		$to_time= time();
+		echo $to_time . ' ' ;
+		$from_time = strtotime("2014-01-20 14:30");
+		$diff=round(abs($to_time - $from_time) / 60,2);
+		echo $diff. " minute";
+		
+
 	    include "lib_functions.php";
 		
 		session_start();
