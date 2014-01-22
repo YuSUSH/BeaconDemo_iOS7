@@ -116,6 +116,13 @@
         if(self.bv!=nil)
             [self.bv ClientHasLeft:userid];
     }
+    
+    
+    if([event isEqualToString:@"homeloan_request"]) //request homeloan
+    {
+        if(self.bv!=nil)
+            [self.bv homeloanRequest:userid];
+    }
 }
 
 

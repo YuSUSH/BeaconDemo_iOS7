@@ -150,6 +150,11 @@
      }];
 }
 
+- (IBAction)OnClickRequestHomeloan:(UIButton *)sender
+{
+    [self requestHomeloan];
+}
+
 
 -(void) NewClientArrive
 {
@@ -517,5 +522,56 @@
 {
     //Make new appointment
     [self performSegueWithIdentifier:@"SegueNewAppointment" sender:self];
+}
+
+
+-(void) requestHomeloan
+{
+    NSURL *requestURL=[NSURL URLWithString:REQUEST_HOMELOAN_URL];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
+    
+    //Set Post Data
+    GET_APPDELEGATE
+    const char *bytes = [[NSString stringWithFormat:@"client=%@", appDelegate.CurrentUserID] UTF8String];
+    //For multiple POST data
+    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
+    
+    //Send request
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+         if(error!=nil)
+             return; //error
+         
+         NSLog(@"responseData: %@", data);
+         
+         //decode the response data
+         NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+         
+         NSMutableDictionary *dataDict=[jsonObjects objectAtIndex:0];
+         NSString *result = [dataDict objectForKey:@"result"];
+         
+         
+         if([result isEqualToString:@"OK"]) //if being asked to create new appointment
+         {
+             //Show shop info and make appointment button
+             dispatch_queue_t mainQueue = dispatch_get_main_queue();
+             dispatch_async(mainQueue, ^(void)
+            {
+                UIAlertView *helloWorldAlert = [[UIAlertView alloc]
+                                                initWithTitle:@"Complete" message:@"Request has been sent. We will serve you soon." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                // Display the Hello WorldMessage
+                [helloWorldAlert show];
+                
+                //[self performSegueWithIdentifier:@"SegueNewAppointment" sender:self];
+            });
+         }
+     }];
+
 }
 @end

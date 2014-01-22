@@ -533,7 +533,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     
@@ -550,6 +550,12 @@ static NSString * const kCellIdentifier = @"BeaconCell";
         titilestr=[NSString stringWithFormat:@"%@ %@",
                    [person valueForKey:@"givename"],
                    [person valueForKey:@"surname"]];
+        
+        if([person valueForKey:@"homeloan_request"] !=nil)
+        {
+            if([[person valueForKey:@"homeloan_request"] isEqualToString:@"TRUE"])
+                cell.detailTextLabel.text=@"Home Loan Requested";
+        }
     }
     else
         titilestr=@"";
@@ -629,4 +635,23 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 {
     [self checkDueAppointment:nil]; //forcably check the due meetings
 }
+
+-(void)homeloanRequest:(NSString *)userid
+{
+    if(enteringClients==nil || enteringClients.count==0)
+        return; //do nothing
+    
+    int i;
+    for(i=0;i<enteringClients.count;i++)
+    {
+        NSMutableDictionary *client= [enteringClients objectAtIndex:i];
+        if( [userid isEqualToString:[client valueForKey:@"userid"]])
+        {
+            [client setObject:@"TRUE" forKey:@"homeloan_request"]; //set the value for homeload request
+            [self.enteringClientTableView reloadData]; //refresh display
+            break;
+        }
+    }
+}
+
 @end

@@ -22,6 +22,7 @@
 #define ADD_APPOINTMENT @"http://ble.sandbox.net.nz/myforum/add_appointment.php"
 #define UPDATE_CLIENT_TOKEN_URL @"http://ble.sandbox.net.nz/myforum/update_clients_token.php"
 #define QUERY_APPOINTMENT_DETAIL_URL @"http://ble.sandbox.net.nz/myforum/query_appointment_detail.php"
+#define REQUEST_HOMELOAN_URL @"http://ble.sandbox.net.nz/myforum/request_homeloan.php"
 
 
 #define GET_APPDELEGATE BeaconDemoAppDelegate *appDelegate	=	(BeaconDemoAppDelegate*)[[UIApplication sharedApplication] delegate];
