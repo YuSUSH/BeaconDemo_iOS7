@@ -20,6 +20,7 @@
 #define QUERY_LOGIN_URL @"http://ble.sandbox.net.nz/myforum/query_login.php"
 #define MEETING_DUE_NOTIFY_URL @"http://ble.sandbox.net.nz/myforum/notify_meeting.php"
 #define QUERY_ALL_APPOINTMENTS @"http://ble.sandbox.net.nz/myforum/query_all_appointments.php"
+#define QUERY_CLIENTS_APPOINTMENT_URL @"http://ble.sandbox.net.nz/myforum/query_clients_appointments.php"
 
 #define GET_APPDELEGATE BeaconDemoAppDelegate *appDelegate	=	(BeaconDemoAppDelegate*)[[UIApplication sharedApplication] delegate];
 

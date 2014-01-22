@@ -106,7 +106,10 @@
     if([event isEqualToString:@"in"]) //client came in event
     {
         if(self.bv!=nil)
+        {
             [self.bv QueryPersonalInfoAndShow:userid];
+            [self.bv checkDueAppointment:userid]; //check if there's any due meeting for this client
+        }
         
         return;
     }

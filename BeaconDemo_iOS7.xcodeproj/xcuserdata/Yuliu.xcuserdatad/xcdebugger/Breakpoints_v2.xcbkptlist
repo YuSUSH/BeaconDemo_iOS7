@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeaconDemo_iOS7/BeaconDemoViewController.m"
-            timestampString = "412048776.553286"
+            timestampString = "412059290.151533"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "-checkDueAppointment:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,57 +42,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BeaconDemo_iOS7/BeaconDemoViewController.m"
-            timestampString = "412048795.142841"
+            timestampString = "412059355.35841"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "-checkDueAppointment:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__48-[BeaconDemoViewController checkDueAppointment:]_block_invoke"
-                  moduleName = "BeaconDemo"
-                  urlString = "file://localhost/Users/Yuliu/Documents/MyProjects/BeaconDemo_iOS7/BeaconDemo_iOS7/BeaconDemoViewController.m"
-                  timestampString = "412054800.193664"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "96"
-                  endingLineNumber = "96"
-                  offsetFromSymbolStart = "348">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__48-[BeaconDemoViewController checkDueAppointment:]_block_invoke"
-                  moduleName = "BeaconDemo"
-                  urlString = "file://localhost/Users/Yuliu/Documents/MyProjects/BeaconDemo_iOS7/BeaconDemo_iOS7/BeaconDemoViewController.m"
-                  timestampString = "412054800.194074"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "96"
-                  endingLineNumber = "96"
-                  offsetFromSymbolStart = "984">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__48-[BeaconDemoViewController checkDueAppointment:]_block_invoke"
-                  moduleName = "BeaconDemo"
-                  urlString = "file://localhost/Users/Yuliu/Documents/MyProjects/BeaconDemo_iOS7/BeaconDemo_iOS7/BeaconDemoViewController.m"
-                  timestampString = "412054800.194477"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "96"
-                  endingLineNumber = "96"
-                  offsetFromSymbolStart = "1034">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

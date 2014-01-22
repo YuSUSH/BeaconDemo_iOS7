@@ -55,24 +55,29 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     self.enteringClientTableView.dataSource=self;
     [self.enteringClientTableView reloadData];
     
-    
+    /*
 #define CHECH_PERIOD 10 * 60 //every 10 minutes
     //[self MeetingDueNotify];
     meetingDueTimer = [NSTimer scheduledTimerWithTimeInterval:CHECH_PERIOD
                                                       target:self selector:@selector(checkDueAppointment:)
                                                     userInfo:nil repeats:YES];
+     */
 }
 
--(void) checkDueAppointment:(NSTimer *)timer
+-(void) checkDueAppointment:(NSString *)client_id
 {
     //get the all existing
-    NSURL *requestURL=[NSURL URLWithString:QUERY_ALL_APPOINTMENTS];
+    NSURL *requestURL=[NSURL URLWithString:QUERY_CLIENTS_APPOINTMENT_URL];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
     
+    const char *bytes = [[NSString stringWithFormat:@"userid=%@", client_id] UTF8String];
+    //For multiple POST data
+    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
     
     //Send request
     [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     
