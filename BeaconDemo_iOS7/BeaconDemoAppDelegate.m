@@ -99,7 +99,7 @@
 	NSLog(@"Received notification: %@", userInfo);
     
     //Get the personID from notification
-    NSString *userid=[[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+    NSString *userid=[[userInfo valueForKey:@"aps"] valueForKey:@"id"];
     NSString *event=[[userInfo valueForKey:@"aps"] valueForKey:@"event"];
     
     // Query the personal info with the ID got from notification

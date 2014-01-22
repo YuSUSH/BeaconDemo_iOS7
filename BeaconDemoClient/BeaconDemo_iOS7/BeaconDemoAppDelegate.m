@@ -72,7 +72,7 @@
 	NSLog(@"Received notification: %@", userInfo);
     
     //Get the personID from notification
-    NSString *appointmentid=[[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+    NSString *appointmentid=[[userInfo valueForKey:@"aps"] valueForKey:@"id"];
     NSString *event=[[userInfo valueForKey:@"aps"] valueForKey:@"event"];
     
     if([event isEqualToString:@"meeting_due"])

@@ -28,6 +28,15 @@
 
 #define GET_APPDELEGATE BeaconDemoAppDelegate *appDelegate	=	(BeaconDemoAppDelegate*)[[UIApplication sharedApplication] delegate];
 
+
+
+#define SHOW_ALERT_WINDOW(titile, content) \
+UIAlertView *helloWorldAlert = [[UIAlertView alloc] \
+                                initWithTitle: titile message: content delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]; \
+[helloWorldAlert show]; \
+
+
+
 @interface BeaconDemoAppDelegate : UIResponder <UIApplicationDelegate, CBCentralManagerDelegate,CBPeripheralDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

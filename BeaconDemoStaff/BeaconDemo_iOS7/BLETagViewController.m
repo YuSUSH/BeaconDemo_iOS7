@@ -634,4 +634,53 @@ NSMutableData *receivedData;
      }];
 }
 
+-(void) gotHomeLoanRequestNotification:(NSString*)client_id
+{
+    //get the detailed info about the meeting
+    NSURL *requestURL=[NSURL URLWithString:QUERY_DB_SERVIER_URL];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
+    
+    //Set Post Data
+    const char *bytes = [[NSString stringWithFormat:@"userid=%@", client_id] UTF8String];
+    //For multiple POST data
+    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
+    
+    //Send request
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+         if(error!=nil)
+             return; //error
+         
+         NSLog(@"responseData: %@", data);
+         
+         //decode the response data
+         NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+         
+         if(jsonObjects==nil)
+             return;
+         
+         NSMutableDictionary *client=[jsonObjects objectAtIndex:0];
+         
+         //Show Meeting info
+         dispatch_queue_t mainQueue = dispatch_get_main_queue();
+         dispatch_async(mainQueue, ^(void)
+            {
+                NSString *showstr;
+                showstr=[NSString stringWithFormat:@"%@ %@ has requested the home loan.",
+                        [client valueForKey:@"givename"],
+                         [client valueForKey:@"surname"]];
+                
+                SHOW_ALERT_WINDOW(@"Request", showstr)
+            });
+         
+     }];
+
+}
+
 @end

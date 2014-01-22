@@ -1,12 +1,9 @@
 <?php
 
-function SendPushNotification($token, $pem_file,  $sent_id, $event)
+function SendPushNotification($message, $token, $pem_file,  $sent_id, $event)
 {
 	// Put your private key's passphrase here:
 	$passphrase = 'sush1234';
-
-	// Put your alert message here:
-	$message = 'Hajimemashite!';
 
 	////////////////////////////////////////////////////////////////////////////////
 
@@ -26,8 +23,8 @@ function SendPushNotification($token, $pem_file,  $sent_id, $event)
 
 	// Create the payload body
 	$body['aps'] = array(
-		'alert' => $sent_id,
-		'sound' => 'default',
+		'alert' => $message,
+		'id' => $sent_id,
 		'event' => $event
 		);
 
@@ -64,21 +61,21 @@ if(strcmp($device_type, "ipad")==0) //send to the iPad
 	$iPadToken = file_get_contents($file);
 	$UserID= $_POST['userid'];
 
-	SendPushNotification($iPadToken, 'ck.pem', $UserID, $device_event);
+	SendPushNotification("Notification to iPad", $iPadToken, 'ck.pem', $UserID, $device_event);
 }
 
 if(strcmp($device_type, "staff")==0)
 {
 	$UserID= $_POST['userid'];
 	$stafftoken=$_POST['token'];
-	SendPushNotification($stafftoken, 'ck_staff.pem', $UserID, $device_event);
+	SendPushNotification("Notification to Staff", $stafftoken, 'ck_staff.pem', $UserID, $device_event);
 }
 
 if(strcmp($device_type, "client")==0)
 {
 	$UserID= $_POST['userid'];
 	$clienttoken=$_POST['token'];
-	SendPushNotification($clienttoken, 'ck_client.pem', $UserID, $device_event);
+	SendPushNotification("Notification to Client", $clienttoken, 'ck_client.pem', $UserID, $device_event);
 }
 
 

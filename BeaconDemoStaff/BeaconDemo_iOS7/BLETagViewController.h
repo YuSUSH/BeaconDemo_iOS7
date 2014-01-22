@@ -52,5 +52,6 @@ static NSString * const iOSUUID = @"00000000-0000-0000-0000-000000000000";
 
 -(void)showNewAppointment:(NSString *)appointment_id;
 -(void) ShowMeetingDueInfo:(NSString *)appointment_id;
+-(void) gotHomeLoanRequestNotification:(NSString*)client_id;
 
 @end
