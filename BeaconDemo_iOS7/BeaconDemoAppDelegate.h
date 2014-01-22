@@ -18,6 +18,8 @@
 #define IPAD_TOKEN_UPDATE_URL @"http://experiment.sandbox.net.nz/beacon/update_ipad_token.php"
 #define QUERY_DB_SERVIER_URL @"http://ble.sandbox.net.nz/myforum/query_personalinfo.php"
 #define QUERY_LOGIN_URL @"http://ble.sandbox.net.nz/myforum/query_login.php"
+#define MEETING_DUE_NOTIFY_URL @"http://ble.sandbox.net.nz/myforum/notify_meeting.php"
+#define QUERY_ALL_APPOINTMENTS @"http://ble.sandbox.net.nz/myforum/query_all_appointments.php"
 
 #define GET_APPDELEGATE BeaconDemoAppDelegate *appDelegate	=	(BeaconDemoAppDelegate*)[[UIApplication sharedApplication] delegate];
 

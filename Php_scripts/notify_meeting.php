@@ -7,6 +7,7 @@
 		$querystr="SELECT token from staff_info WHERE userid='" . $staff_id . "'";
 		
 		$staff_token='';
+		
 		//echo $querystr;
 		$result=ExecuteQuery($querystr);
 		if(!$result)
@@ -24,11 +25,13 @@
 				$staff_token=mysql_result($result, 0,'token');
 				
 				//Send notification to the specified staff
+				
 				$url = 'http://experiment.sandbox.net.nz/beacon/simplepush.php';
 				$fields = array(
 							'device_type'=>urlencode("staff"),
 				            'userid'=>urlencode($appointment_id),
 				    		'token'=>urlencode($staff_token),
+				    		'event'=>urlencode("meeting_due")
 				        );
 
 				//url-ify the data for the POST
@@ -109,8 +112,8 @@
 		if(!connect_to_database()) //connect to SQL database
 			return;
 		
-		//SendAppointmentNotificationToStaff($id, $staff);
 		SendAppointmentNotificationToClient($appointment, $client);
+		SendAppointmentNotificationToStaff($appointment, $staff);
 			
 		
 		close_database();

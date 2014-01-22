@@ -38,4 +38,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelFullname;
 @property (strong, nonatomic) IBOutlet UIImageView *imgPhoto;
 
+@property (strong, nonatomic) NSTimer *meetingDueTimer;
+
 @end
