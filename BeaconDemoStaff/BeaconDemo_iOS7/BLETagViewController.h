@@ -51,5 +51,6 @@ static NSString * const iOSUUID = @"00000000-0000-0000-0000-000000000000";
 - (IBAction)OnClickLogout:(UIButton *)sender;
 
 -(void)showNewAppointment:(NSString *)appointment_id;
+-(void) ShowMeetingDueInfo:(NSString *)appointment_id;
 
 @end

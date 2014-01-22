@@ -625,4 +625,8 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 
 
 
+- (IBAction)OnClickCheckDueAppointment:(UIButton *)sender
+{
+    [self checkDueAppointment:nil]; //forcably check the due meetings
+}
 @end

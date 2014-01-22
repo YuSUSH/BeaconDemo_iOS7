@@ -39,5 +39,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imgPhoto;
 
 @property (strong, nonatomic) NSTimer *meetingDueTimer;
+- (IBAction)OnClickCheckDueAppointment:(UIButton *)sender;
 
 @end

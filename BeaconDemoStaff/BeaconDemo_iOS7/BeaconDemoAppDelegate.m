@@ -72,9 +72,20 @@
     
     //Get the personID from notification
     NSString *appointment_id=[[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
-    // Query the personal info with the ID got from notification
-    if(self.tv!=nil)
-        [self.tv showNewAppointment:appointment_id];
+    NSString *event=[[userInfo valueForKey:@"aps"] valueForKey:@"event"];
+    
+    if([event isEqualToString:@"new_appointment"])
+    {
+        // Query the personal info with the ID got from notification
+        if(self.tv!=nil)
+            [self.tv showNewAppointment:appointment_id];
+    }
+    
+    if([event isEqualToString:@"meeting_due"])
+    {
+        if(self.tv!=nil)
+            [self.tv ShowMeetingDueInfo:appointment_id];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

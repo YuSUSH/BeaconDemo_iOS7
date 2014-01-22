@@ -29,6 +29,7 @@
 							'device_type'=>urlencode("staff"),
 				            'userid'=>urlencode($appointment_id),
 				    		'token'=>urlencode($staff_token),
+				    		'event'=>urlencode("new_appointment")
 				        );
 
 				//url-ify the data for the POST

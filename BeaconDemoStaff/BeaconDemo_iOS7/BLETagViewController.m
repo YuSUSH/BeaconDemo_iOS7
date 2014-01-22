@@ -10,6 +10,7 @@
 #import <UIKit/UIDevice.h>
 #import "BeaconDemoAppDelegate.h"
 #import "AppointmentDetailViewController.h"
+#import "MeetingNotifyViewController.h"
 
 @interface BLETagViewController ()
 
@@ -210,6 +211,12 @@ NSMutableData *receivedData;
     {
         AppointmentDetailViewController *myVC = [segue destinationViewController];
         myVC.appointmentInfo = sender;// set your properties here
+    }
+    
+    if([segue.identifier isEqualToString:@"SegueToMeetingNotify"])
+    {
+        MeetingNotifyViewController *vc= segue.destinationViewController;
+        vc.appointmentDetail=sender;
     }
 }
 
@@ -531,12 +538,12 @@ NSMutableData *receivedData;
 
 -(void)showNewAppointment:(NSString *)appointment_id
 {
-    NSURL *requestURL=[NSURL URLWithString:QUERY_APPOINTMENTS_INFO_URL];
+    NSURL *requestURL=[NSURL URLWithString:QUERY_APPOINTMENT_DETAIL_URL];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
     
     //Set Post Data
-    const char *bytes = [[NSString stringWithFormat:@"id=%@", appointment_id] UTF8String];
+    const char *bytes = [[NSString stringWithFormat:@"appointment_id=%@", appointment_id] UTF8String];
     //For multiple POST data
     //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
     
@@ -565,8 +572,8 @@ NSMutableData *receivedData;
              dispatch_async(dispatch_get_main_queue(), ^{
                  NSString *meeting_str;
                  meeting_str=[NSString stringWithFormat:@"%@ and %@ at %@ about %@.",
-                               [meeting valueForKey:@"client"],
-                               [meeting valueForKey:@"staff"],
+                               [meeting valueForKey:@"client_fullname"],
+                               [meeting valueForKey:@"staff_fullname"],
                                [meeting valueForKey:@"time"],
                                [meeting valueForKey:@"description"]];
                  
@@ -579,6 +586,52 @@ NSMutableData *receivedData;
          }
      }];
 
+}
+
+
+
+-(void) ShowMeetingDueInfo:(NSString *)appointment_id
+{
+    //get the detailed info about the meeting
+    NSURL *requestURL=[NSURL URLWithString:QUERY_APPOINTMENT_DETAIL_URL];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
+    
+    //Set Post Data
+    const char *bytes = [[NSString stringWithFormat:@"appointment_id=%@", appointment_id] UTF8String];
+    //For multiple POST data
+    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
+    
+    //Send request
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+         if(error!=nil)
+             return; //error
+         
+         NSLog(@"responseData: %@", data);
+         
+         //decode the response data
+         NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+         
+         if(jsonObjects==nil)
+             return;
+         
+         NSMutableDictionary *appointment=[jsonObjects objectAtIndex:0];
+         
+         //Show Meeting info
+         dispatch_queue_t mainQueue = dispatch_get_main_queue();
+         dispatch_async(mainQueue, ^(void)
+                        {
+                            //Show the appointment detail window
+                            [self performSegueWithIdentifier:@"SegueToMeetingNotify" sender:appointment];
+                        });
+         
+     }];
 }
 
 @end
