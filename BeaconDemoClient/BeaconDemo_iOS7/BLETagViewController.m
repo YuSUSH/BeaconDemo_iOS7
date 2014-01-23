@@ -29,6 +29,7 @@
 
 - (void)viewDidLoad
 {
+    self.busyIndicator.hidden=true;
     
     //First of all update the client token for this iphone device
     GET_APPDELEGATE
@@ -527,6 +528,7 @@
 
 -(void) requestHomeloan
 {
+    BUSY_INDICATOR_START(self.busyIndicator)
     NSURL *requestURL=[NSURL URLWithString:REQUEST_HOMELOAN_URL];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
@@ -545,6 +547,8 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
+         BUSY_INDICATOR_STOP(self.busyIndicator)
+         
          if(error!=nil)
              return; //error
          

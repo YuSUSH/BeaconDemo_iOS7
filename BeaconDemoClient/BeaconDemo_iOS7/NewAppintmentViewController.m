@@ -47,6 +47,8 @@
     self.staffPicker=[[iphonePicker alloc] init];
     [self.staffPicker Init:self.textStaffChoice Delegate:self DoneButtonTarget:self DoneButtonAction:(@selector(DoneStaffSelection:))];
     
+    [self.textStaffChoice setDelegate:self];
+    
 }
 
 -(void)DoneDateSelection:(id)sender
@@ -98,7 +100,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
 
-        
+    BUSY_INDICATOR_START(self.busyIndicator)
+    
     NSURL *requestURL=[NSURL URLWithString:GET_ALL_STAFF_INFO_URL];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
@@ -114,6 +117,9 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
+    
+         BUSY_INDICATOR_STOP(self.busyIndicator)
+         
          if(error!=nil)
              return; //error
          
@@ -137,7 +143,6 @@
 {
     if([pickerView isEqual:staffPicker.m_Picker]) //security level picker
     {
-        
         NSString *surname, *givename, *fullname;
         surname=[[allStaffs objectAtIndex:row] valueForKey:@"surname"];
         givename=[[allStaffs objectAtIndex:row] valueForKey:@"givename"];

@@ -99,11 +99,16 @@
                                     <action selector="OnClickCancel:" destination="l1e-c8-wxZ" eventType="touchUpInside" id="I0m-XI-PhD"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="G7s-vE-Lic">
+                                <rect key="frame" x="150" y="373" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="o1u-Ft-pGC"/>
                     <connections>
+                        <outlet property="busyIndicator" destination="G7s-vE-Lic" id="ApU-o2-7gD"/>
                         <outlet property="textDateChoice" destination="9EC-2o-XRd" id="H28-v6-TFq"/>
                         <outlet property="textDescription" destination="blc-Th-egt" id="p3e-vS-SIW"/>
                         <outlet property="textStaffChoice" destination="dLs-sW-L7Y" id="joT-Wf-zfN"/>
@@ -166,11 +171,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="zrt-6F-hIr">
+                                <rect key="frame" x="134" y="359" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="iDL-g1-uFg"/>
                     <connections>
+                        <outlet property="busyIndicator" destination="zrt-6F-hIr" id="ZuI-Z4-pba"/>
                         <outlet property="labelPassword" destination="Mx7-eM-kmf" id="hEe-C3-Xmo"/>
                         <outlet property="labelUserID" destination="ssa-cP-ImJ" id="zYI-Q4-s6s"/>
                         <outlet property="passwordText" destination="Maf-39-TBH" id="3gu-6d-rJX"/>
@@ -246,6 +256,10 @@
                                     <action selector="OnClickRequestHomeloan:" destination="GFV-OE-UJp" eventType="touchUpInside" id="0kd-1j-54k"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="WWP-Z8-XNJ">
+                                <rect key="frame" x="131" y="314" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -255,6 +269,7 @@
                         <outlet property="LabelDeviceInfo" destination="HxT-AA-aUO" id="dDX-Kt-NsR"/>
                         <outlet property="btnMakeAppointment" destination="fRk-Da-FuJ" id="slK-jJ-RNJ"/>
                         <outlet property="btnRequestHomeLoan" destination="xyT-yF-yoX" id="w5h-uc-unm"/>
+                        <outlet property="busyIndicator" destination="WWP-Z8-XNJ" id="bxr-on-Tp6"/>
                         <outlet property="labelShopInfo" destination="vii-bb-ZaW" id="Cb3-RP-efN"/>
                         <segue destination="l1e-c8-wxZ" kind="push" identifier="SegueNewAppointment" id="zJJ-b1-Wfb"/>
                         <segue destination="8aR-sA-VM3" kind="push" identifier="SegueToMeetingNotify" id="NAB-vY-xht"/>

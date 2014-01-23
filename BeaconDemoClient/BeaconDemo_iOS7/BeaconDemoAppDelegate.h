@@ -27,6 +27,22 @@
 
 #define GET_APPDELEGATE BeaconDemoAppDelegate *appDelegate	=	(BeaconDemoAppDelegate*)[[UIApplication sharedApplication] delegate];
 
+
+#define BUSY_INDICATOR_START( indicator ) \
+indicator.hidden=false; \
+[ indicator startAnimating]; \
+[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+
+#define BUSY_INDICATOR_STOP( indicator ) \
+dispatch_queue_t mainQueue = dispatch_get_main_queue(); \
+dispatch_async(mainQueue, ^(void) \
+{ \
+        [ indicator stopAnimating]; \
+        indicator.hidden=true; \
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents]; \
+});
+
+
 @interface BeaconDemoAppDelegate : UIResponder <UIApplicationDelegate, CBCentralManagerDelegate,CBPeripheralDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

@@ -93,7 +93,7 @@ DoneButtonTarget:(id)target DoneButtonAction:(SEL)handler
 
 @synthesize m_Picker;
 
--(void) Init:(UITextField*)textfield Delegate:(id<UIPickerViewDelegate>)PickerDelegate DoneButtonTarget:(id)target DoneButtonAction:(SEL)handler
+-(void) Init:(UITextField*)textfield Delegate:(id<UIPickerViewDelegate, UIPickerViewDataSource>)PickerDelegate DoneButtonTarget:(id)target DoneButtonAction:(SEL)handler
 {
     
     self.textField=textfield;

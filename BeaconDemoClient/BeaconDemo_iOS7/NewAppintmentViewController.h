@@ -10,10 +10,11 @@
 #import "PopoverPicker.h"
 #import "PopoverDatePicker.h"
 
-@interface NewAppintmentViewController : AudioViewController <UIPickerViewDelegate>
+@interface NewAppintmentViewController : AudioViewController <UIPickerViewDelegate, UITextFieldDelegate, UIPickerViewDataSource>
 
 @property (retain, nonatomic) iphonePicker *staffPicker;
 @property (strong, nonatomic) NSString *selectedDateStr;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *busyIndicator;
 
 @property (strong, nonatomic) NSMutableArray *allStaffs;
 @property (strong, nonatomic) IBOutlet UITextField *textDateChoice;
