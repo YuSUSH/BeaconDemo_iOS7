@@ -53,6 +53,7 @@ function SendPushNotification($message, $token, $pem_file,  $sent_id, $event)
 //Read out the Device Token string saved in the file
 $device_type= $_POST['device_type']; //the type of target device the notification is to be sent to
 $device_event= $_POST['event'];
+$alert_msg=$_POST['alert_msg'];
 	
 if(strcmp($device_type, "ipad")==0) //send to the iPad
 {
@@ -61,21 +62,21 @@ if(strcmp($device_type, "ipad")==0) //send to the iPad
 	$iPadToken = file_get_contents($file);
 	$UserID= $_POST['userid'];
 
-	SendPushNotification("Notification to iPad", $iPadToken, 'ck.pem', $UserID, $device_event);
+	SendPushNotification($alert_msg, $iPadToken, 'ck.pem', $UserID, $device_event);
 }
 
 if(strcmp($device_type, "staff")==0)
 {
 	$UserID= $_POST['userid'];
 	$stafftoken=$_POST['token'];
-	SendPushNotification("Notification to Staff", $stafftoken, 'ck_staff.pem', $UserID, $device_event);
+	SendPushNotification($alert_msg, $stafftoken, 'ck_staff.pem', $UserID, $device_event);
 }
 
 if(strcmp($device_type, "client")==0)
 {
 	$UserID= $_POST['userid'];
 	$clienttoken=$_POST['token'];
-	SendPushNotification("Notification to Client", $clienttoken, 'ck_client.pem', $UserID, $device_event);
+	SendPushNotification($alert_msg, $clienttoken, 'ck_client.pem', $UserID, $device_event);
 }
 
 

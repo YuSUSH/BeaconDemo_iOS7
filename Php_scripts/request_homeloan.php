@@ -9,7 +9,8 @@
 		$fields = array(
 					'device_type'=>urlencode("ipad"),
 		            'userid'=>urlencode($client_id),
-		    		'event'=>urlencode("homeloan_request")
+		    		'event'=>urlencode("homeloan_request"),
+		    		'alert_msg'=>urlencode("A client has requested the home loan.")
 		        );
 
 		//url-ify the data for the POST
@@ -52,7 +53,8 @@
 					'device_type'=>urlencode("staff"),
 		            'userid'=>urlencode($client_id),
 		    		'token'=>urlencode($staff_token),
-		    		'event'=>urlencode("homeloan_request")
+		    		'event'=>urlencode("homeloan_request"),
+		    		'alert_msg'=>urlencode("A client has requested the home loan.")
 		        );
 
 		//url-ify the data for the POST

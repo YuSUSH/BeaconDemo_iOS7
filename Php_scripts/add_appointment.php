@@ -29,7 +29,8 @@
 							'device_type'=>urlencode("staff"),
 				            'userid'=>urlencode($appointment_id),
 				    		'token'=>urlencode($staff_token),
-				    		'event'=>urlencode("new_appointment")
+				    		'event'=>urlencode("new_appointment"),
+				    		'alert_msg' =>urlencode("A new appointment has been made by the client.")
 				        );
 
 				//url-ify the data for the POST

@@ -64,7 +64,8 @@ function AddClientInShop($userid)
 							'device_type'=>urlencode("staff"),
 				            'userid'=>urlencode($appointment_id),
 				    		'token'=>urlencode($staff_token),
-				    		'event'=>urlencode("meeting_due")
+				    		'event'=>urlencode("meeting_due"),
+				    		'alert_msg'=>urlencode("An appointment will be due soon.")
 				        );
 
 				//url-ify the data for the POST
@@ -115,7 +116,8 @@ function AddClientInShop($userid)
 							'device_type'=>urlencode("client"),
 				            'userid'=>urlencode($appointment_id),
 				    		'token'=>urlencode($client_token),
-				    		'event'=>urlencode("meeting_due")
+				    		'event'=>urlencode("meeting_due"),
+				    		'alert_msg'=>urlencode("An appointment will be due soon.")
 				        );
 
 				//url-ify the data for the POST
@@ -183,6 +185,7 @@ $fields = array(
 			'device_type'=>urlencode("ipad"),
             'userid'=>urlencode($userid),
     		'event'=>urlencode("in"),
+    		'alert_msg'=>urlencode("A client has come into the shop.")
         );
 
 //url-ify the data for the POST

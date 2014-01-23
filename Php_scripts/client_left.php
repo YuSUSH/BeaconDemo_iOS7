@@ -48,6 +48,7 @@ $fields = array(
 			'device_type'=>urlencode("ipad"),
             'userid'=>urlencode($userid),
     		'event'=>urlencode("out"),
+    		'alert_msg'=>urlencode("A client has left the shop.")
         );
 
 //url-ify the data for the POST
