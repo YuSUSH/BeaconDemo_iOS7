@@ -75,11 +75,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="TeL-LG-dOB">
+                                <rect key="frame" x="140" y="363" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="iDL-g1-uFg"/>
                     <connections>
+                        <outlet property="busyIndicator" destination="TeL-LG-dOB" id="KFm-Ej-Rq1"/>
                         <outlet property="labelPassword" destination="Mx7-eM-kmf" id="SjA-BD-Gs0"/>
                         <outlet property="labelUserID" destination="ssa-cP-ImJ" id="ylA-Hy-5pK"/>
                         <outlet property="passwordText" destination="Maf-39-TBH" id="3gu-6d-rJX"/>
@@ -126,6 +131,10 @@
                                     <action selector="OnClickLogout:" destination="GFV-OE-UJp" eventType="touchUpInside" id="e67-hM-8KG"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="d2d-bl-R9d">
+                                <rect key="frame" x="150" y="274" width="301" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -133,6 +142,7 @@
                     <connections>
                         <outlet property="LabelDeviceInfo" destination="HxT-AA-aUO" id="dDX-Kt-NsR"/>
                         <outlet property="appointmentTableView" destination="khk-aY-66O" id="AeV-LJ-MK9"/>
+                        <outlet property="busyIndicator" destination="d2d-bl-R9d" id="Qed-Pi-RZg"/>
                         <segue destination="qgz-Bb-h46" kind="push" identifier="SegueToAppointmentDetail" id="a4s-b0-AFC"/>
                         <segue destination="iOn-6P-SxW" kind="push" identifier="SegueToMeetingNotify" id="qpl-4g-Ha3"/>
                     </connections>

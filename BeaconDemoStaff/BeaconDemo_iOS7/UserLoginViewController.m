@@ -146,6 +146,8 @@ bool Auto_login;
 -(void) ValidateLoginAccount:(NSString*)userid AndPassword:(NSString *)password
 {
     
+    BUSY_INDICATOR_START(self.busyIndicator)
+    
     NSURL *requestURL=[NSURL URLWithString:QUERY_STAFF_LOGIN_URL];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
@@ -163,6 +165,8 @@ bool Auto_login;
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
+         BUSY_INDICATOR_STOP(self.busyIndicator)
+         
          if(error!=nil)
          {
              [self SetNormalState]; //recover to normal appearance

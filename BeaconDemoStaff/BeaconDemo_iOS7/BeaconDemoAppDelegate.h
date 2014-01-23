@@ -33,7 +33,23 @@
 #define SHOW_ALERT_WINDOW(titile, content) \
 UIAlertView *helloWorldAlert = [[UIAlertView alloc] \
                                 initWithTitle: titile message: content delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]; \
-[helloWorldAlert show]; \
+[helloWorldAlert show];
+
+
+
+#define BUSY_INDICATOR_START( indicator ) \
+indicator.hidden=false; \
+[ indicator startAnimating]; \
+[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+
+#define BUSY_INDICATOR_STOP( indicator ) \
+dispatch_queue_t mainQueue = dispatch_get_main_queue(); \
+dispatch_async(mainQueue, ^(void) \
+{ \
+[ indicator stopAnimating]; \
+indicator.hidden=true; \
+[[UIApplication sharedApplication] endIgnoringInteractionEvents]; \
+});
 
 
 

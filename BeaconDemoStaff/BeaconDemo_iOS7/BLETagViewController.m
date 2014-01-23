@@ -109,93 +109,6 @@
     return [[UIDevice currentDevice] identifierForVendor].UUIDString;
 }
 
-NSMutableData *receivedData;
--(void) NotifyPushNotificationServer
-{
-    NSString* deviceID= [self getCurrentDeviceID];
-    NSLog(@"////////This device ID=%@", deviceID);
-    
-    receivedData=[[NSMutableData alloc] init];
-    NSString *requestURL=[NSString stringWithFormat:@"http://experiment.sandbox.net.nz/beacon/simplepush.php?deviceid=%@", deviceID];
-    NSURLRequest *theRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:requestURL]];
-    
-    NSURLConnection *theConnection = [[NSURLConnection alloc] initWithRequest:theRequest  delegate:self];
-    
-}
-
--(void) NewClientArrive
-{
-    
-    NSURL *requestURL=[NSURL URLWithString:CLIENT_ARRIVE_URL];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
-    
-    //Set Post Data
-    GET_APPDELEGATE
-    const char *bytes = [[NSString stringWithFormat:@"userid=%@", appDelegate.CurrentStaffID] UTF8String];
-    //For multiple POST data
-    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
-    
-    //Send request
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
-    
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-    {
-        if(error!=nil)
-            return; //error
-        
-        NSLog(@"responseData: %@", data);
-        
-        //decode the response data
-        NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        
-        NSMutableDictionary *dataDict=[jsonObjects objectAtIndex:0];
-        NSString *result = [dataDict objectForKey:@"result"];
-        
-        if([result isEqualToString:@"add_new"]) //if being asked to create new appointment
-        {
-            //try to add new appointment
-            dispatch_queue_t mainQueue = dispatch_get_main_queue();
-            dispatch_async(mainQueue, ^(void)
-            {
-                [self performSegueWithIdentifier:@"SegueNewAppointment" sender:self];
-            });
-        }
-    }];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [receivedData appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    
-    if (receivedData) {
-        
-        NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:receivedData options:NSJSONReadingMutableContainers error:nil];
-        
-        int i;
-        for (i=0; i<[jsonObjects count];i++)
-        {
-            NSMutableDictionary *dataDict=[jsonObjects objectAtIndex:i];
-            NSString *ID = [dataDict objectForKey:@"ID"];
-            NSString *Name = [dataDict objectForKey:@"Name"];
-            NSString *Type = [dataDict objectForKey:@"Type"];
-            NSLog(@"//////////////// ID=%@", ID);
-            NSLog(@"//////////////// Name=%@", Name);
-            NSLog(@"//////////////// Type=%@", Type);
-            
-        }
-        
-    }
-    
-    
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -491,7 +404,9 @@ NSMutableData *receivedData;
 
 -(void) FetchAllofMyAppointments:(NSString *)staffid
 {
-        
+    
+    BUSY_INDICATOR_START(self.busyIndicator)
+    
     NSURL *requestURL=[NSURL URLWithString:QUERY_STAFFS_APPOINTMENTS_URL];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
@@ -509,6 +424,8 @@ NSMutableData *receivedData;
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
+         BUSY_INDICATOR_STOP(self.busyIndicator)
+         
          if(error!=nil)
              return; //error
          

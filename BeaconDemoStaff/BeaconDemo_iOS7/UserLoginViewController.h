@@ -15,5 +15,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *titileLabel;
 @property (strong, nonatomic) IBOutlet UILabel *labelUserID;
 @property (strong, nonatomic) IBOutlet UILabel *labelPassword;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *busyIndicator;
 
 @end
