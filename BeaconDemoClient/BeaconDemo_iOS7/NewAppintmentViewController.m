@@ -188,6 +188,8 @@
 -(void) addNewAppointment
 {
     
+    BUSY_INDICATOR_START(self.busyIndicator)
+    
     NSURL *requestURL=[NSURL URLWithString:ADD_APPOINTMENT];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
@@ -215,6 +217,8 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
+         BUSY_INDICATOR_STOP(self.busyIndicator)
+         
          if(error!=nil)
              return; //error
          
