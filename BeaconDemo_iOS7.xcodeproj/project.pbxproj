@@ -16,13 +16,14 @@
 		F390C2FC1806644E00A8BA39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F390C2FB1806644E00A8BA39 /* main.m */; };
 		F390C3001806644E00A8BA39 /* BeaconDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F390C2FF1806644E00A8BA39 /* BeaconDemoAppDelegate.m */; };
 		F390C3031806644E00A8BA39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F390C3011806644E00A8BA39 /* Main.storyboard */; };
-		F390C3061806644E00A8BA39 /* BeaconDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F390C3051806644E00A8BA39 /* BeaconDemoViewController.m */; };
 		F390C3081806644E00A8BA39 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F390C3071806644E00A8BA39 /* Images.xcassets */; };
 		F390C30F1806644E00A8BA39 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F390C30E1806644E00A8BA39 /* XCTest.framework */; };
 		F390C3101806644E00A8BA39 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F390C2EF1806644E00A8BA39 /* Foundation.framework */; };
 		F390C3111806644E00A8BA39 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F390C2F31806644E00A8BA39 /* UIKit.framework */; };
 		F390C3191806644E00A8BA39 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F390C3171806644E00A8BA39 /* InfoPlist.strings */; };
 		F390C31B1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = F390C31A1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m */; };
+		F3A413541891CF6200115841 /* LeftTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A413531891CF6200115841 /* LeftTableViewController.m */; };
+		F3A413571891D9A400115841 /* ClientInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A413561891D9A400115841 /* ClientInfoViewController.m */; };
 		F3CDCC14187BB01D00C86E61 /* PersonalInfoPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CDCC12187BB01D00C86E61 /* PersonalInfoPopupViewController.m */; };
 		F3CDCC15187BB01D00C86E61 /* PersonalInfoPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3CDCC13187BB01D00C86E61 /* PersonalInfoPopupViewController.xib */; };
 /* End PBXBuildFile section */
@@ -52,14 +53,16 @@
 		F390C2FE1806644E00A8BA39 /* BeaconDemoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeaconDemoAppDelegate.h; sourceTree = "<group>"; };
 		F390C2FF1806644E00A8BA39 /* BeaconDemoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeaconDemoAppDelegate.m; sourceTree = "<group>"; };
 		F390C3021806644E00A8BA39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F390C3041806644E00A8BA39 /* BeaconDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeaconDemoViewController.h; sourceTree = "<group>"; };
-		F390C3051806644E00A8BA39 /* BeaconDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeaconDemoViewController.m; sourceTree = "<group>"; };
 		F390C3071806644E00A8BA39 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F390C30D1806644E00A8BA39 /* BeaconDemo_iOS7Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeaconDemo_iOS7Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F390C30E1806644E00A8BA39 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F390C3161806644E00A8BA39 /* BeaconDemo_iOS7Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BeaconDemo_iOS7Tests-Info.plist"; sourceTree = "<group>"; };
 		F390C3181806644E00A8BA39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F390C31A1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeaconDemo_iOS7Tests.m; sourceTree = "<group>"; };
+		F3A413521891CF6200115841 /* LeftTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftTableViewController.h; sourceTree = "<group>"; };
+		F3A413531891CF6200115841 /* LeftTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftTableViewController.m; sourceTree = "<group>"; };
+		F3A413551891D9A400115841 /* ClientInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientInfoViewController.h; sourceTree = "<group>"; };
+		F3A413561891D9A400115841 /* ClientInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientInfoViewController.m; sourceTree = "<group>"; };
 		F3CDCC11187BB01D00C86E61 /* PersonalInfoPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoPopupViewController.h; sourceTree = "<group>"; };
 		F3CDCC12187BB01D00C86E61 /* PersonalInfoPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoPopupViewController.m; sourceTree = "<group>"; };
 		F3CDCC13187BB01D00C86E61 /* PersonalInfoPopupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalInfoPopupViewController.xib; sourceTree = "<group>"; };
@@ -126,8 +129,6 @@
 				F390C2FE1806644E00A8BA39 /* BeaconDemoAppDelegate.h */,
 				F390C2FF1806644E00A8BA39 /* BeaconDemoAppDelegate.m */,
 				F390C3011806644E00A8BA39 /* Main.storyboard */,
-				F390C3041806644E00A8BA39 /* BeaconDemoViewController.h */,
-				F390C3051806644E00A8BA39 /* BeaconDemoViewController.m */,
 				F390C3071806644E00A8BA39 /* Images.xcassets */,
 				F390C2F61806644E00A8BA39 /* Supporting Files */,
 				F310A3051810CC8F00581230 /* AudioViewController.h */,
@@ -135,6 +136,10 @@
 				F3CDCC11187BB01D00C86E61 /* PersonalInfoPopupViewController.h */,
 				F3CDCC12187BB01D00C86E61 /* PersonalInfoPopupViewController.m */,
 				F3CDCC13187BB01D00C86E61 /* PersonalInfoPopupViewController.xib */,
+				F3A413521891CF6200115841 /* LeftTableViewController.h */,
+				F3A413531891CF6200115841 /* LeftTableViewController.m */,
+				F3A413551891D9A400115841 /* ClientInfoViewController.h */,
+				F3A413561891D9A400115841 /* ClientInfoViewController.m */,
 			);
 			path = BeaconDemo_iOS7;
 			sourceTree = "<group>";
@@ -276,9 +281,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3CDCC14187BB01D00C86E61 /* PersonalInfoPopupViewController.m in Sources */,
-				F390C3061806644E00A8BA39 /* BeaconDemoViewController.m in Sources */,
 				F390C2FC1806644E00A8BA39 /* main.m in Sources */,
+				F3A413571891D9A400115841 /* ClientInfoViewController.m in Sources */,
 				F390C3001806644E00A8BA39 /* BeaconDemoAppDelegate.m in Sources */,
+				F3A413541891CF6200115841 /* LeftTableViewController.m in Sources */,
 				F310A3071810CC8F00581230 /* AudioViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

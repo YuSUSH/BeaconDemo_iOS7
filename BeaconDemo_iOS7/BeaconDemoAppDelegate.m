@@ -105,9 +105,9 @@
     // Query the personal info with the ID got from notification
     if([event isEqualToString:@"in"]) //client came in event
     {
-        if(self.bv!=nil)
+        if(self.leftSplitView!=nil)
         {
-            [self.bv QueryPersonalInfoAndShow:userid]; //Show this new client
+            [self.leftSplitView QueryPersonalInfoAndShow:userid]; //Show this new client
         }
         
         return;
@@ -115,15 +115,15 @@
     
     if([event isEqualToString:@"out"]) //client came in event
     {
-        if(self.bv!=nil)
-            [self.bv ClientHasLeft:userid];
+        if(self.leftSplitView!=nil)
+            [self.leftSplitView ClientHasLeft:userid];
     }
     
     
     if([event isEqualToString:@"homeloan_request"]) //request homeloan
     {
-        if(self.bv!=nil)
-            [self.bv homeloanRequest:userid];
+        if(self.leftSplitView!=nil)
+            [self.leftSplitView homeloanRequest:userid];
     }
 }
 

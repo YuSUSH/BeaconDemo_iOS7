@@ -8,10 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreBluetooth/CoreBluetooth.h>
-#import "BeaconDemoViewController.h"
 #import "PersonalInfoPopupViewController.h"
+#import "LeftTableViewController.h"
+#import "ClientInfoViewController.h"
 
 #define IPAD3_SERVICE_ID @"87BB8D91-4662-780A-5A25-C1626992C22D"
+
+
+static NSString * const kUUID = @"00000000-0000-0000-0000-000000000000";
+static NSString * const kIdentifier = @"SomeIdentifier";
+static NSString * const kCellIdentifier = @"BeaconCell";
+#define DETECT_IOS_DISTANCE_BASED_ON_RSSI -80
 
 
 #define PUSH_SERVIER_URL @"http://experiment.sandbox.net.nz/beacon/simplepush.php"
@@ -31,9 +38,10 @@
 @property (nonatomic, strong) NSTimer *myTimer;
 
 
-@property (strong, nonatomic) BeaconDemoViewController *bv;
 
 @property (strong, nonatomic) NSString *CurrentUserID;
 @property (strong, nonatomic) NSMutableDictionary *CurrentPersonalInfo;
+@property (strong, nonatomic) LeftTableViewController *leftSplitView;
+@property (strong, nonatomic) ClientInfoViewController *clientInfoView;
 
 @end

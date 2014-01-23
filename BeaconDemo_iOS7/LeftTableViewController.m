@@ -1,28 +1,93 @@
 //
-//  BeaconDemoViewController.m
+//  LeftTableViewController.m
 //  BeaconDemo_iOS7
 //
-//  Created by Yu Liu on 10/10/13.
+//  Created by Yu Liu on 24/01/14.
 //
 //
 
+#import "LeftTableViewController.h"
 #import "BeaconDemoAppDelegate.h"
-#import "BeaconDemoViewController.h"
 
-
-static NSString * const kUUID = @"00000000-0000-0000-0000-000000000000";
-static NSString * const kIdentifier = @"SomeIdentifier";
-static NSString * const kCellIdentifier = @"BeaconCell";
-#define DETECT_IOS_DISTANCE_BASED_ON_RSSI -80
-
-@interface BeaconDemoViewController ()
-
+@interface LeftTableViewController ()
 
 @end
 
-@implementation BeaconDemoViewController
+@implementation LeftTableViewController
 
 @synthesize m_PopoverController, popupQueue, queueLock, enteringClients;
+
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Table view data source
+
+
+
+
+/*
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+*/
+
+/*
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }   
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }   
+}
+*/
+
+/*
+// Override to support rearranging the table view.
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+{
+}
+*/
+
+/*
+// Override to support conditional rearranging of the table view.
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the item to be re-orderable.
+    return YES;
+}
+*/
+
+/*
+#pragma mark - Navigation
+
+// In a story board-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+
+ */
 
 - (void)viewDidLoad
 {
@@ -45,22 +110,22 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     
     //Save the view in the AppDelegate
     GET_APPDELEGATE
-    appDelegate.bv=self; //pass this pointer to the AppDelegate
+    appDelegate.leftSplitView=self; //pass this pointer to the AppDelegate
     
     //advertising
     [self stopRangingForBeacons];
     [self startAdvertisingBeacon];
     
-    self.enteringClientTableView.delegate=self;
-    self.enteringClientTableView.dataSource=self;
-    [self.enteringClientTableView reloadData];
+    self.tableView.delegate=self;
+    self.tableView.dataSource=self;
+    [self.tableView reloadData];
     
     /*
-#define CHECH_PERIOD 10 * 60 //every 10 minutes
-    //[self MeetingDueNotify];
-    meetingDueTimer = [NSTimer scheduledTimerWithTimeInterval:CHECH_PERIOD
-                                                      target:self selector:@selector(checkDueAppointment:)
-                                                    userInfo:nil repeats:YES];
+     #define CHECH_PERIOD 10 * 60 //every 10 minutes
+     //[self MeetingDueNotify];
+     meetingDueTimer = [NSTimer scheduledTimerWithTimeInterval:CHECH_PERIOD
+     target:self selector:@selector(checkDueAppointment:)
+     userInfo:nil repeats:YES];
      */
 }
 
@@ -133,7 +198,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     [self.locationManager stopRangingBeaconsInRegion:self.beaconRegion];
     
     self.detectedBeacons = nil;
-    [self.beaconTableView reloadData];
+    [self.tableView reloadData];
     
     NSLog(@"Turned off ranging.");
 }
@@ -158,7 +223,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 
 -(void)ShowAlertDialog:(NSString *)msg
 {
-    [super PlayRingtone];
+    //[super PlayRingtone];
     
     //show the dialog box
     UIAlertView *helloWorldAlert = [[UIAlertView alloc]
@@ -187,29 +252,29 @@ static NSString * const kCellIdentifier = @"BeaconCell";
             if([beacon.proximityUUID.UUIDString isEqual: kUUID]) //if it's our beacon device
             {
                 
-               if(beacon.rssi<0 && beacon.rssi >DETECT_IOS_DISTANCE_BASED_ON_RSSI) //if it's inside our range
-               {
-                   if(!bInsideRange) //if we haven't shown this information before
-                   {
-                    
-                       [self ShowAlertDialog:@"Welcome to Sush Mobile!"];
-                       bInsideRange=YES;
-                       return;
-                   }
-               }
-               else //we are outside the range
-               {
-                   if(bInsideRange) //if we were inside range before
-                   {
-                       [self ShowAlertDialog:@"See you next time!"];
-                       bInsideRange=NO;
-                       return;
-                   }
-               }
+                if(beacon.rssi<0 && beacon.rssi >DETECT_IOS_DISTANCE_BASED_ON_RSSI) //if it's inside our range
+                {
+                    if(!bInsideRange) //if we haven't shown this information before
+                    {
+                        
+                        [self ShowAlertDialog:@"Welcome to Sush Mobile!"];
+                        bInsideRange=YES;
+                        return;
+                    }
+                }
+                else //we are outside the range
+                {
+                    if(bInsideRange) //if we were inside range before
+                    {
+                        [self ShowAlertDialog:@"See you next time!"];
+                        bInsideRange=NO;
+                        return;
+                    }
+                }
             }
-    
+            
         }
-      
+        
     }
     
     
@@ -320,7 +385,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     //create a popover controller
     self.m_PopoverController = [[UIPopoverController alloc] initWithContentViewController:popoverContent];
     self.m_PopoverController.delegate=self;
-   
+    
     popoverContent.personalInfo=personalInfo; //pass the personal info to popupview
     popoverContent.m_PopoverController=self.m_PopoverController; //pass the pointer of m_PopoverController
     popoverContent.mainView=self; //pass the pointer of this view
@@ -367,7 +432,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
         }
     }
     
-    [self.enteringClientTableView reloadData]; //refresh the table view
+    [self.tableView reloadData]; //refresh the table view
     
 }
 
@@ -416,7 +481,7 @@ static NSString * const kCellIdentifier = @"BeaconCell";
      {
          if(error !=nil)
              return;
-             
+         
          NSLog(@"responseData: %@", data);
          
          //decode the response data
@@ -430,21 +495,21 @@ static NSString * const kCellIdentifier = @"BeaconCell";
              personalInfo=dataDict;
          }
          
-       
+         
          dispatch_async(dispatch_get_main_queue(), ^{
-                 //[self ShowPopupView:personalInfo];
-                [queueLock lock];
-                [self.popupQueue addObject:personalInfo]; //Add it to the popup queue
-                [queueLock unlock];
+             //[self ShowPopupView:personalInfo];
+             [queueLock lock];
+             [self.popupQueue addObject:personalInfo]; //Add it to the popup queue
+             [queueLock unlock];
              
-                [self.enteringClients addObject:personalInfo]; //Add it to the list array
-                [self.enteringClientTableView reloadData]; //refresh list display
+             [self.enteringClients addObject:personalInfo]; //Add it to the list array
+             [self.tableView reloadData]; //refresh list display
              
-                if(self.popupQueue.count==1 && self.m_PopoverController==nil) //this is the only element in queue
-                {
-                    //show it and remove that element from queue
-                    [self removeFromQueueAndShowPopupView];
-                }
+             if(self.popupQueue.count==1 && self.m_PopoverController==nil) //this is the only element in queue
+             {
+                 //show it and remove that element from queue
+                 [self removeFromQueueAndShowPopupView];
+             }
          });
          //[self ShowPersonInfoWindow:outputstr];
          //Show the popup window for personal info
@@ -460,20 +525,24 @@ static NSString * const kCellIdentifier = @"BeaconCell";
     if(indexPath.row < self.enteringClients.count)
     {
         NSMutableDictionary *client= [enteringClients objectAtIndex:indexPath.row];
-        self.labelFullname.text=[NSString stringWithFormat:@"%@ %@",
-        [client valueForKey:@"givename"], [client valueForKey:@"surname"] ];
-        
-        
-        //show picture
-        NSString *picture_url= [NSString stringWithFormat:@"%@%@",
-                                @"http://ble.sandbox.net.nz/myforum/upload_image/",
-                                [client valueForKey:@"iconfilename"] ];
-        
-        NSURL *url = [NSURL URLWithString:picture_url];
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        UIImage *img = [[UIImage alloc] initWithData:data];
-        CGSize size = img.size;
-        [self.imgPhoto setImage:img];
+        GET_APPDELEGATE
+        if(appDelegate.clientInfoView!=nil)
+        {
+            appDelegate.clientInfoView.labelFullname.text=[NSString stringWithFormat:@"%@ %@",
+                                     [client valueForKey:@"givename"], [client valueForKey:@"surname"] ];
+            
+            
+            //show picture
+            NSString *picture_url= [NSString stringWithFormat:@"%@%@",
+                                    @"http://ble.sandbox.net.nz/myforum/upload_image/",
+                                    [client valueForKey:@"iconfilename"] ];
+            
+            NSURL *url = [NSURL URLWithString:picture_url];
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            UIImage *img = [[UIImage alloc] initWithData:data];
+            CGSize size = img.size;
+            [appDelegate.clientInfoView.imgPhoto setImage:img];
+        }
     }
 }
 
@@ -545,10 +614,13 @@ static NSString * const kCellIdentifier = @"BeaconCell";
         if( [userid isEqualToString:[client valueForKey:@"userid"]])
         {
             [client setObject:@"TRUE" forKey:@"homeloan_request"]; //set the value for homeload request
-            [self.enteringClientTableView reloadData]; //refresh display
+            [self.tableView reloadData]; //refresh display
             break;
         }
     }
 }
+
+
+
 
 @end

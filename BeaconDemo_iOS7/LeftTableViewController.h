@@ -1,25 +1,16 @@
 //
-//  BeaconDemoViewController.h
+//  LeftTableViewController.h
 //  BeaconDemo_iOS7
 //
-//  Created by Yu Liu on 10/10/13.
+//  Created by Yu Liu on 24/01/14.
 //
 //
 
 #import <UIKit/UIKit.h>
-
-
 #import <CoreLocation/CoreLocation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
-#import "AudioViewController.h"
 
-
-@interface BeaconDemoViewController : AudioViewController <CLLocationManagerDelegate, CBPeripheralManagerDelegate, UITableViewDataSource, UITableViewDelegate, UIPopoverControllerDelegate>
-@property (weak, nonatomic) IBOutlet UISwitch *TRSwitch;
-- (IBAction)FunctionSwitch:(UISwitch *)sender;
-
-@property (nonatomic, weak) IBOutlet UITableView *beaconTableView;
-@property (strong, nonatomic) IBOutlet UILabel *infoLabel;
+@interface LeftTableViewController : UITableViewController <CLLocationManagerDelegate, CBPeripheralManagerDelegate, UIPopoverControllerDelegate>
 
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -34,9 +25,10 @@
 -(void)ShowPopupView:(NSMutableDictionary*)personalInfo;
 -(void) QueryPersonalInfoAndShow:(NSString*)userID;
 -(void) ClientHasLeft:(NSString*)userID;
-@property (strong, nonatomic) IBOutlet UITableView *enteringClientTableView;
-@property (strong, nonatomic) IBOutlet UILabel *labelFullname;
-@property (strong, nonatomic) IBOutlet UIImageView *imgPhoto;
+
+//@property (strong, nonatomic) IBOutlet UITableView *enteringClientTableView;
+//@property (strong, nonatomic) IBOutlet UILabel *labelFullname;
+//@property (strong, nonatomic) IBOutlet UIImageView *imgPhoto;
 
 -(void)homeloanRequest:(NSString *)userid;
 
