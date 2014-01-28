@@ -75,7 +75,7 @@
 		                       $gender . "', " . 
 								$age . ", '" .
 								time() . "', '" .
-								$iconfilename . "')";
+								$iconfilename . "', '')";
 		//echo $querystr;
 		$result=ExecuteQuery($querystr);
 		

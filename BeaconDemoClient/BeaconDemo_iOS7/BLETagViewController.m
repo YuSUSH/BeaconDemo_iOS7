@@ -440,6 +440,7 @@
     self.locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
     self.locationManager.delegate = self;
     [self.locationManager startMonitoringSignificantLocationChanges];
+    [self.locationManager startUpdatingLocation];
     
     NSLog(@"Ranging turned on for region: %@.", self.beaconRegion);
     
@@ -452,7 +453,7 @@
     
     NSUUID *proximityUUID = [[NSUUID alloc] initWithUUIDString:kUUID];
     self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID identifier:kIdentifier];
-    self.beaconRegion.notifyEntryStateOnDisplay=YES;
+    self.beaconRegion.notifyEntryStateOnDisplay=NO;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)locationManager:(CLLocationManager *)manager
@@ -467,6 +468,9 @@
         }
     }
 }
+
+
+
 
 - (void)locationManager:(CLLocationManager *)manager
          didEnterRegion:(CLRegion *)region
