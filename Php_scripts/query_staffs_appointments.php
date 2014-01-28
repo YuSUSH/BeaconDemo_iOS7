@@ -1,6 +1,36 @@
 
 	<?php
 	    include "lib_functions.php";
+	
+		function CheckClientInShop($userid)
+		{			
+			//firstly, check all the users in the shop now
+			$bAlreadyExist=0;
+			
+			$result=ExecuteQuery("SELECT * FROM inshop_users");
+			if($result)
+			{
+				$rows = mysql_num_rows($result);
+				if($rows>0)
+				{
+					for ($j = 0 ; $j < $rows ; $j++)
+					{		
+						if( strcmp($userid,  mysql_result($result,$j,'userid') )==0)
+						{
+							$bAlreadyExist=1;
+							break;
+						}
+					}
+				}
+				
+				if($bAlreadyExist==1)
+				{
+					return 1;
+				}
+			}
+			
+			return -1;
+		}
 		///////////////////////////////////////////////////////////////
 		function OutputAppointmentResults($result)
 		{
@@ -24,7 +54,14 @@
 						//Output to HTTP request
 						$arrCol["client_fullname"]=mysql_result($client_result, 0,'givename') . ' ' .
 									mysql_result($client_result, 0,'surname');
+						$arrCol["iconfilename"]=mysql_result($client_result, 0,'iconfilename');
 					}
+					
+					//To see if this client is still inshop
+					if(CheckClientInShop($client_id)>0)
+						$arrCol["inshop"]=1;
+					else
+						$arrCol["inshop"]=0;
 					
 					$arrCol["time"]=mysql_result($result,$j,'time');
 					$arrCol["description"]= mysql_result($result,$j,'description');

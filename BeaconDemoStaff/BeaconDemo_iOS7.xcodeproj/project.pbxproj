@@ -29,6 +29,7 @@
 		F3AB2F6B188634F4004FF03B /* NSObject+UIPopoverController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB2F6A188634F4004FF03B /* NSObject+UIPopoverController_iPhone.m */; };
 		F3D7B866188DD0AE004D3328 /* AppointmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3D7B865188DD0AE004D3328 /* AppointmentDetailViewController.m */; };
 		F3DD5719187CBE0800EEA6C6 /* UserLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DD5718187CBE0800EEA6C6 /* UserLoginViewController.m */; };
+		F3DE636818974F590040E8FA /* ImageTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3DE636718974F590040E8FA /* ImageTableCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,8 @@
 		F3D7B865188DD0AE004D3328 /* AppointmentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppointmentDetailViewController.m; sourceTree = "<group>"; };
 		F3DD5717187CBE0800EEA6C6 /* UserLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLoginViewController.h; sourceTree = "<group>"; };
 		F3DD5718187CBE0800EEA6C6 /* UserLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLoginViewController.m; sourceTree = "<group>"; };
+		F3DE636618974F590040E8FA /* ImageTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageTableCell.h; path = ../ImageTableCell.h; sourceTree = "<group>"; };
+		F3DE636718974F590040E8FA /* ImageTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageTableCell.m; path = ../ImageTableCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +160,8 @@
 				F3D7B865188DD0AE004D3328 /* AppointmentDetailViewController.m */,
 				F37FB8EE188F58B4006908C8 /* MeetingNotifyViewController.h */,
 				F37FB8EF188F58B4006908C8 /* MeetingNotifyViewController.m */,
+				F3DE636618974F590040E8FA /* ImageTableCell.h */,
+				F3DE636718974F590040E8FA /* ImageTableCell.m */,
 			);
 			path = BeaconDemo_iOS7;
 			sourceTree = "<group>";
@@ -299,6 +304,7 @@
 				F3A2C2EE188739AB000D321F /* PopoverDatePicker.m in Sources */,
 				F390C2FC1806644E00A8BA39 /* main.m in Sources */,
 				F3D7B866188DD0AE004D3328 /* AppointmentDetailViewController.m in Sources */,
+				F3DE636818974F590040E8FA /* ImageTableCell.m in Sources */,
 				F37FB8F0188F58B4006908C8 /* MeetingNotifyViewController.m in Sources */,
 				F3DD5719187CBE0800EEA6C6 /* UserLoginViewController.m in Sources */,
 				F3AB2F6B188634F4004FF03B /* NSObject+UIPopoverController_iPhone.m in Sources */,

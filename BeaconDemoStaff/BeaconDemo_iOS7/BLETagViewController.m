@@ -11,6 +11,7 @@
 #import "BeaconDemoAppDelegate.h"
 #import "AppointmentDetailViewController.h"
 #import "MeetingNotifyViewController.h"
+#import "ImageTableCell.h"
 
 @interface BLETagViewController ()
 
@@ -345,10 +346,10 @@
 {
     
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ImageTableCell *cell = (ImageTableCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[ImageTableCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     
@@ -364,6 +365,10 @@
     NSMutableDictionary *appointment=[myAppointments objectAtIndex:indexPath.row];
     
     showFullName= [appointment valueForKey:@"client_fullname"];
+    if([[appointment valueForKey:@"inshop"] integerValue] ==1)
+        cell.inoutLabel.text=@"IN";
+    else
+        cell.inoutLabel.text=@"OUT";
 /*
     int fullname_len=showFullName.length;
     showFullName=[showFullName substringToIndex:LENGTH_NAME_IN_TABLE];
@@ -379,9 +384,11 @@
 //               showFullName,
 //               showTime];
 
-    [cell.textLabel setText:showFullName];
-    [cell.detailTextLabel setText:showTime];
-
+    [cell.NameLabel setText:showFullName];
+    [cell.timeLabel setText:showTime];
+    
+    cell.iconfilename=[appointment valueForKey:@"iconfilename"];
+    [cell updateImageDisplay];
     
     
     return cell;

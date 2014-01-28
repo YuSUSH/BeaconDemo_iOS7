@@ -106,7 +106,7 @@
     enteringClients=[[NSMutableArray alloc] init];
     [enteringClients removeAllObjects];
     
-    self.title=@"iOS to iOS with Beacon API";
+    self.title=@"Queue";
     
     //Save the view in the AppDelegate
     GET_APPDELEGATE
