@@ -394,8 +394,8 @@
     [cell.NameLabel setText:showFullName];
     [cell.timeLabel setText:showTime];
     
-    cell.iconfilename=[appointment valueForKey:@"iconfilename"];
-    [cell updateImageDisplay];
+    UIImage *img=[self.imageArray objectAtIndex:indexPath.row];
+    [cell.personalImage setImage:img];
     
     
     return cell;
@@ -438,23 +438,36 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
-         BUSY_INDICATOR_STOP(self.busyIndicator)
-         
          if(error!=nil)
+         {
+             BUSY_INDICATOR_STOP(self.busyIndicator)
              return; //error
+         }
          
          NSLog(@"responseData: %@", data);
          
          //decode the response data
          NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
          
-         //NSMutableDictionary *dataDict=[jsonObjects objectAtIndex:0];
-         //NSString *result = [dataDict objectForKey:@"result"];
+         myAppointments=jsonObjects; //pass the appointment info
+         
+         //Load all the icon image data
+         self.imageArray = [[NSMutableArray alloc] init];
+         int i;
+         for(i=0;i<myAppointments.count;i++)
+         {
+             NSMutableDictionary *appointment=[myAppointments objectAtIndex:i];
+             NSString *filename=[appointment valueForKey:@"iconfilename"];
+             UIImage *img=[self loadIconImage:filename];
+             //Store the image data into the array
+             [self.imageArray addObject:img];
+         }
+         
+         BUSY_INDICATOR_STOP(self.busyIndicator)
          
          if(jsonObjects.count>0)
          {
              dispatch_async(dispatch_get_main_queue(), ^{
-                 myAppointments=jsonObjects; //pass the appointment info
                  [appointmentTableView reloadData];
              });
          }
@@ -612,6 +625,19 @@
          
      }];
 
+}
+
+-(UIImage*) loadIconImage:(NSString*)iconfilename
+{
+    //show picture
+    NSString *picture_url= [NSString stringWithFormat:@"%@%@",
+                        @"http://ble.sandbox.net.nz/myforum/upload_image/",
+                        iconfilename ];
+
+    NSURL *url = [NSURL URLWithString:picture_url];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    UIImage *img = [[UIImage alloc] initWithData:data];
+    return img;
 }
 
 @end

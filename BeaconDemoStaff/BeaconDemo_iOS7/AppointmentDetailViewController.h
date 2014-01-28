@@ -14,5 +14,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelClientName;
 @property (strong, nonatomic) IBOutlet UILabel *labelTime;
 @property (strong, nonatomic) IBOutlet UILabel *labelDescription;
+- (IBAction)OnClickBackButton:(UIButton *)sender;
 
 @end

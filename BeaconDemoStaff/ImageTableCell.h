@@ -14,9 +14,7 @@
 @property (strong, nonatomic) UILabel     *NameLabel;
 @property (strong, nonatomic) UILabel     *timeLabel;
 @property (strong, nonatomic) UILabel     *inoutLabel;
-@property (strong, nonatomic) NSString *iconfilename;
 
--(void) updateImageDisplay;
 -(void) setColorWhenIn;
 -(void) setColorWhenOut;
 

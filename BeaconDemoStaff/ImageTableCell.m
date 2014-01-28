@@ -65,20 +65,6 @@
     
 }
 
--(void) updateImageDisplay
-{
-    //show picture
-    NSString *picture_url= [NSString stringWithFormat:@"%@%@",
-                            @"http://ble.sandbox.net.nz/myforum/upload_image/",
-                            self.iconfilename ];
-    
-    NSURL *url = [NSURL URLWithString:picture_url];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    UIImage *img = [[UIImage alloc] initWithData:data];
-    CGSize size = img.size;
-    [self.personalImage setImage:img];
-}
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];

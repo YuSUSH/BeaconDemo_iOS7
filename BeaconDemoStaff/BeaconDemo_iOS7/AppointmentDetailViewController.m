@@ -43,4 +43,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)OnClickBackButton:(UIButton *)sender
+{
+    [self.navigationController popViewControllerAnimated:true];
+}
 @end
