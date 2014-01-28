@@ -17,5 +17,7 @@
 @property (strong, nonatomic) NSString *iconfilename;
 
 -(void) updateImageDisplay;
+-(void) setColorWhenIn;
+-(void) setColorWhenOut;
 
 @end

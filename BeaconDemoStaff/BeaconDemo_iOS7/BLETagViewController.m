@@ -43,7 +43,7 @@
     [self UpdateStaffDeviceToken:appDelegate.CurrentTokenStr
                      WithStaffID:appDelegate.CurrentStaffID];
     
-    self.title=@"BLE device to iOS with Bluetooth Core API";
+    self.title=@"Clients Waiting";
     
     //peripherals=[[NSMutableArray alloc] init];
     //[peripherals removeAllObjects];
@@ -65,9 +65,12 @@
     
     
     self.navigationItem.hidesBackButton=true; //disable the back button
-    
-    
 
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden: YES animated:NO]; //don't show the navigation bar
 }
 
 
@@ -358,17 +361,21 @@
     [cell.textLabel setTextColor:[UIColor blackColor]];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
-#define LENGTH_NAME_IN_TABLE 15
-    NSString *titilestr;
     
     NSString *showFullName;
     NSMutableDictionary *appointment=[myAppointments objectAtIndex:indexPath.row];
     
     showFullName= [appointment valueForKey:@"client_fullname"];
     if([[appointment valueForKey:@"inshop"] integerValue] ==1)
-        cell.inoutLabel.text=@"IN";
+    {
+        cell.inoutLabel.text=@"In";
+        [cell setColorWhenIn];
+    }
     else
-        cell.inoutLabel.text=@"OUT";
+    {
+        cell.inoutLabel.text=@"Out";
+        [cell setColorWhenOut];
+    }
 /*
     int fullname_len=showFullName.length;
     showFullName=[showFullName substringToIndex:LENGTH_NAME_IN_TABLE];

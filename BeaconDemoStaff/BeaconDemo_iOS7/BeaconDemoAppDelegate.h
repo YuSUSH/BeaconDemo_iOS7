@@ -52,6 +52,11 @@ indicator.hidden=true; \
 });
 
 
+#define RGB_COLOR(RValue, GValue, BValue, AValue) [UIColor colorWithRed:RValue/255.0f \
+                                green:GValue/255.0f \
+                                blue:BValue/255.0f alpha:AValue]
+
+
 
 @interface BeaconDemoAppDelegate : UIResponder <UIApplicationDelegate, CBCentralManagerDelegate,CBPeripheralDelegate>
 
