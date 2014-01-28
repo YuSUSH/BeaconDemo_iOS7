@@ -49,6 +49,9 @@
     
     [self.textStaffChoice setDelegate:self];
     
+    //show the department info
+    self.labelDepartment.text=[@"Department: " stringByAppendingString:self.department];
+    
 }
 
 -(void)DoneDateSelection:(id)sender
@@ -184,6 +187,7 @@
     [self addNewAppointment];
 }
 
+#define DEFAULT_STAFF_FOR_DEMO @"aya"
 
 -(void) addNewAppointment
 {
@@ -197,11 +201,12 @@
     //Set Post Data
     GET_APPDELEGATE
     
-    const char *bytes = [[NSString stringWithFormat:@"client=%@&staff=%@&time=%@&description=%@",
+    const char *bytes = [[NSString stringWithFormat:@"client=%@&staff=%@&time=%@&description=%@&department=%@",
                           appDelegate.CurrentUserID,
-                          [selectedStaff valueForKey:@"userid"],
+                          DEFAULT_STAFF_FOR_DEMO, //[selectedStaff valueForKey:@"userid"],
                           self.textDateChoice.text,
-                          self.textDescription.text
+                          self.textDescription.text,
+                          self.department
                           ] UTF8String];
     
     

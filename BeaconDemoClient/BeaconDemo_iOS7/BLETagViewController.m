@@ -10,6 +10,8 @@
 #import <UIKit/UIDevice.h>
 #import "BeaconDemoAppDelegate.h"
 #import "MeetingNotifyViewController.h"
+#import "DepartmentTableCell.h"
+#import "NewAppintmentViewController.h"
 
 @interface BLETagViewController ()
 
@@ -38,6 +40,7 @@
     
     self.bInsideRange=false; //initially outside the Beacon range
     self.navigationItem.hidesBackButton=true; //disable the "back" button
+    [self.navigationController setNavigationBarHidden: YES animated:NO]; //don't show the navigation bar
     
     //by default hide the make appointment button and shop label
     self.btnRequestHomeLoan.hidden=true;
@@ -63,6 +66,12 @@
                         [appDelegate.CurrentPersonalInfo valueForKey:@"givename"],
                         [appDelegate.CurrentPersonalInfo valueForKey:@"surname"]];
     self.LabelDeviceInfo.text=fullname;
+    
+    
+    
+    //init the table view
+    self.departmentTable.delegate=self;
+    self.departmentTable.dataSource=self;
 
 }
 
@@ -312,6 +321,12 @@
     {
         MeetingNotifyViewController *vc= segue.destinationViewController;
         vc.appointmentDetail=sender;
+    }
+    
+    if([segue.identifier isEqualToString:@"SegueNewAppointment"])
+    {
+        NewAppintmentViewController *vc=segue.destinationViewController;
+        vc.department=sender;
     }
 }
 
@@ -582,4 +597,84 @@
      }];
 
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 5;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+#define HOME_LOAN_DEPARTMENT 0
+#define STUDENT_LOAN_DEPARTMENT 1
+#define INSURANCE_DEPARTMENT 2
+#define CREDIT_DEPARTMENT 3
+#define KIWI_SAVER_DEPARTMENT 4
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    static NSString *CellIdentifier = @"Cell";
+    DepartmentTableCell *cell = (DepartmentTableCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(cell == nil)
+    {
+        cell = [[DepartmentTableCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    
+    
+    switch(indexPath.row)
+    {
+        case HOME_LOAN_DEPARTMENT:
+            cell.textLabel.text=@"Home Loans";
+            break;
+        case STUDENT_LOAN_DEPARTMENT:
+            cell.textLabel.text=@"Student Loans";
+            break;
+        case INSURANCE_DEPARTMENT:
+            cell.textLabel.text=@"Insurance";
+            break;
+        case CREDIT_DEPARTMENT:
+            cell.textLabel.text=@"Credit";
+            break;
+        case KIWI_SAVER_DEPARTMENT:
+            cell.textLabel.text=@"Kiwi Saver";
+            break;
+    }
+    
+    return cell;
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row < 5)
+    {
+        NSString *department=@"";
+        switch(indexPath.row)
+        {
+            case HOME_LOAN_DEPARTMENT:
+                department=@"Home Loans";
+                break;
+            case STUDENT_LOAN_DEPARTMENT:
+                department=@"Student Loans";
+                break;
+            case INSURANCE_DEPARTMENT:
+                department=@"Insurance";
+                break;
+            case CREDIT_DEPARTMENT:
+                department=@"Credit";
+                break;
+            case KIWI_SAVER_DEPARTMENT:
+                department=@"Kiwi Saver";
+                break;
+        }
+        
+        [self performSegueWithIdentifier:@"SegueNewAppointment" sender:department];
+    }
+}
+
+
 @end

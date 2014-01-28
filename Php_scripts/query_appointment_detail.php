@@ -38,6 +38,7 @@
 					
 				$arrCol["time"]=mysql_result($result,$j,'time');
 				$arrCol["description"]= mysql_result($result,$j,'description');
+				$arrCol["department"]= mysql_result($result,$j,'department');
 				array_push($resultArray,$arrCol);
 
 			}

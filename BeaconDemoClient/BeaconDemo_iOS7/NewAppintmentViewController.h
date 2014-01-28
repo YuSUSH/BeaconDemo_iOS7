@@ -26,6 +26,8 @@
 
 @property (strong, nonatomic) iphoneDatePicker *datePicker;
 @property (strong, nonatomic) IBOutlet UITextField *textStaffChoice;
+@property (strong, nonatomic) NSString *department; //the department info
 - (IBAction)OnClickCancel:(UIButton *)sender;
+@property (strong, nonatomic) IBOutlet UILabel *labelDepartment;
 
 @end

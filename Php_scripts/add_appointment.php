@@ -109,6 +109,7 @@
 	     $staff= $_POST['staff'];
 	     $plannedtime= $_POST['time'];
 	     $description= $_POST['description'];
+	     $department=$_POST['department'];
 	     
 		/////////////////////////////////////////////////////////////////////////////////
 		if(!connect_to_database()) //connect to SQL database
@@ -135,7 +136,8 @@
 								$client . "', '" . 
 								$staff . "', '" . 
 		                        $plannedtime . "', '" . 
-								$description . "')";
+								$description . "', '" .
+								$department . "')";
 		//echo $querystr;
 		$result=ExecuteQuery($querystr);
 		if(!$result)

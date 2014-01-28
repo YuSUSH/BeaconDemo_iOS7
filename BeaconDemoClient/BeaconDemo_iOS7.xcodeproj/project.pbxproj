@@ -25,6 +25,7 @@
 		F390C31B1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = F390C31A1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m */; };
 		F3A2C2EE188739AB000D321F /* PopoverDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A2C2ED188739AB000D321F /* PopoverDatePicker.m */; };
 		F3A7195E180BA71C001999C0 /* BLETagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A7195D180BA71C001999C0 /* BLETagViewController.m */; };
+		F3A735851898694E006C7FF3 /* DepartmentTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A735841898694E006C7FF3 /* DepartmentTableCell.m */; };
 		F3AB2F6518861884004FF03B /* NewAppintmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB2F6418861884004FF03B /* NewAppintmentViewController.m */; };
 		F3AB2F681886331F004FF03B /* PopoverPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB2F671886331F004FF03B /* PopoverPicker.m */; };
 		F3AB2F6B188634F4004FF03B /* NSObject+UIPopoverController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AB2F6A188634F4004FF03B /* NSObject+UIPopoverController_iPhone.m */; };
@@ -68,6 +69,8 @@
 		F3A2C2ED188739AB000D321F /* PopoverDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverDatePicker.m; sourceTree = "<group>"; };
 		F3A7195C180BA71C001999C0 /* BLETagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLETagViewController.h; sourceTree = "<group>"; };
 		F3A7195D180BA71C001999C0 /* BLETagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLETagViewController.m; sourceTree = "<group>"; };
+		F3A735831898694E006C7FF3 /* DepartmentTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepartmentTableCell.h; sourceTree = "<group>"; };
+		F3A735841898694E006C7FF3 /* DepartmentTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DepartmentTableCell.m; sourceTree = "<group>"; };
 		F3AB2F6318861884004FF03B /* NewAppintmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAppintmentViewController.h; sourceTree = "<group>"; };
 		F3AB2F6418861884004FF03B /* NewAppintmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewAppintmentViewController.m; sourceTree = "<group>"; };
 		F3AB2F661886331F004FF03B /* PopoverPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverPicker.h; sourceTree = "<group>"; };
@@ -157,6 +160,8 @@
 				F3A2C2ED188739AB000D321F /* PopoverDatePicker.m */,
 				F37FB8EB188F3242006908C8 /* MeetingNotifyViewController.h */,
 				F37FB8EC188F3242006908C8 /* MeetingNotifyViewController.m */,
+				F3A735831898694E006C7FF3 /* DepartmentTableCell.h */,
+				F3A735841898694E006C7FF3 /* DepartmentTableCell.m */,
 			);
 			path = BeaconDemo_iOS7;
 			sourceTree = "<group>";
@@ -296,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3A735851898694E006C7FF3 /* DepartmentTableCell.m in Sources */,
 				F3A2C2EE188739AB000D321F /* PopoverDatePicker.m in Sources */,
 				F390C2FC1806644E00A8BA39 /* main.m in Sources */,
 				F3DD5719187CBE0800EEA6C6 /* UserLoginViewController.m in Sources */,

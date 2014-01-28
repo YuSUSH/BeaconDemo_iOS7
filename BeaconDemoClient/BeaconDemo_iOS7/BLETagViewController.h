@@ -31,7 +31,7 @@ static NSString * const iOSUUID = @"00000000-0000-0000-0000-000000000000";
 #define DETECT_IOS_DISTANCE_BASED_ON_RSSI -80
 #define DETECT_BLETAG_DISTANCE_BASED_ON_RSSI -80
 
-@interface BLETagViewController : AudioViewController <CBCentralManagerDelegate,CBPeripheralDelegate, NSURLConnectionDelegate, CLLocationManagerDelegate, UIAlertViewDelegate>
+@interface BLETagViewController : AudioViewController <CBCentralManagerDelegate,CBPeripheralDelegate, NSURLConnectionDelegate, CLLocationManagerDelegate, UIAlertViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (strong,nonatomic) CBCentralManager *cm;
 @property (weak, nonatomic) IBOutlet UILabel *LabelDeviceInfo;
@@ -59,5 +59,6 @@ static NSString * const iOSUUID = @"00000000-0000-0000-0000-000000000000";
 -(void) ShowMeetingDueInfo:(NSString *)appointment_id;
 - (IBAction)OnClickRequestHomeloan:(UIButton *)sender;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *busyIndicator;
+@property (strong, nonatomic) IBOutlet UITableView *departmentTable;
 
 @end
