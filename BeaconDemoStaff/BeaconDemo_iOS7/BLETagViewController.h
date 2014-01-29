@@ -56,5 +56,6 @@ static NSString * const iOSUUID = @"00000000-0000-0000-0000-000000000000";
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *busyIndicator;
 
 @property (strong, nonatomic) NSMutableArray *imageArray;
+- (IBAction)OnClickRefresh:(UIButton *)sender;
 
 @end

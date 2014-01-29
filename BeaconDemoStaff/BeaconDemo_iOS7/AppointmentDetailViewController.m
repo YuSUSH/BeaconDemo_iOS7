@@ -44,16 +44,17 @@
         clientIDstr= [NSString stringWithFormat:@"Client ID:%@",
                         [appointmentInfo valueForKey:@"client"]];
         self.labelClientID.text=clientIDstr;
-        
-        //Load the image data
-        NSString *iconfilename=[appointmentInfo valueForKey:@"iconfilename"];
-        UIImage *img=[self loadIconImage:iconfilename];
-        [self.personalImage setImage:img];
     }
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    //Load the image data
+    NSString *iconfilename=[appointmentInfo valueForKey:@"iconfilename"];
+    UIImage *img=[self loadIconImage:iconfilename];
+    [self.personalImage setImage:img];
+    
+    
     //To see if it's a due notification
     NSString *dueornot=[appointmentInfo valueForKey:@"meeting_due"];
     

@@ -659,4 +659,9 @@
     return img;
 }
 
+- (IBAction)OnClickRefresh:(UIButton *)sender
+{
+    GET_APPDELEGATE
+    [self FetchAllofMyAppointments:appDelegate.CurrentStaffID];
+}
 @end
