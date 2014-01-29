@@ -22,6 +22,7 @@
 		F390C3111806644E00A8BA39 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F390C2F31806644E00A8BA39 /* UIKit.framework */; };
 		F390C3191806644E00A8BA39 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F390C3171806644E00A8BA39 /* InfoPlist.strings */; };
 		F390C31B1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = F390C31A1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m */; };
+		F39965A91899A42400D2FC3B /* ImageTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F39965A81899A42400D2FC3B /* ImageTableCell.m */; };
 		F3A413541891CF6200115841 /* LeftTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A413531891CF6200115841 /* LeftTableViewController.m */; };
 		F3A413571891D9A400115841 /* ClientInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A413561891D9A400115841 /* ClientInfoViewController.m */; };
 		F3CDCC14187BB01D00C86E61 /* PersonalInfoPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3CDCC12187BB01D00C86E61 /* PersonalInfoPopupViewController.m */; };
@@ -59,6 +60,8 @@
 		F390C3161806644E00A8BA39 /* BeaconDemo_iOS7Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BeaconDemo_iOS7Tests-Info.plist"; sourceTree = "<group>"; };
 		F390C3181806644E00A8BA39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F390C31A1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeaconDemo_iOS7Tests.m; sourceTree = "<group>"; };
+		F39965A71899A42400D2FC3B /* ImageTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTableCell.h; sourceTree = "<group>"; };
+		F39965A81899A42400D2FC3B /* ImageTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTableCell.m; sourceTree = "<group>"; };
 		F3A413521891CF6200115841 /* LeftTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftTableViewController.h; sourceTree = "<group>"; };
 		F3A413531891CF6200115841 /* LeftTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftTableViewController.m; sourceTree = "<group>"; };
 		F3A413551891D9A400115841 /* ClientInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientInfoViewController.h; sourceTree = "<group>"; };
@@ -140,6 +143,8 @@
 				F3A413531891CF6200115841 /* LeftTableViewController.m */,
 				F3A413551891D9A400115841 /* ClientInfoViewController.h */,
 				F3A413561891D9A400115841 /* ClientInfoViewController.m */,
+				F39965A71899A42400D2FC3B /* ImageTableCell.h */,
+				F39965A81899A42400D2FC3B /* ImageTableCell.m */,
 			);
 			path = BeaconDemo_iOS7;
 			sourceTree = "<group>";
@@ -281,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3CDCC14187BB01D00C86E61 /* PersonalInfoPopupViewController.m in Sources */,
+				F39965A91899A42400D2FC3B /* ImageTableCell.m in Sources */,
 				F390C2FC1806644E00A8BA39 /* main.m in Sources */,
 				F3A413571891D9A400115841 /* ClientInfoViewController.m in Sources */,
 				F390C3001806644E00A8BA39 /* BeaconDemoAppDelegate.m in Sources */,

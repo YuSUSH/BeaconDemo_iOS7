@@ -23,11 +23,15 @@ static NSString * const kCellIdentifier = @"BeaconCell";
 
 #define PUSH_SERVIER_URL @"http://experiment.sandbox.net.nz/beacon/simplepush.php"
 #define IPAD_TOKEN_UPDATE_URL @"http://experiment.sandbox.net.nz/beacon/update_ipad_token.php"
-#define QUERY_DB_SERVIER_URL @"http://ble.sandbox.net.nz/myforum/query_personalinfo.php"
+#define QUERY_PERSONAL_INFO_URL @"http://ble.sandbox.net.nz/myforum/query_personalinfo.php"
 #define QUERY_LOGIN_URL @"http://ble.sandbox.net.nz/myforum/query_login.php"
 #define QUERY_ALL_APPOINTMENTS @"http://ble.sandbox.net.nz/myforum/query_all_appointments.php"
 
 #define GET_APPDELEGATE BeaconDemoAppDelegate *appDelegate	=	(BeaconDemoAppDelegate*)[[UIApplication sharedApplication] delegate];
+
+#define RGB_COLOR(RValue, GValue, BValue, AValue) [UIColor colorWithRed:RValue/255.0f \
+green:GValue/255.0f \
+blue:BValue/255.0f alpha:AValue]
 
 @interface BeaconDemoAppDelegate : UIResponder <UIApplicationDelegate, CBCentralManagerDelegate,CBPeripheralDelegate>
 

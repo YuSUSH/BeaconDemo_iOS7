@@ -8,6 +8,7 @@
 
 #import "LeftTableViewController.h"
 #import "BeaconDemoAppDelegate.h"
+#import "ImageTableCell.h"
 
 @interface LeftTableViewController ()
 
@@ -127,6 +128,10 @@
      target:self selector:@selector(checkDueAppointment:)
      userInfo:nil repeats:YES];
      */
+    
+    //Init the image array
+    self.imageArray= [[NSMutableArray alloc] init];
+    [self.imageArray removeAllObjects];
 }
 
 
@@ -428,7 +433,10 @@
         {
             NSMutableDictionary *client=[enteringClients objectAtIndex:m];
             if([[client valueForKey:@"userid"] isEqualToString:userID])
+            {
                 [enteringClients removeObjectAtIndex:m]; //remove this client
+                [self.imageArray removeObjectAtIndex:m]; //remove this client's image from the array too.
+            }
         }
     }
     
@@ -459,7 +467,7 @@
     }
     
     
-    NSURL *requestURL=[NSURL URLWithString:QUERY_DB_SERVIER_URL];
+    NSURL *requestURL=[NSURL URLWithString:QUERY_PERSONAL_INFO_URL];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
     
@@ -503,6 +511,10 @@
              [queueLock unlock];
              
              [self.enteringClients addObject:personalInfo]; //Add it to the list array
+             //Load the image data for this client
+             NSString *iconfilename= [personalInfo valueForKey:@"iconfilename"];
+             UIImage *img=[self loadIconImage:iconfilename];
+             [self.imageArray addObject:img]; //Add this image to the array
              [self.tableView reloadData]; //refresh list display
              
              if(self.popupQueue.count==1 && self.m_PopoverController==nil) //this is the only element in queue
@@ -517,6 +529,19 @@
          
      }];
     
+}
+
+-(UIImage*) loadIconImage:(NSString*)iconfilename
+{
+    //show picture
+    NSString *picture_url= [NSString stringWithFormat:@"%@%@",
+                            @"http://ble.sandbox.net.nz/myforum/upload_image/",
+                            iconfilename ];
+    
+    NSURL *url = [NSURL URLWithString:picture_url];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    UIImage *img = [[UIImage alloc] initWithData:data];
+    return img;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -550,17 +575,17 @@
 {
     
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ImageTableCell *cell = (ImageTableCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[ImageTableCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     
     
-    [cell.textLabel setFont:[UIFont systemFontOfSize:18]];
-    [cell.textLabel setTextColor:[UIColor blackColor]];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [cell.NameLabel setFont:[UIFont systemFontOfSize:18]];
+    [cell.NameLabel setTextColor:[UIColor blackColor]];
+    //[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     NSString *titilestr;
     
@@ -576,12 +601,15 @@
             if([[person valueForKey:@"homeloan_request"] isEqualToString:@"TRUE"])
                 cell.detailTextLabel.text=@"Home Loan Requested";
         }
+        
+        //show the image for this client
+        [cell.imageView setImage:[self.imageArray objectAtIndex:indexPath.row]];
     }
     else
         titilestr=@"";
     
     
-    [cell.textLabel setText:titilestr];
+    [cell.NameLabel setText:titilestr];
     
     
     

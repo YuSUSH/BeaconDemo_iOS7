@@ -30,6 +30,8 @@
 //@property (strong, nonatomic) IBOutlet UILabel *labelFullname;
 //@property (strong, nonatomic) IBOutlet UIImageView *imgPhoto;
 
+@property (strong, nonatomic) NSMutableArray *imageArray; //store all the image data for the entering clients
+
 -(void)homeloanRequest:(NSString *)userid;
 
 @end
