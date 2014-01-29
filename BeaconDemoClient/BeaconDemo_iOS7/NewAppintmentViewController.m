@@ -16,6 +16,8 @@
 @implementation NewAppintmentViewController
 @synthesize allStaffs, staffPicker, selectedStaff, selectedDateStr;
 
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -52,7 +54,26 @@
     //show the department info
     self.labelDepartment.text=[@"Department: " stringByAppendingString:self.department];
     
+    self.textDescription.delegate=self;
+    
+    self.orgViewFrame=self.view.frame; //save the original rect of the view
+    
 }
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    CGRect rect=self.orgViewFrame;
+    rect.origin.y-=170;
+    self.view.frame=rect;
+    
+    return true;
+}
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
+    self.view.frame=self.orgViewFrame;
+    return true;
+}
+
 
 -(void)DoneDateSelection:(id)sender
 {
