@@ -23,6 +23,9 @@
 		F390C3111806644E00A8BA39 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F390C2F31806644E00A8BA39 /* UIKit.framework */; };
 		F390C3191806644E00A8BA39 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F390C3171806644E00A8BA39 /* InfoPlist.strings */; };
 		F390C31B1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = F390C31A1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m */; };
+		F39965B31899BEC400D2FC3B /* nav_ic_back.png in Resources */ = {isa = PBXBuildFile; fileRef = F39965B01899BEC400D2FC3B /* nav_ic_back.png */; };
+		F39965B41899BEC400D2FC3B /* nav_ic_menue.png in Resources */ = {isa = PBXBuildFile; fileRef = F39965B11899BEC400D2FC3B /* nav_ic_menue.png */; };
+		F39965B51899BEC400D2FC3B /* nav_ic_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = F39965B21899BEC400D2FC3B /* nav_ic_refresh.png */; };
 		F3A2C2EE188739AB000D321F /* PopoverDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A2C2ED188739AB000D321F /* PopoverDatePicker.m */; };
 		F3A7195E180BA71C001999C0 /* BLETagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A7195D180BA71C001999C0 /* BLETagViewController.m */; };
 		F3A735851898694E006C7FF3 /* DepartmentTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A735841898694E006C7FF3 /* DepartmentTableCell.m */; };
@@ -65,6 +68,9 @@
 		F390C3161806644E00A8BA39 /* BeaconDemo_iOS7Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BeaconDemo_iOS7Tests-Info.plist"; sourceTree = "<group>"; };
 		F390C3181806644E00A8BA39 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F390C31A1806644E00A8BA39 /* BeaconDemo_iOS7Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeaconDemo_iOS7Tests.m; sourceTree = "<group>"; };
+		F39965B01899BEC400D2FC3B /* nav_ic_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nav_ic_back.png; path = ../../assets/nav_ic_back.png; sourceTree = "<group>"; };
+		F39965B11899BEC400D2FC3B /* nav_ic_menue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nav_ic_menue.png; path = ../../assets/nav_ic_menue.png; sourceTree = "<group>"; };
+		F39965B21899BEC400D2FC3B /* nav_ic_refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nav_ic_refresh.png; path = ../../assets/nav_ic_refresh.png; sourceTree = "<group>"; };
 		F3A2C2EC188739AB000D321F /* PopoverDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverDatePicker.h; sourceTree = "<group>"; };
 		F3A2C2ED188739AB000D321F /* PopoverDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverDatePicker.m; sourceTree = "<group>"; };
 		F3A7195C180BA71C001999C0 /* BLETagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLETagViewController.h; sourceTree = "<group>"; };
@@ -138,6 +144,9 @@
 		F390C2F51806644E00A8BA39 /* BeaconDemo_iOS7 */ = {
 			isa = PBXGroup;
 			children = (
+				F39965B01899BEC400D2FC3B /* nav_ic_back.png */,
+				F39965B11899BEC400D2FC3B /* nav_ic_menue.png */,
+				F39965B21899BEC400D2FC3B /* nav_ic_refresh.png */,
 				F310A303181099C100581230 /* ringtone.mp3 */,
 				F390C2FE1806644E00A8BA39 /* BeaconDemoAppDelegate.h */,
 				F390C2FF1806644E00A8BA39 /* BeaconDemoAppDelegate.m */,
@@ -279,9 +288,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F39965B41899BEC400D2FC3B /* nav_ic_menue.png in Resources */,
 				F310A304181099C100581230 /* ringtone.mp3 in Resources */,
+				F39965B31899BEC400D2FC3B /* nav_ic_back.png in Resources */,
 				F390C3081806644E00A8BA39 /* Images.xcassets in Resources */,
 				F390C2FA1806644E00A8BA39 /* InfoPlist.strings in Resources */,
+				F39965B51899BEC400D2FC3B /* nav_ic_refresh.png in Resources */,
 				F390C3031806644E00A8BA39 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
