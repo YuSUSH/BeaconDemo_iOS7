@@ -160,6 +160,57 @@
      }];
 }
 
+
+-(void) ShowMeetingConfirmation:(NSString *)appointment_id
+{
+    //get the detailed info about the meeting
+    NSURL *requestURL=[NSURL URLWithString:QUERY_APPOINTMENT_DETAIL_URL];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
+    
+    //Set Post Data
+    const char *bytes = [[NSString stringWithFormat:@"appointment_id=%@", appointment_id] UTF8String];
+    //For multiple POST data
+    //NSString *key = [NSString stringWithFormat:@"key=%@&key2=%2", keyValue, key2value];
+    
+    //Send request
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[NSData dataWithBytes:bytes length:strlen(bytes)]];
+    
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+         if(error!=nil)
+             return; //error
+         
+         NSLog(@"responseData: %@", data);
+         
+         //decode the response data
+         NSMutableArray *jsonObjects = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+         
+         if(jsonObjects==nil)
+             return;
+         
+         NSMutableDictionary *appointment=[jsonObjects objectAtIndex:0];
+         
+         //Show Meeting info
+         dispatch_queue_t mainQueue = dispatch_get_main_queue();
+         dispatch_async(mainQueue, ^(void)
+        {
+            //Show the appointment detail window
+            NSString *time=[appointment valueForKey:@"time"];
+            NSString *department=[appointment valueForKey:@"department"];
+            
+            NSString *showStr=[NSString stringWithFormat:@"Our staff from %@ department has confirmed the appointment with you at %@.", department, time];
+            
+            SHOW_ALERT_WINDOW(@"Appointment Confirmation", showStr)
+        });
+         
+     }];
+}
+
+
 - (IBAction)OnClickRequestHomeloan:(UIButton *)sender
 {
     [self requestHomeloan];

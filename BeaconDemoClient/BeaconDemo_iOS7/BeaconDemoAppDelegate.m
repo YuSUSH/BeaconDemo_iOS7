@@ -83,6 +83,16 @@
         
     }
     
+    //Got confirmation from the staff
+    if([event isEqualToString:@"confirm_meeting"])
+    {
+        //Show the meeting confirmation from the staff
+        if(self.tv!=nil)
+            [self.tv ShowMeetingConfirmation:appointmentid];
+        
+    }
+
+    
 }
 
 
