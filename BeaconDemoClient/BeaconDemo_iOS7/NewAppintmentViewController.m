@@ -63,7 +63,7 @@
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
     CGRect rect=self.orgViewFrame;
-    rect.origin.y-=170;
+    rect.origin.y-=160;
     self.view.frame=rect;
     
     return true;

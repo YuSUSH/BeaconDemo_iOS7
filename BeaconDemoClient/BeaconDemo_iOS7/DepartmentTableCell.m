@@ -18,7 +18,7 @@
     }
     
     //Init the in/out label
-    self.strokeLabel=[[UILabel alloc] initWithFrame:CGRectMake(265, 5, 40, 40)];
+    self.strokeLabel=[[UILabel alloc] initWithFrame:CGRectMake(275, 1, 40, 40)];
     [self.strokeLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:19]];
     [self.strokeLabel setText:@">"];
     [self.contentView addSubview:self.strokeLabel];
