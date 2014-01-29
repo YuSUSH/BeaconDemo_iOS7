@@ -10,10 +10,11 @@
 
 @interface MeetingNotifyViewController : AudioViewController
 @property (strong, nonatomic) IBOutlet UILabel *labelTime;
-@property (strong, nonatomic) IBOutlet UILabel *labelDescription;
 
 @property (strong, nonatomic) NSMutableDictionary *appointmentDetail;
 @property (strong, nonatomic) IBOutlet UILabel *labelTitle;
 - (IBAction)OnClockClose:(UIButton *)sender;
+@property (strong, nonatomic) IBOutlet UILabel *labelDepartment;
+@property (strong, nonatomic) IBOutlet UITextView *textDescription;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "MeetingNotifyViewController.h"
+#import "BeaconDemoAppDelegate.h"
 
 @interface MeetingNotifyViewController ()
 
@@ -39,6 +40,7 @@
     self.labelTime.text=time;
     self.labelDescription.text=description;
 }
+
 
 - (void)didReceiveMemoryWarning
 {

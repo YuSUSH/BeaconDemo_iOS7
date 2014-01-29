@@ -52,6 +52,26 @@
     }
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    //To see if it's a due notification
+    NSString *dueornot=[appointmentInfo valueForKey:@"meeting_due"];
+    
+    if(dueornot!=nil)
+    {
+        if([dueornot isEqualToString:@"true"])
+        {
+            //We should notify the staff the meeting will start soon and and client has come in
+            NSString *showstr;
+            NSString *client_fullname=[appointmentInfo valueForKey:@"client_fullname"];
+            
+            showstr=[NSString stringWithFormat:@"Our client %@ has arrived, with whom this appointment will be due soon.", client_fullname];
+            
+            SHOW_ALERT_WINDOW(@"Notification", showstr)
+        }
+    }
+}
+
 -(UIImage*) loadIconImage:(NSString*)iconfilename
 {
     //show picture

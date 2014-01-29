@@ -37,6 +37,8 @@ bool Auto_login;
     self.useridText.delegate=self;
     self.passwordText.delegate=self;
     
+    self.busyIndicator.hidden=true;
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];

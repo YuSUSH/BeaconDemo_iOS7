@@ -536,6 +536,7 @@
 
 -(void) ShowMeetingDueInfo:(NSString *)appointment_id
 {
+    /*
     //get the detailed info about the meeting
     NSURL *requestURL=[NSURL URLWithString:QUERY_APPOINTMENT_DETAIL_URL];
     
@@ -576,6 +577,24 @@
                         });
          
      }];
+     */
+    
+    if(myAppointments.count<1)
+        return; //do nothing
+    
+    int i;
+    //search for the appointment by ID first
+    NSMutableDictionary *this_appointment;
+    for(i=0;i<myAppointments.count;i++)
+    {
+        this_appointment=[myAppointments objectAtIndex:i];
+        if([[this_appointment valueForKey:@"id"] isEqualToString:appointment_id])
+        {
+            [this_appointment setValue:@"true" forKey:@"meeting_due"]; //set the flag for notification
+            [self performSegueWithIdentifier:@"SegueToAppointmentDetail" sender:this_appointment];
+            return;
+        }
+    }
 }
 
 -(void) gotHomeLoanRequestNotification:(NSString*)client_id

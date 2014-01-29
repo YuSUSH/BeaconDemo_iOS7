@@ -33,11 +33,14 @@
     NSString *staffName=[appointmentDetail valueForKey:@"staff_fullname"];
     NSString *time=[appointmentDetail valueForKey:@"time"];
     NSString *description=[appointmentDetail valueForKey:@"description"];
+    NSString *department=[appointmentDetail valueForKey:@"department"];
     
     self.labelTitle.text=[NSString  stringWithFormat:@"The appointment with %@ will be due at:",
                      staffName];
     self.labelTime.text=time;
-    self.labelDescription.text=description;
+    
+    self.labelDepartment.text=department;
+    self.textDescription.text=description;
 }
 
 - (void)didReceiveMemoryWarning
