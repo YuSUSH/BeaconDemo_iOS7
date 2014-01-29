@@ -20,22 +20,22 @@
     }
     
     //Init the ImageView object
-    self.personalImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
+    self.personalImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 2, 50, 50)];
     [self.contentView addSubview:self.personalImage];
     
     
     //Init name Label
-    self.NameLabel=[[UILabel alloc] initWithFrame:CGRectMake(55, 0, 190, 25)];
+    self.NameLabel=[[UILabel alloc] initWithFrame:CGRectMake(55, 5, 190, 25)];
     [self.NameLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:19]];
     [self.contentView addSubview:self.NameLabel];
     
     //Init the time label
-    self.timeLabel=[[UILabel alloc] initWithFrame:CGRectMake(55, 20, 190, 25)];
+    self.timeLabel=[[UILabel alloc] initWithFrame:CGRectMake(55, 25, 190, 25)];
     [self.timeLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:15]];
     [self.contentView addSubview:self.timeLabel];
     
     //Init the in/out label
-    self.inoutLabel=[[UILabel alloc] initWithFrame:CGRectMake(255, 5, 40, 40)];
+    self.inoutLabel=[[UILabel alloc] initWithFrame:CGRectMake(255, 10, 40, 40)];
     [self.NameLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:19]];
     [self.contentView addSubview:self.inoutLabel];
     
