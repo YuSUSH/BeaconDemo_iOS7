@@ -44,6 +44,7 @@
 				for ($j = 0 ; $j < $rows ; ++$j)
 				{		
 					$arrCol= array();
+					$arrCol["id"]=mysql_result($result,$j,'id');
 					$arrCol["staff"]=mysql_result($result,$j,'staff');
 					$client_id=mysql_result($result,$j,'client');
 					$arrCol["client"]=$client_id;

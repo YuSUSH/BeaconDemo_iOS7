@@ -184,6 +184,21 @@
 - (IBAction)OnClickSubmit:(UIButton *)sender
 {
     //Add a new record in appointment table in the DB
+    if(self.textDateChoice.text==nil ||
+       [self.textDateChoice.text isEqualToString:@""])
+    {
+        SHOW_ALERT_WINDOW(@"Warning", @"Please choose the time.")
+        return;
+    }
+    
+    if(self.textDescription.text==nil ||
+       [self.textDescription.text isEqualToString:@""])
+    {
+        SHOW_ALERT_WINDOW(@"Warning", @"Please write the description of the appointment.")
+        return;
+    }
+    
+    
     [self addNewAppointment];
 }
 

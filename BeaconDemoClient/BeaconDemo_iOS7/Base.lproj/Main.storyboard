@@ -127,7 +127,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezl-Wk-Tvz">
-                                <rect key="frame" x="13" y="402" width="287" height="38"/>
+                                <rect key="frame" x="13" y="384" width="287" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.40392156862745099" green="0.72941176470588232" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Submit">

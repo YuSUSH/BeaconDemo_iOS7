@@ -88,7 +88,7 @@ bool Auto_login;
 
 -(void) SetBusyState
 {
-    [self.titileLabel setText:@"Loggin in ..."];
+    [self.titileLabel setText:@"Logging in ..."];
     self.useridText.hidden=true;
     self.passwordText.hidden=true;
     self.labelUserID.hidden=true;

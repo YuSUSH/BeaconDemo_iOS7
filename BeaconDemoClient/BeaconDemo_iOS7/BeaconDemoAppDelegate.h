@@ -28,6 +28,12 @@
 #define GET_APPDELEGATE BeaconDemoAppDelegate *appDelegate	=	(BeaconDemoAppDelegate*)[[UIApplication sharedApplication] delegate];
 
 
+#define SHOW_ALERT_WINDOW(titile, content) \
+UIAlertView *helloWorldAlert = [[UIAlertView alloc] \
+initWithTitle: titile message: content delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil]; \
+[helloWorldAlert show];
+
+
 #define BUSY_INDICATOR_START( indicator ) \
 indicator.hidden=false; \
 [ indicator startAnimating]; \

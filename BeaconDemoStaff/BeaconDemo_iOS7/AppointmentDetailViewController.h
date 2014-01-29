@@ -13,9 +13,12 @@
 @property (strong, nonatomic) NSMutableDictionary *appointmentInfo;
 @property (strong, nonatomic) IBOutlet UILabel *labelClientName;
 @property (strong, nonatomic) IBOutlet UILabel *labelTime;
-@property (strong, nonatomic) IBOutlet UILabel *labelDescription;
 - (IBAction)OnClickBackButton:(UIButton *)sender;
 @property (strong, nonatomic) IBOutlet UIImageView *personalImage;
 @property (strong, nonatomic) IBOutlet UILabel *labelClientID;
+@property (strong, nonatomic) IBOutlet UITextView *textDescription;
+@property (strong, nonatomic) IBOutlet UILabel *labelDepartment;
+- (IBAction)OnClickConfirmMeeting:(UIButton *)sender;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *busyIndicator;
 
 @end
