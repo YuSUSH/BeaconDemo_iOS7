@@ -11,5 +11,6 @@
 @interface ClientInfoViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UILabel *labelFullname;
 @property (strong, nonatomic) IBOutlet UIImageView *imgPhoto;
+@property (strong, nonatomic) IBOutlet UILabel *labelClientID;
 
 @end

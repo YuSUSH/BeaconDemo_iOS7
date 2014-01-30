@@ -19,5 +19,6 @@
 @property (nonatomic, retain) LeftTableViewController *mainView; //pointer to the main view
 @property (strong, nonatomic) NSMutableDictionary *personalInfo;
 - (IBAction)OnClickCloseButton:(UIButton *)sender;
+@property (strong, nonatomic) IBOutlet UILabel *labelClientID;
 
 @end

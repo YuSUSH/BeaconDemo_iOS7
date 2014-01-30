@@ -39,6 +39,10 @@
                          [personalInfo valueForKey:@"surname"]];
     [self.personalInfoLabel setText:fullname];
     
+    NSString *clientIDstr;
+    clientIDstr=[NSString stringWithFormat:@"Client ID: %@", [personalInfo valueForKey:@"userid"]];
+    self.labelClientID.text=clientIDstr;
+    
     [self PlayRingtone];
     
 }

@@ -405,7 +405,7 @@
     
     
     //Make it appears from the button's area
-    [self.m_PopoverController presentPopoverFromRect: CGRectMake(480, 220, 531, 544)
+    [self.m_PopoverController presentPopoverFromRect: CGRectMake(380, 120, 531, 544)
      //[self convertRect:self.m_button.frame toView:self.mView]
                                               inView:self.view
                             permittedArrowDirections:0 animated:YES];
@@ -562,6 +562,10 @@
             appDelegate.clientInfoView.labelFullname.text=[NSString stringWithFormat:@"%@ %@",
                                      [client valueForKey:@"givename"], [client valueForKey:@"surname"] ];
             
+            
+            NSString *clientIDstr;
+            clientIDstr=[NSString stringWithFormat:@"Client ID: %@", [client valueForKey:@"userid"]];
+            appDelegate.clientInfoView.labelClientID.text=clientIDstr;
             
             //show picture
             NSString *picture_url= [NSString stringWithFormat:@"%@%@",
