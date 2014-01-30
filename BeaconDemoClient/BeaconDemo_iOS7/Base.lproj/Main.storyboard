@@ -82,7 +82,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szZ-EQ-5Oc">
-                                <rect key="frame" x="10" y="38" width="16" height="20"/>
+                                <rect key="frame" x="10" y="28" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="19"/>
                                 <state key="normal" image="nav_ic_back.png">
@@ -301,7 +301,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g7C-Dg-AiH">
-                                <rect key="frame" x="10" y="38" width="16" height="20"/>
+                                <rect key="frame" x="10" y="28" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" image="nav_ic_menue.png">
@@ -474,8 +474,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="nav_ic_back.png" width="32" height="40"/>
-        <image name="nav_ic_menue.png" width="32" height="40"/>
+        <image name="nav_ic_back.png" width="16" height="20"/>
+        <image name="nav_ic_menue.png" width="16" height="20"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
