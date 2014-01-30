@@ -108,6 +108,8 @@
     [enteringClients removeAllObjects];
     
     self.title=@"Queue";
+    self.navigationItem.title = @"New Queue";
+
     
     //Save the view in the AppDelegate
     GET_APPDELEGATE
@@ -133,11 +135,22 @@
     self.imageArray= [[NSMutableArray alloc] init];
     [self.imageArray removeAllObjects];
     
-    UINavigationBar *navbar= self.navigationController.navigationBar;
     
     //[navbar setBackgroundColor:[UIColor redColor]];
-    [[UINavigationBar appearance] setTintColor:[UIColor redColor]];
+    //navbar setTitleTextAttributes:
+    //[[UINavigationBar appearance] setTintColor:[UIColor redColor]];
     //[navbar setTintColor:[UIColor redColor]];
+    
+    CGRect rect;
+    rect=CGRectMake(0, 0, 320, 64);
+    UILabel *titilebar=[[UILabel alloc] initWithFrame:rect];
+    [titilebar setBackgroundColor:RGB_COLOR(77, 77, 77, 1.0f)];
+    titilebar.text=@"  Queue";
+    titilebar.textColor=[UIColor whiteColor];
+    [titilebar setFont:[UIFont fontWithName:@"Georgia" size:22]];
+    [self.navigationController.view addSubview:titilebar];
+    
+    
 }
 
 

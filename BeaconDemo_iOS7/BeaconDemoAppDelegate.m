@@ -49,7 +49,7 @@
     //Your app can find out which types of push notifications are enabled through:
     //UIRemoteNotificationType enabledTypes = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
     //NSLog(@"enabledTypes is: %d", enabledTypes);
-    
+    [[UINavigationBar appearance] setBackgroundColor:[UIColor redColor]];
     return YES;
 }
 
