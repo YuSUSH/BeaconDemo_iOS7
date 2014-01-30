@@ -132,6 +132,12 @@
     //Init the image array
     self.imageArray= [[NSMutableArray alloc] init];
     [self.imageArray removeAllObjects];
+    
+    UINavigationBar *navbar= self.navigationController.navigationBar;
+    
+    //[navbar setBackgroundColor:[UIColor redColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor redColor]];
+    //[navbar setTintColor:[UIColor redColor]];
 }
 
 
@@ -583,7 +589,6 @@
     
     
     
-    [cell.NameLabel setFont:[UIFont systemFontOfSize:18]];
     [cell.NameLabel setTextColor:[UIColor blackColor]];
     //[cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
