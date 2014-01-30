@@ -261,12 +261,23 @@
                 self.labelShopInfo.text=shop_info;
                 self.btnRequestHomeLoan.hidden=false;
                 
-                /*
-                UIAlertView *helloWorldAlert = [[UIAlertView alloc]
-                                                initWithTitle:@"Welcome" message:[@"Welcome to " stringByAppendingString:shop_info] delegate:self cancelButtonTitle:@"Make Appointment" otherButtonTitles:@"close", nil];
-                // Display the Hello WorldMessage
-                [helloWorldAlert show];
-                 */
+                
+                //If in backgournd mode
+                UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+                if (state == UIApplicationStateBackground || state == UIApplicationStateInactive)
+                {
+                    //notify iOS that we've detected a device
+                    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+                    localNotification.alertBody = @"Welcome to Kiwi bank!";
+                    localNotification.soundName = @"ringtone.mp3";
+                    localNotification.fireDate = [NSDate date];
+                
+                    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+                }
+                
+                SHOW_ALERT_WINDOW(@"Welcome", @"Welcome to Kiwi Bank!")
+                
+
             });
         }
     }];

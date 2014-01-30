@@ -65,5 +65,6 @@ dispatch_async(mainQueue, ^(void) \
 @property (strong, nonatomic) NSMutableDictionary *CurrentPersonalInfo;
 @property (nonatomic) bool bEnableBLE; //if the BLE function is
 @property (strong, nonatomic) NSString *currentToken;
+@property (nonatomic) bool bInBackground;
 
 @end

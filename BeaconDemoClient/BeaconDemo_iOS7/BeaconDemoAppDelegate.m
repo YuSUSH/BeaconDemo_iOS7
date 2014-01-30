@@ -148,7 +148,7 @@
          */
         
         //Using iBeacon API
-        [self.tv startRangingForBeacons];
+        //[self.tv startRangingForBeacons];
     }
 
     
