@@ -38,7 +38,13 @@
     [self UpdateClientDeviceToken:appDelegate.currentToken
                      WithClientID:appDelegate.CurrentUserID];
     
-    self.bInsideRange=false; //initially outside the Beacon range
+    self.bInsideRangeNow=false; //initially outside the Beacon range
+    self.bInSideRangeLastNotified=false; //initially outside the Beacon range
+    self.timestampLastNotified=[self getCurrentTimestamp]; //init the timestamp
+    //Init the check reminder notify timer
+    self.checkRemindNotifyTimer=[[NSTimer alloc] init];
+    self.checkRemindNotifyTimer=[NSTimer scheduledTimerWithTimeInterval:5.0 target:self                selector:@selector(CheckToRemindNotify:) userInfo:nil repeats:YES];
+    
     self.navigationItem.hidesBackButton=true; //disable the "back" button
     [self.navigationController setNavigationBarHidden: YES animated:NO]; //don't show the navigation bar
     
@@ -220,6 +226,22 @@
 -(void) NewClientArrive
 {
     
+    //If in backgournd mode
+    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+    if (state == UIApplicationStateBackground || state == UIApplicationStateInactive)
+    {
+        //notify iOS that we've detected a device
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        localNotification.alertBody = @"Welcome to Kiwi bank!";
+        localNotification.soundName = @"ringtone.mp3";
+        localNotification.fireDate = [NSDate date];
+        
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    }
+    
+    SHOW_ALERT_WINDOW(@"Welcome", @"Welcome to Kiwi Bank!")
+    
+    
     NSURL *requestURL=[NSURL URLWithString:CLIENT_ARRIVE_URL];
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestURL];
@@ -260,23 +282,6 @@
                 self.labelShopInfo.hidden=false;
                 self.labelShopInfo.text=shop_info;
                 self.btnRequestHomeLoan.hidden=false;
-                
-                
-                //If in backgournd mode
-                UIApplicationState state = [[UIApplication sharedApplication] applicationState];
-                if (state == UIApplicationStateBackground || state == UIApplicationStateInactive)
-                {
-                    //notify iOS that we've detected a device
-                    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-                    localNotification.alertBody = @"Welcome to Kiwi bank!";
-                    localNotification.soundName = @"ringtone.mp3";
-                    localNotification.fireDate = [NSDate date];
-                
-                    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-                }
-                
-                SHOW_ALERT_WINDOW(@"Welcome", @"Welcome to Kiwi Bank!")
-                
 
             });
         }
@@ -552,51 +557,100 @@
 - (void)locationManager:(CLLocationManager *)manager
          didEnterRegion:(CLRegion *)region
 {
-    if(self.bInsideRange) //if already inside the range
+    if(self.bInSideRangeLastNotified) //if already inside the range
         return; //do nothing
     
     if([region.identifier isEqualToString:kIdentifier])
     {
-        self.bInsideRange=true;
-        /*
-        NSLog(@"$$$$$$$$$$ I came in!");
+        //update status
+        self.bInsideRangeNow=true;
         
-        UIAlertView *helloWorldAlert = [[UIAlertView alloc]
-                                        initWithTitle:@"My First App" message:@"I came in!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        // Display the Hello WorldMessage
-        [helloWorldAlert show];
-         */
-        [self NewClientArrive]; //notify the server side that we found the iPad
+        long long currentTimestamp=[self getCurrentTimestamp];
+        
+        NSLog(@"currentTimestamp - self.timestampLastNotified=%d", (int)(currentTimestamp - self.timestampLastNotified));
+        if(currentTimestamp - self.timestampLastNotified > 5000) //more than 5 seconds since last notified
+        {
+            //update status
+            self.bInSideRangeLastNotified=true;
+            self.timestampLastNotified=currentTimestamp;
+            
+            [self NewClientArrive]; //notify the server side that we found the iPad
+        }
     }
     
+}
+
+-(long long) getCurrentTimestamp
+{
+    return (long long)([[NSDate date] timeIntervalSince1970] * 1000.0);
 }
 
 - (void)locationManager:(CLLocationManager *)manager
           didExitRegion:(CLRegion *)region
 {
-    if(!self.bInsideRange) //if already outside the range
+    if(!self.bInSideRangeLastNotified) //if already outside the range
         return; //do nothing
        
     if([region.identifier isEqualToString:kIdentifier])
     {
-        self.bInsideRange=false;
+        //update status
+        self.bInsideRangeNow=false;
         
-        [self ClientExit]; //send push notification for exiting the shop
+        long long currentTimestamp=[self getCurrentTimestamp];
+        
+        NSLog(@"currentTimestamp - self.timestampLastNotified=%d", (int)(currentTimestamp - self.timestampLastNotified));
+        if(currentTimestamp - self.timestampLastNotified > 5000) //more than 5 seconds since last notified
+        {
+            
+            //update status
+            self.bInSideRangeLastNotified=false;
+            self.timestampLastNotified=currentTimestamp;
+        
+            [self ClientExit]; //send push notification for exiting the shop
+        }
     }
+}
 
-    
+//To see if we need to notify that we have entered the region or gone out of the region
+-(void) CheckToRemindNotify:(NSTimer*)pTimer
+{
+    //if current status is different from that notified last time
+    if(self.bInsideRangeNow != self.bInSideRangeLastNotified )
+    {
+        long long currentTimestamp=[self getCurrentTimestamp];
+        
+        if(self.bInsideRangeNow)
+        {
+            self.bInSideRangeLastNotified=true; //update it
+            self.timestampLastNotified=currentTimestamp;
+            [self NewClientArrive]; //notify come in
+        }
+        else
+        {
+            self.bInSideRangeLastNotified=false; //update it
+            self.timestampLastNotified=currentTimestamp;
+            [self ClientExit]; //notify go out
+        }
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
 {
-    if(state == CLRegionStateInside) {
-        NSLog(@"locationManager didDetermineState INSIDE for %@", region.identifier);
-    }
-    else if(state == CLRegionStateOutside) {
-        NSLog(@"locationManager didDetermineState OUTSIDE for %@", region.identifier);
-    }
-    else {
-        NSLog(@"locationManager didDetermineState OTHER for %@", region.identifier);
+    if([region.identifier isEqualToString:kIdentifier])
+    {
+        if(state == CLRegionStateInside)
+        {
+            self.bInsideRangeNow=true; //update current status
+            NSLog(@"locationManager didDetermineState INSIDE for %@", region.identifier);
+        }
+        else if(state == CLRegionStateOutside)
+        {
+            self.bInsideRangeNow=false; //update current status
+            NSLog(@"locationManager didDetermineState OUTSIDE for %@", region.identifier);
+        }
+        else {
+            NSLog(@"locationManager didDetermineState OTHER for %@", region.identifier);
+        }
     }
 }
 

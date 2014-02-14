@@ -49,7 +49,11 @@ static NSString * const iOSUUID = @"00000000-0000-0000-0000-000000000000";
 
 - (IBAction)OnClickLogout:(UIButton *)sender;
 
-@property (nonatomic) bool bInsideRange;
+@property (nonatomic) bool bInsideRangeNow; //current status (rightnow)
+@property (nonatomic) bool bInSideRangeLastNotified; //the status been notified last time
+@property (nonatomic) long long timestampLastNotified; //time stamp when being notified last time
+@property (nonatomic, strong) NSTimer *checkRemindNotifyTimer;
+
 @property (strong, nonatomic) IBOutlet UILabel *labelShopInfo;
 @property (strong, nonatomic) IBOutlet UIButton *btnMakeAppointment;
 - (IBAction)OnClickMakeAppointment:(UIButton *)sender;
