@@ -36,6 +36,7 @@ bool Auto_login;
 	// Do any additional setup after loading the view.
     self.useridText.delegate=self;
     self.passwordText.delegate=self;
+    self.busyIndicator.hidden=true;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self

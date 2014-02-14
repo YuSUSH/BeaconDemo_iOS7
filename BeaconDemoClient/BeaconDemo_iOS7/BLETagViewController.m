@@ -568,7 +568,7 @@
         long long currentTimestamp=[self getCurrentTimestamp];
         
         NSLog(@"currentTimestamp - self.timestampLastNotified=%d", (int)(currentTimestamp - self.timestampLastNotified));
-        if(currentTimestamp - self.timestampLastNotified > 5000) //more than 5 seconds since last notified
+        if((int)(currentTimestamp - self.timestampLastNotified) > 50000) //more than 5 seconds since last notified
         {
             //update status
             self.bInSideRangeLastNotified=true;
@@ -599,7 +599,7 @@
         long long currentTimestamp=[self getCurrentTimestamp];
         
         NSLog(@"currentTimestamp - self.timestampLastNotified=%d", (int)(currentTimestamp - self.timestampLastNotified));
-        if(currentTimestamp - self.timestampLastNotified > 5000) //more than 5 seconds since last notified
+        if((int)(currentTimestamp - self.timestampLastNotified) > 5000) //more than 5 seconds since last notified
         {
             
             //update status
